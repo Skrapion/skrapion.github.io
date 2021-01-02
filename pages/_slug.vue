@@ -1,7 +1,9 @@
 <template>
     <article id='singlecontent'>
-        <div id='prettypictures' class='youtube' v-if='post.youtube'>
-            <iframe :src="`https://www.youtube.com/embed/${post.youtube}`" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div id='prettypictures' v-if='post.youtube'>
+            <div id='youtubewrapper'>
+                <iframe :src="`https://www.youtube.com/embed/${post.youtube}`" frameborder="0" width="100%" height="100%" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
         </div>
         <div id='prettypictures' v-else>
             <nuxt-image :src="`/posts/${post.slug}/cover.jpg`"/>
@@ -82,20 +84,17 @@ export default {
     height: auto;
 }
 
-.youtube {
+#youtubewrapper {
     position: relative;
-    width: 100%;
-    height: 0;
-    padding-bottom: 56.25%;
-    margin: 0;
+    padding-top: 56.25%;
 }
 
-.youtube iframe {
+#youtubewrapper iframe {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    left: 0;
-    top: 0;
 }
 
 #date {

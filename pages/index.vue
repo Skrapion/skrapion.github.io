@@ -1,6 +1,8 @@
 <template>
-    <div id='indexcontent'>
-        <div v-for="post of posts" :key="post.slug" :class="{post: true, featured: post.featured}"><nuxt-link :to="post.slug"><nuxt-image :src="`/posts/${post.slug}/cover.jpg`" :alt="post.title" width="400" height="400" :sizes="post.featured ? featuredSizes : sizes"/></nuxt-link></div>
+    <div id='indexcontentpadding'>
+        <div id='indexcontent'>
+            <div v-for="post of posts" :key="post.slug" :class="{post: true, featured: post.featured}"><nuxt-link :to="post.slug"><nuxt-image :src="`/posts/${post.slug}/cover.jpg`" :alt="post.title" width="400" height="400" :sizes="post.featured ? featuredSizes : sizes"/></nuxt-link></div>
+        </div>
     </div>
 </template>
 
@@ -31,15 +33,17 @@ export default {
 </script>
 
 <style scoped>
+#indexcontentpadding {
+    width: auto;
+    margin: 20px;
+}
+
 #indexcontent {
     display: grid;
-    width: 100%;
     grid-template-columns: repeat(auto-fill, minmax(200px, auto));
     grid-gap: 10px;
     grid-auto-rows: minmax(200px, auto);
     grid-auto-flow: dense;
-    margin-bottom: 10px;
-    padding: 20px;
 }
 
 .post a img {
