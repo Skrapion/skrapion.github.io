@@ -2,11 +2,15 @@
     "name": "firefang-dot-com",
     "scripts": {
         "dev": "nuxt",
-        "generate": "nuxt generate"
+        "generate": "nuxt generate",
+        "deploy": "push-dir --dir=dest --branch=gh-pages --cleanup"
     },
     "dependencies": {
         "@nuxt/content": "^1.11.1",
         "@nuxt/image": "0.0.4",
         "nuxt": "^2.14.12"
+    },
+    "devDependencies": {
+        "push-dir": "^0.4.1"
     }
 }
