@@ -1,0 +1,12 @@
+{
+    "name": "firefang-dot-com",
+    "scripts": {
+        "dev": "nuxt",
+        "generate": "nuxt generate"
+    },
+    "dependencies": {
+        "@nuxt/content": "^1.11.1",
+        "@nuxt/image": "0.0.4",
+        "nuxt": "^2.14.12"
+    }
+}
