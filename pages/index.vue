@@ -1,7 +1,7 @@
 <template>
     <div id='indexcontentpadding'>
         <div id='indexcontent'>
-            <div v-for="post of posts" :key="post.slug" :class="{post: true, featured: post.featured}"><nuxt-link :to="post.slug"><nuxt-image :src="`/posts/${post.slug}/cover.jpg`" :alt="post.title" width="400" height="400" :sizes="post.featured ? featuredSizes : sizes"/></nuxt-link></div>
+            <div v-for="(post, i) of posts" :key="post.slug" :class="{post: true, featured: post.featured}"><nuxt-link :to="post.slug"><nuxt-image :src="`/posts/${post.slug}/cover.jpg`" :alt="post.title" width="400" height="400" :sizes="post.featured ? featuredSizes : sizes" :placeholder="true" :lazy="i>3"/></nuxt-link></div>
         </div>
     </div>
 </template>

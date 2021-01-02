@@ -6,7 +6,7 @@
             </div>
         </div>
         <div id='prettypictures' v-else>
-            <nuxt-image :src="`/posts/${post.slug}/cover.jpg`"/>
+            <nuxt-image :src="`/posts/${post.slug}/cover.jpg`" :placeholder="true" :lazy="false"/>
         </div>
         <div id='date'>
             {{formatDate(post.date)}}
