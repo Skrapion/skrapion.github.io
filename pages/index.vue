@@ -39,6 +39,7 @@ export default {
     grid-auto-rows: minmax(200px, auto);
     grid-auto-flow: dense;
     margin-bottom: 10px;
+    padding: 20px;
 }
 
 .post a img {

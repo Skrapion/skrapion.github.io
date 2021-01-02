@@ -16,5 +16,8 @@ export default {
         '@nuxt/content',
         '@nuxt/image'
     ],
-    components: true
+    components: true,
+    generate: {
+        fallback: '404.html'
+    }
 }

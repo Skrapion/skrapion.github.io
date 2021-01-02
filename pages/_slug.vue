@@ -23,7 +23,7 @@
 
 <script>
 export default {
-    async asyncData({$content, params}) {
+    async asyncData({$content, params, error}) {
         const postPromise = $content('posts', params.slug).fetch();
         const surroundPromise = $content('posts')
             .only(['slug'])
@@ -31,15 +31,24 @@ export default {
             .surround(params.slug)
             .fetch();
 
-        const post = await postPromise;
-        const [prev, next] = await surroundPromise;
+        try {
+            const post = await postPromise;
+            const [prev, next] = await surroundPromise;
 
-        return {post, prev, next};
+            return {post, prev, next};
+        } catch(e) {
+            error({statusCode: 400, message: "Not Found"});
+        }
     },
     methods: {
         formatDate(date) {
             const options = {year: 'numeric', month: 'long', day: 'numeric'};
             return new Date(date).toLocaleString('en', options);
+        }
+    },
+    head() {
+        return {
+            title: this.post.title + " - Firefang"
         }
     }
 }
@@ -47,24 +56,30 @@ export default {
 
 <style scoped>
 #singlecontent {
-        display: grid;
-        grid-template-columns: 66%;
-        grid-template-areas:
-                "pic .     ."
-                "pic date  date"
-                "pic desc  desc"
-                "pic newer older"
-                "pic .     .";
-        font-size: 12pt;
+    display: grid;
+    height: 100%;
+    grid-template-columns: 66%;
+    grid-template-areas:
+            "pic .     ."
+            "pic date  date"
+            "pic desc  desc"
+            "pic newer older"
+            "pic .     .";
+    grid-template-rows: auto min-content min-content min-content auto;
+    font-size: 12pt;
+    padding: 20px;
 }
 
 #prettypictures {
-        grid-area: pic;
+    grid-area: pic;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #prettypictures .size-post-thumbnail {
-        width: 100%;
-        height: auto;
+    width: 100%;
+    height: auto;
 }
 
 .youtube {
@@ -84,33 +99,34 @@ export default {
 }
 
 #date {
-        grid-area: date;
-        text-align: right;
-        font-style: italic;
+    grid-area: date;
+    text-align: right;
+    font-style: italic;
+    height: auto;
 }
 
 #boringwords {
-        grid-area: desc;
-        margin-left: 2em;
-        text-align: justify;
+    grid-area: desc;
+    margin-left: 2em;
+    text-align: justify;
 }
 
 #older {
-        grid-area: newer;
-        margin-left: 2em;
+    grid-area: newer;
+    margin-left: 2em;
 }
 
 #newer {
-        grid-area: older;
-        text-align: right;
+    grid-area: older;
+    text-align: right;
 }
 
 #newer a, #older a {
-        color: white;
-        text-decoration: none;
+    color: white;
+    text-decoration: none;
 }
 
 #newer a:hover, #older a:hover {
-        text-decoration: underline;
+    text-decoration: underline;
 }
 </style>
