@@ -2,6 +2,7 @@
     "name": "firefang-dot-com",
     "scripts": {
         "dev": "nuxt",
+        "start": "nuxt start",
         "generate": "nuxt generate",
         "deploy": "push-dir --dir=dest --branch=gh-pages --cleanup"
     },
