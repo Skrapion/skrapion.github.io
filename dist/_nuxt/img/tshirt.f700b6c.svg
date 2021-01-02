@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:version="1.0beta1 (fe3e306, 2019-09-17)"
+   sodipodi:docname="tshirt.svg"
+   id="svg6"
+   version="1.1"
+   viewBox="0 0 24 24"
+   role="img">
+  <metadata
+     id="metadata12">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Facebook icon</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs10" />
+  <sodipodi:namedview
+     inkscape:snap-intersection-paths="true"
+     inkscape:current-layer="svg6"
+     inkscape:cy="10.64422"
+     inkscape:cx="17.699801"
+     inkscape:zoom="15.729167"
+     showgrid="false"
+     id="namedview8"
+     inkscape:window-height="480"
+     inkscape:window-width="640"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0"
+     guidetolerance="10"
+     gridtolerance="10"
+     objecttolerance="10"
+     borderopacity="1"
+     inkscape:document-rotation="0"
+     bordercolor="#666666"
+     pagecolor="#2b2b2b" />
+  <title
+     id="title2">Facebook icon</title>
+  <path
+     inkscape:connector-curvature="0"
+     d="m 14.327096,22.21347 h 3.51775 V 8.0975584 l 1.983413,2.0229806 2.881561,-3.1019038 c 0,0 -3.293213,-4.5854236 -5.351472,-4.9900196 -2.058258,-0.4045964 -2.151815,-0.1798207 -2.151815,-0.1798207 0,0 -0.0065,2.6019438 -3.206533,2.6019438 M 14.327096,22.21347 H 6.1551541 V 8.0975584 L 4.1717415,10.120539 1.2901798,7.0186352 c 0,0 3.2932134,-4.5854236 5.3514717,-4.9900196 2.0582583,-0.4045964 2.1518158,-0.1798207 2.1518158,-0.1798207 0,0 0.00645,2.6019438 3.2065327,2.6019438"
+     style="vector-effect:non-scaling-stroke;fill:none;stroke:#ffffff;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+     id="path854" />
+</svg>
