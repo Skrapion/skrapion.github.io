@@ -32,7 +32,7 @@ export default {
     head() {
         return {
             meta: [
-                { hid: 'og:url', property: "og:url", content: process.env.baseURL },
+                { hid: 'og:url', property: "og:url", content: process.env.BaseURL },
                 { hid: 'og:type', property: "og:type", content: "website" }
             ]
         }
