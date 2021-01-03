@@ -6,7 +6,7 @@
             </div>
         </div>
         <div id='prettypictures' v-else>
-            <nuxt-image :src="`/posts/${post.slug}/cover.jpg`" :placeholder="true" :lazy="false"/>
+            <nuxt-image :src="`/posts/${post.slug}/cover.jpg`" :placeholder="true"/>
         </div>
         <div id='date'>
             {{formatDate(post.date)}}
@@ -50,7 +50,20 @@ export default {
     },
     head() {
         return {
-            title: this.post.title + " - Firefang"
+            title: this.post.title + " - Firefang",
+            meta: [
+                { hid: 'description', name: 'description', content: this.post.description },
+
+                { hid: 'og:title', property: "og:title", content: this.post.title + " - Firefang" },
+                { hid: 'og:url', property: "og:url", content: process.env.baseURL + this.post.slug },
+                { hid: 'og:type', property: "og:type", content: this.post.youtube ? "video" : "article" },
+                { hid: 'og:description', property: "og:description", content: this.post.description },
+                { hid: 'og:image', property: 'og:image', content: "/posts/" + this.post.slug + "/cover.jpg" },
+
+                { hid: 'twitter:title', property: 'twitter:title', content: this.post.title + " - Firefang" },
+                { hid: 'twitter:description', property: 'twitter:description', content: this.post.description },
+                { hid: 'twitter:image', property: 'twitter:image', content: "/posts/" + this.post.slug + "/cover.jpg" }
+            ]
         }
     }
 }

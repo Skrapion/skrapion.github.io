@@ -1,7 +1,7 @@
 <template>
     <div id='indexcontentpadding'>
         <div id='indexcontent'>
-            <div v-for="(post, i) of posts" :key="post.slug" :class="{post: true, featured: post.featured}"><nuxt-link :to="post.slug"><nuxt-image :src="`/posts/${post.slug}/cover.jpg`" :alt="post.title" width="400" height="400" :sizes="post.featured ? featuredSizes : sizes" :placeholder="true" :lazy="i>3"/></nuxt-link></div>
+            <div v-for="post of posts" :key="post.slug" :class="{post: true, featured: post.featured}"><nuxt-link :to="post.slug"><nuxt-image :src="`/posts/${post.slug}/cover.jpg`" :alt="post.title" width="400" height="400" :sizes="post.featured ? featuredSizes : sizes" :placeholder="true"/></nuxt-link></div>
         </div>
     </div>
 </template>
@@ -26,6 +26,14 @@ export default {
                     breakpoint: 400,
                     width: 800
                 }
+            ]
+        }
+    },
+    head() {
+        return {
+            meta: [
+                { hid: 'og:url', property: "og:url", content: process.env.baseURL },
+                { hid: 'og:type', property: "og:type", content: "website" }
             ]
         }
     }

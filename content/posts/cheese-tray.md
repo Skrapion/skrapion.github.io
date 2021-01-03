@@ -1,5 +1,6 @@
 ---
 title: Cheese Tray
+description: A handmade maple and walnut cheese tray with a woodburned monogram.
 date: 2015-12-15
 featured: true
 ---

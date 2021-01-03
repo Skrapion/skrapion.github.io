@@ -1,5 +1,6 @@
 ---
 title: VH Love
+description: "48-hour film challenge: After a disastrous foray into video dating, Harriet goes to her bartender friend to be consoled."
 date: 2012-11-14
 youtube: If7dUFW_NPU
 ---
