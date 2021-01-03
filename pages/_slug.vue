@@ -39,7 +39,7 @@ export default {
 
             return {post, prev, next};
         } catch(e) {
-            error({statusCode: 400, message: "Not Found"});
+            error({statusCode: 404, message: "Not Found"});
         }
     },
     methods: {
