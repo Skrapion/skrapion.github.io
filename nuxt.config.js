@@ -1,4 +1,4 @@
-const baseUrl = "https://skrapion.gitlab.io/";
+const baseUrl = "https://skrapion.github.io/";
 const desc = "Rick Yorgason's portfolio blog. Everything from traditional woodworking to video game development."
 
 export default {
