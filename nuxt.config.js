@@ -1,4 +1,4 @@
-const baseUrl = "https://skrapion.github.io/";
+const baseUrl = "https://nuxt.firefang.com/";
 const desc = "Rick Yorgason's portfolio blog. Everything from traditional woodworking to video game development."
 
 
