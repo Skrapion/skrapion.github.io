@@ -13,6 +13,7 @@ export default {
     ],
     components: true,
     generate: {
+        dir: 'docs',
         fallback: '404.html'
     },
     env: {
