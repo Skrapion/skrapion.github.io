@@ -1,5 +1,13 @@
 <template>
     <article id='singlecontent'>
+        <div id='story'>
+            <div id='date'>
+                {{formatDate(post.date)}}
+            </div>
+            <div id='boringwords'>
+                <nuxt-content :document='post'/>
+            </div>
+        </div>
         <div id='prettypictures' v-if='post.youtube'>
             <div id='youtubewrapper'>
                 <iframe :src="`https://www.youtube.com/embed/${post.youtube}`" frameborder="0" width="100%" height="100%" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -8,17 +16,19 @@
         <div id='prettypictures' v-else>
             <nuxt-image :src="`/posts/${post.slug}/cover.jpg`" :placeholder="true"/>
         </div>
-        <div id='date'>
-            {{formatDate(post.date)}}
-        </div>
-        <div id='boringwords'>
-            <nuxt-content :document='post'/>
-        </div>
-        <div id='older' v-if="prev">
-            <nuxt-link :to="prev.slug">&laquo; Older</nuxt-link>
-        </div>
-        <div id='newer' v-if="next">
-            <nuxt-link :to="next.slug">Newer &raquo;</nuxt-link>
+        <div id='signposts'>
+            <div id='newer' v-if="next">
+                <nuxt-link :to="next.slug">
+                    <nuxt-image class="signpostimg" :src="`/posts/${next.slug}/cover.jpg`" :placeholder="true" width="400" height="400"/>
+                    <div class="signposttext">&laquo; Newer</div>
+                </nuxt-link>
+            </div>
+            <div id='older' v-if="prev">
+                <nuxt-link :to="prev.slug">
+                    <nuxt-image class="signpostimg" :src="`/posts/${prev.slug}/cover.jpg`" :placeholder="true" width="400" height="400"/>
+                    <div class="signposttext">Older &raquo;</div>
+                </nuxt-link>
+            </div>
         </div>
     </article>
 </template>
@@ -76,23 +86,50 @@ export default {
 #singlecontent {
     display: grid;
     height: 100%;
-    grid-template-columns: 66%;
+    grid-template-columns: 300px;
     grid-template-areas:
-            "pic .     ."
-            "pic date  date"
-            "pic desc  desc"
-            "pic newer older"
-            "pic .     .";
-    grid-template-rows: auto min-content min-content min-content auto;
+            "story pics"
+            "story signposts";
+    /*grid-template-rows: auto min-content min-content min-content auto;*/
     font-size: 12pt;
     padding: 20px;
 }
 
+#story {
+    grid-area: story;
+    margin-right: 40px;
+}
+
 #prettypictures {
-    grid-area: pic;
-    display: flex;
+    grid-area: pics;
+    /*display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: center;*/
+}
+
+#signposts {
+    grid-area: signposts;
+    display: grid;
+    grid-template-areas: "nextsignpost . prevsignpost";
+    grid-template-columns: 150px auto 150px;
+}
+
+#older {
+    grid-area: prevsignpost;
+    text-align: right;
+}
+
+#newer {
+    grid-area: nextsignpost;
+}
+
+#newer a, #older a {
+    color: white;
+    text-decoration: none;
+}
+
+#newer a:hover, #older a:hover {
+    text-decoration: underline;
 }
 
 #prettypictures .size-post-thumbnail {
@@ -124,24 +161,5 @@ export default {
     grid-area: desc;
     margin-left: 2em;
     text-align: justify;
-}
-
-#older {
-    grid-area: newer;
-    margin-left: 2em;
-}
-
-#newer {
-    grid-area: older;
-    text-align: right;
-}
-
-#newer a, #older a {
-    color: white;
-    text-decoration: none;
-}
-
-#newer a:hover, #older a:hover {
-    text-decoration: underline;
 }
 </style>
