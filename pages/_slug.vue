@@ -85,26 +85,29 @@ export default {
 <style scoped>
 #singlecontent {
     display: grid;
-    height: 100%;
     grid-template-columns: 300px;
     grid-template-areas:
             "story pics"
-            "story signposts";
-    /*grid-template-rows: auto min-content min-content min-content auto;*/
+            ".     signposts";
     font-size: 12pt;
     padding: 20px;
 }
 
 #story {
     grid-area: story;
-    margin-right: 40px;
+    padding-right: 40px;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #prettypictures {
     grid-area: pics;
-    /*display: flex;
+    margin-bottom: 20px;
+    display: flex;
     flex-direction: column;
-    justify-content: center;*/
+    justify-content: center;
 }
 
 #signposts {
@@ -112,6 +115,7 @@ export default {
     display: grid;
     grid-template-areas: "nextsignpost . prevsignpost";
     grid-template-columns: 150px auto 150px;
+    margin-top: 20px;
 }
 
 #older {
