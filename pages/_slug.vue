@@ -18,13 +18,13 @@
         </div>
         <div id='signposts'>
             <div id='newer' v-if="next">
-                <nuxt-link :to="next.slug">
+                <nuxt-link :to="`/${next.slug}`">
                     <nuxt-image class="signpostimg" :src="`/posts/${next.slug}/cover.jpg`" :placeholder="true" width="400" height="400"/>
                     <div class="signposttext">&laquo; Newer</div>
                 </nuxt-link>
             </div>
             <div id='older' v-if="prev">
-                <nuxt-link :to="prev.slug">
+                <nuxt-link :to="`/${prev.slug}`">
                     <nuxt-image class="signpostimg" :src="`/posts/${prev.slug}/cover.jpg`" :placeholder="true" width="400" height="400"/>
                     <div class="signposttext">Older &raquo;</div>
                 </nuxt-link>
