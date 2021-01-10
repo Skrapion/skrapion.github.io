@@ -8,9 +8,14 @@
                 <nuxt-content :document='post'/>
             </div>
         </div>
-        <div id='prettypictures' v-if='post.youtube'>
-            <div id='youtubewrapper'>
-                <iframe :src="`https://www.youtube.com/embed/${post.youtube}`" frameborder="0" width="100%" height="100%" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div id='prettypictures' v-if='post.pics'>
+            <div v-for='pic of post.pics' :key='pic'>
+                <div v-if='pic.substr(pic.length-3, pic.length) == ".yt"' class='pic youtubewrapper'>
+                    <iframe :src="`https://www.youtube.com/embed/${pic.substr(0, pic.length-3)}`" frameborder="0" width="100%" height="100%" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div v-else class='pic'>
+                    <nuxt-image :src="`/posts/${post.slug}/${pic}`" :placeholder="true"/>
+                </div>
             </div>
         </div>
         <div id='prettypictures' v-else>
@@ -96,7 +101,7 @@ export default {
 #story {
     grid-area: story;
     padding-right: 40px;
-    max-height: 100%;
+    max-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -115,7 +120,6 @@ export default {
     display: grid;
     grid-template-areas: "nextsignpost . prevsignpost";
     grid-template-columns: 150px auto 150px;
-    margin-top: 20px;
 }
 
 #older {
@@ -141,12 +145,16 @@ export default {
     height: auto;
 }
 
-#youtubewrapper {
+.pic {
+    margin-bottom: 20px;
+}
+
+.youtubewrapper {
     position: relative;
     padding-top: 56.25%;
 }
 
-#youtubewrapper iframe {
+.youtubewrapper iframe {
     position: absolute;
     top: 0;
     left: 0;
@@ -164,6 +172,5 @@ export default {
 #boringwords {
     grid-area: desc;
     margin-left: 2em;
-    text-align: justify;
 }
 </style>
