@@ -14,7 +14,8 @@ export default {
     components: true,
     generate: {
         dir: 'docs',
-        fallback: '404.html'
+        fallback: '404.html',
+        nestedProperties: ['posts.tags']
     },
     env: {
         BaseURL: baseUrl

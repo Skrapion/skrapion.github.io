@@ -35,6 +35,14 @@
                 </nuxt-link>
             </div>
         </div>
+        <div v-if='!$fetchState.pending && similars.length' id='similars'>
+            <h2>Other {{similarsCategory}} projects</h2>
+            <div v-for="similar of similars" :key='similar.slug'>
+                <nuxt-link :to="`/${similar.slug}`">
+                    <nuxt-image class="similarimg" :src="`/posts/${similar.slug}/cover.jpg`" :placeholder="true" width="400" height="400"/>
+                </nuxt-link>
+            </div>
+        </div>
     </article>
 </template>
 
@@ -55,6 +63,40 @@ export default {
             return {post, prev, next};
         } catch(e) {
             error({statusCode: 404, message: "Not Found"});
+        }
+    },
+    data() {
+        return {
+            similars: [],
+            similarsCategory: ""
+        }
+    },
+    async fetch() {
+        this.similars = await this.$nuxt.context.$content('posts')
+            .only(['slug', 'tags', 'title'])
+            .where({
+                $and: [{
+                    'slug': { $ne: this.$nuxt.context.params.slug }
+                },{
+                    'tags': { $contains: [this.post.tags[0]] }
+                }]
+            })
+            .fetch();
+        if(this.similars.length > 3) {
+            this.similarsCategory = this.post.tags[0];
+        } else {
+            this.similars = await this.$nuxt.context.$content('posts')
+            .only(['slug', 'tags', 'title'])
+            .where({
+                $and: [{
+                    'slug': { $ne: this.$nuxt.context.params.slug }
+                },{
+                    'tags': { $containsAny: this.post.tags }
+                }]
+            })
+            .fetch();
+
+            this.similarsCategory = "similar";
         }
     },
     methods: {
@@ -93,7 +135,8 @@ export default {
     grid-template-columns: 300px;
     grid-template-areas:
             "story pics"
-            ".     signposts";
+            ".     signposts"
+            "similars similars";
     font-size: 12pt;
     padding: 20px;
 }
@@ -140,6 +183,10 @@ export default {
     text-decoration: underline;
 }
 
+#similars {
+    grid-area: similars;
+}
+
 #prettypictures .size-post-thumbnail {
     width: 100%;
     height: auto;
@@ -172,5 +219,9 @@ export default {
 #boringwords {
     grid-area: desc;
     margin-left: 2em;
+}
+
+.similarimg {
+    width: 200px;
 }
 </style>

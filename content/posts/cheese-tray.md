@@ -3,6 +3,7 @@ title: Cheese Tray
 description: A handmade maple and walnut cheese tray with a woodburned monogram.
 date: 2015-12-15
 featured: true
+tags: [woodworking]
 ---
 I get to share this now. Here’s the cheese tray I made for a friend for Secret Santa. It’s made of riven maple and walnut with a pyrographic monogram for her and her fiancé over an acanthus leaf design.
 

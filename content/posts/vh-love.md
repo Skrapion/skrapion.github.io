@@ -4,6 +4,7 @@ description: "48-hour film challenge: After a disastrous foray into video dating
 date: 2012-11-14
 pics:
   - If7dUFW_NPU.yt
+tags: [film challenges, video]
 ---
 Our submission to this year’s [Toronto 48 Hour Film Challenge](https://www.48hourfilm.com/toronto).
 
