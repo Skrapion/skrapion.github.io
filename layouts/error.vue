@@ -34,7 +34,8 @@ export default {
 h1 {
     font-size: 12rem;
     font-family: 'Rouge Script', cursive;
-    font-weight: normal;
+    font-weight: 100;
+    font-style: italic;
     line-height: 0.5em;
     margin: 0;
 }
@@ -42,7 +43,8 @@ h1 {
 h2 {
     font-size: 4rem;
     font-family: 'Rouge Script', cursive;
-    font-weight: normal;
+    font-weight: 100;
+    font-style: italic;
     margin-top: 0;
 }
 </style>

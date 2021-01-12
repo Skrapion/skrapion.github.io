@@ -1,49 +1,55 @@
 <template>
-    <article id='singlecontent'>
-        <div id='story'>
-            <div id='date'>
-                {{formatDate(post.date)}}
-            </div>
-            <div id='boringwords'>
-                <nuxt-content :document='post'/>
-            </div>
-        </div>
-        <div id='prettypictures' v-if='post.pics'>
-            <div v-for='pic of post.pics' :key='pic'>
-                <div v-if='pic.substr(pic.length-3, pic.length) == ".yt"' class='pic youtubewrapper'>
-                    <iframe :src="`https://www.youtube.com/embed/${pic.substr(0, pic.length-3)}`" frameborder="0" width="100%" height="100%" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div id='singlecontent'>
+        <article>
+            <div id='story'>
+                <div id='date'>
+                    {{formatDate(post.date)}}
                 </div>
-                <div v-else class='pic'>
-                    <nuxt-image :src="`/posts/${post.slug}/${pic}`" :placeholder="true"/>
+                <div id='boringwords'>
+                    <nuxt-content :document='post'/>
                 </div>
             </div>
-        </div>
-        <div id='prettypictures' v-else>
-            <nuxt-image :src="`/posts/${post.slug}/cover.jpg`" :placeholder="true"/>
-        </div>
-        <div id='signposts'>
-            <div id='newer' v-if="next">
-                <nuxt-link :to="`/${next.slug}`">
-                    <nuxt-image class="signpostimg" :src="`/posts/${next.slug}/cover.jpg`" :placeholder="true" width="400" height="400"/>
-                    <div class="signposttext">&laquo; Newer</div>
-                </nuxt-link>
+            <div id='prettypictures' v-if='post.pics'>
+                <div v-for='pic of post.pics' :key='pic'>
+                    <div v-if='pic.substr(pic.length-3, pic.length) == ".yt"' class='pic youtubewrapper'>
+                        <iframe :src="`https://www.youtube.com/embed/${pic.substr(0, pic.length-3)}`" frameborder="0" width="100%" height="100%" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div v-else class='pic'>
+                        <nuxt-image :src="`/posts/${post.slug}/${pic}`" :placeholder="true"/>
+                    </div>
+                </div>
             </div>
-            <div id='older' v-if="prev">
-                <nuxt-link :to="`/${prev.slug}`">
-                    <nuxt-image class="signpostimg" :src="`/posts/${prev.slug}/cover.jpg`" :placeholder="true" width="400" height="400"/>
-                    <div class="signposttext">Older &raquo;</div>
-                </nuxt-link>
+            <div id='prettypictures' v-else>
+                <nuxt-image :src="`/posts/${post.slug}/cover.jpg`" :placeholder="true"/>
             </div>
-        </div>
+            <div id='signposts'>
+                <div id='newer' v-if="next" class='post'>
+                    <nuxt-link :to="`/${next.slug}`">
+                        <nuxt-image class="signpostimg" :src="`/posts/${next.slug}/cover.jpg`" :placeholder="true" width="400" height="400"/>
+                        <div class="signposttext">&laquo; Newer</div>
+                    </nuxt-link>
+                </div>
+                <div id='older' v-if="prev" class='post'>
+                    <nuxt-link :to="`/${prev.slug}`">
+                        <nuxt-image class="signpostimg" :src="`/posts/${prev.slug}/cover.jpg`" :placeholder="true" width="400" height="400"/>
+                        <div class="signposttext">Older &raquo;</div>
+                    </nuxt-link>
+                </div>
+            </div>
+        </article>
         <div v-if='!$fetchState.pending && similars.length' id='similars'>
-            <h2>Other {{similarsCategory}} projects</h2>
-            <div v-for="similar of similars" :key='similar.slug'>
-                <nuxt-link :to="`/${similar.slug}`">
-                    <nuxt-image class="similarimg" :src="`/posts/${similar.slug}/cover.jpg`" :placeholder="true" width="400" height="400"/>
-                </nuxt-link>
+            <div class="indexcontentpadding">
+                <h2>Other {{similarsCategory}} projects...</h2>
+                <div id="indexcontent">
+                    <div v-for="similar of similars" :key='similar.slug' class='post'>
+                        <nuxt-link :to="`/${similar.slug}`">
+                            <nuxt-image class="similarimg" :src="`/posts/${similar.slug}/cover.jpg`" :placeholder="true" :alt="similar.title" width="400" height="400"/>
+                        </nuxt-link>
+                    </div>
+                </div>
             </div>
         </div>
-    </article>
+    </div>
 </template>
 
 <script>
@@ -123,6 +129,10 @@ export default {
                 { hid: 'twitter:title', property: 'twitter:title', content: this.post.title + " - Firefang" },
                 { hid: 'twitter:description', property: 'twitter:description', content: this.post.description },
                 { hid: 'twitter:image', property: 'twitter:image', content: process.env.BaseURL + "posts/" + this.post.slug + "/cover.jpg" }
+            ],
+            link: [
+                {rel: 'preconnect', href: 'https://fonts.gstatic.com'},
+                {rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Rouge+Script&display=swap'},
             ]
         }
     }
@@ -130,15 +140,19 @@ export default {
 </script>
 
 <style scoped>
-#singlecontent {
+#singlecontent article {
+    position: relative;
     display: grid;
     grid-template-columns: 300px;
     grid-template-areas:
             "story pics"
-            ".     signposts"
-            "similars similars";
+            ".     signposts";
     font-size: 12pt;
     padding: 20px;
+
+    z-index: 1;
+    border-bottom: 17px solid transparent;
+    border-image: url(~assets/images/halftone.png) 17 repeat;
 }
 
 #story {
@@ -163,6 +177,7 @@ export default {
     display: grid;
     grid-template-areas: "nextsignpost . prevsignpost";
     grid-template-columns: 150px auto 150px;
+    padding-bottom: 20px;
 }
 
 #older {
@@ -184,7 +199,14 @@ export default {
 }
 
 #similars {
-    grid-area: similars;
+    position: relative;
+    margin-top: -17px;
+    background: #262626;
+    padding-top: 1px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 40px;
+    z-index: 0;
 }
 
 #prettypictures .size-post-thumbnail {
@@ -221,7 +243,11 @@ export default {
     margin-left: 2em;
 }
 
-.similarimg {
-    width: 200px;
+#similars h2 {
+    font-size: 40px;
+    font-style: italic;
+    font-weight: 100;
+    font-family: 'Rouge Script', cursive;
+    margin-bottom: 0;
 }
 </style>

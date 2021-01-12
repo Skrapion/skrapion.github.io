@@ -1,7 +1,7 @@
 html, body {
     margin: 0;
     height: 100%;
-    background: #222;
+    background: #1d1d1d;
 }
 
 a {
@@ -15,7 +15,7 @@ a {
     width: 300px;
     border-right: 17px solid transparent;
     border-image: url(~assets/images/halftone.png) 17 repeat;
-    z-index: 1;
+    z-index: 2;
 }
 
 #header {
@@ -47,4 +47,45 @@ a {
     color: white;
     font-size: 2em;
     height: 100%;
+}
+
+#indexcontentpadding {
+    width: auto;
+    margin: 20px;
+}
+
+#indexcontent {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, auto));
+    grid-gap: 10px;
+    grid-auto-rows: minmax(200px, auto);
+    grid-auto-flow: dense;
+}
+
+.post a img {
+    width: 100%;
+    height: 100%;
+}
+
+.featured {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.post a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    height: 100%;
+    width: 100%;
+}
+
+.post:hover {
+    transform: scale(1.05);
+    z-index: 1;
+}
+
+.post {
+    transition: all 1s;
+    z-index: unset;
 }
