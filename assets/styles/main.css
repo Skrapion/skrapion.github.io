@@ -52,6 +52,7 @@ a {
 #indexcontentpadding {
     width: auto;
     margin: 20px;
+    padding-bottom: 20px;
 }
 
 #indexcontent {
