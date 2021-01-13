@@ -24,7 +24,7 @@ const create = async (feed, args) => {
     feed.options = {
         title: "Firefang",
         description: desc,
-        link: `${baseUrl}feed.xml`
+        link: `${baseUrl}rss.xml`
     };
     const {$content} = require('@nuxt/content');
     if(posts === null || posts.length === 0) {
@@ -80,7 +80,7 @@ export default {
     },
     feed: [
         {
-            path: '/feed.xml',
+            path: '/rss.xml',
             create,
             cacheTime: 1000 * 60 * 15,
             type: 'rss2'
