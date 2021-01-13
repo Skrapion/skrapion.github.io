@@ -1,10 +1,10 @@
+import { hostname } from 'os';
+
 const fs = require('fs').promises;
 const path = require('path');
 
 const baseUrl = "https://nuxt.firefang.com/";
 const desc = "Rick Yorgason's portfolio blog. Everything from traditional woodworking to video game development."
-
-let posts = [];
 
 const constructFeedItem = async (post) => {
     const filePath = path.join(__dirname, `docs/rssgen/${post.slug}/index.html`);
@@ -20,22 +20,39 @@ const constructFeedItem = async (post) => {
     }
 }
 
+const fetchPosts = async () => {
+    const {$content} = require('@nuxt/content');
+    return $content('posts')
+        .sortBy('date', 'desc')
+        .fetch();
+}
+
 const create = async (feed, args) => {
+    const posts = await fetchPosts();
+
     feed.options = {
         title: "Firefang",
         description: desc,
         link: `${baseUrl}rss.xml`
     };
-    const {$content} = require('@nuxt/content');
-    if(posts === null || posts.length === 0) {
-        posts = await $content('posts').fetch();
-    }
 
     for(const post of posts) {
         const feedItem = await constructFeedItem(post);
         feed.addItem(feedItem);
     }
     return feed;
+}
+
+const createSitemapRoutes = async () => {
+    const posts = await fetchPosts();
+
+    let routes = [];
+
+    for(const post of posts) {
+        routes.push(`/${post.slug}`);
+    }
+
+    return routes;
 }
 
 export default {
@@ -46,7 +63,8 @@ export default {
     modules: [
         '@nuxt/content',
         '@nuxt/image',
-        '@nuxtjs/feed'
+        '@nuxtjs/feed',
+        '@nuxtjs/sitemap'
     ],
     components: true,
     generate: {
@@ -85,5 +103,10 @@ export default {
             cacheTime: 1000 * 60 * 15,
             type: 'rss2'
         }
-    ]
+    ],
+    sitemap: {
+        hostname: baseUrl,
+        exclude: ['/rssgen'],
+        routes: createSitemapRoutes
+    }
 }
