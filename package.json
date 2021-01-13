@@ -8,6 +8,7 @@
     "dependencies": {
         "@nuxt/content": "^1.11.1",
         "@nuxt/image": "0.0.4",
+        "@nuxtjs/feed": "^2.0.0",
         "nuxt": "^2.14.12"
     },
     "devDependencies": {}

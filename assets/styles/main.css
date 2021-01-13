@@ -1,7 +1,6 @@
 html, body {
     margin: 0;
     height: 100%;
-    background: #1d1d1d;
 }
 
 a {
@@ -44,9 +43,10 @@ a {
     position: absolute;
     left: 300px;
     right: 0;
+    background: #1d1d1d;
     color: white;
     font-size: 2em;
-    height: 100%;
+    min-height: 100vh;
 }
 
 #indexcontentpadding {

@@ -10,7 +10,7 @@ Our submission to this year’s [Toronto 48 Hour Film Challenge](https://www.48h
 
 The requirements:
 
-Genre: Period film
+- Genre: Period film
 - Character name: “Harriet” or “Harrison”
 - Dialogue: “What would you like to know”
 - Prop: Scissors
