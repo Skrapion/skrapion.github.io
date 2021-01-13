@@ -12,7 +12,8 @@ const constructFeedItem = async (post) => {
     const url = `${baseUrl}${post.slug}/`;
     return {
         title: post.title,
-        image: baseUrl + "favicon.ico",
+        date: new Date(post.date),
+        image: `${baseUrl}posts/${post.slug}/cover.jpg`,
         id: url,
         link: url,
         description: post.description,
@@ -33,7 +34,8 @@ const create = async (feed, args) => {
     feed.options = {
         title: "Firefang",
         description: desc,
-        link: `${baseUrl}rss.xml`
+        link: `${baseUrl}rss.xml`,
+        image: `${baseUrl}favicon.ico`
     };
 
     for(const post of posts) {

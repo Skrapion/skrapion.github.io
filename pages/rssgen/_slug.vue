@@ -1,8 +1,5 @@
 <template>
-    <div id='rsscontent'>
-        <nuxt-content :document='post'/>
-        <nuxt-image :src="`/posts/${post.slug}/cover.jpg`" :lazy='false' :sizes='200' />
-    </div>
+    <nuxt-content :document='post'/>
 </template>
 
 <script>
