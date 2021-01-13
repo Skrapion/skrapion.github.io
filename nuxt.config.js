@@ -106,6 +106,7 @@ export default {
     ],
     sitemap: {
         hostname: baseUrl,
+        gzip: true,
         exclude: ['/rssgen'],
         routes: createSitemapRoutes
     }
