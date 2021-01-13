@@ -1,17 +1,18 @@
 const fs = require('fs').promises;
 const path = require('path');
 
-const baseUrl = process.NODE_ENV === 'production' ? "https://nuxt.firefang.com/" : "http://localhost:3000/";
+const baseUrl = "https://nuxt.firefang.com/";
 const desc = "Rick Yorgason's portfolio blog. Everything from traditional woodworking to video game development."
 
 let posts = [];
 
 const constructFeedItem = async (post) => {
-    const filePath = path.join(__dirname, `dist/rss/${post.slug}/index.html`);
+    const filePath = path.join(__dirname, `docs/rssgen/${post.slug}/index.html`);
     const content = await fs.readFile(filePath, 'utf8');
     const url = `${baseUrl}${post.slug}/`;
     return {
         title: post.title,
+        image: baseUrl + "favicon.ico",
         id: url,
         link: url,
         description: post.description,
@@ -51,7 +52,8 @@ export default {
     generate: {
         dir: 'docs',
         fallback: '404.html',
-        nestedProperties: ['posts.tags']
+        nestedProperties: ['posts.tags'],
+        routes: ['/rssgen/']
     },
     env: {
         BaseURL: baseUrl
@@ -71,7 +73,10 @@ export default {
             { hid: 'twitter:description', property: 'twitter:description', content: desc },
             { hid: 'twitter:image', property: 'twitter:image', content: baseUrl + "RickHoldingTheWorld.jpg" }
         ],
-        link: [{rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}]
+        link: [
+            {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+            {rel: 'alternate', type: 'application/rss+xml', title: 'RSS Feed for Firefang', href: '/rss.xml' }
+        ]
     },
     feed: [
         {
