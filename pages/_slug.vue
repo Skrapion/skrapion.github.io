@@ -10,28 +10,29 @@
                         <nuxt-content :document='post'/>
                     </div>
                 </div>
-                <div id='prettypictures' v-if='post.pics'>
-                    <div v-for='pic of post.pics' :key='pic'>
-                        <div v-if='pic.substr(pic.length-3, pic.length) == ".yt"' class='pic youtubewrapper'>
-                            <iframe :src="`https://www.youtube.com/embed/${pic.substr(0, pic.length-3)}`" frameborder="0" width="100%" height="100%" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                        <div v-else class='pic'>
-                            <nuxt-image :src="`/posts/${post.slug}/${pic}`" :placeholder="true"/>
+                <div id='picturecontainer'>
+                    <div id='prettypictures' v-if='post.pics'>
+                        <div v-for='pic of post.pics' :key='pic'>
+                            <div v-if='pic.substr(pic.length-3, pic.length) == ".yt"' class='pic youtubewrapper'>
+                                <iframe :src="`https://www.youtube.com/embed/${pic.substr(0, pic.length-3)}`" frameborder="0" width="100%" height="100%" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div v-else class='pic'>
+                                <nuxt-image :src="`/posts/${post.slug}/${pic}`" :placeholder="true"/>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div id='prettypictures' v-else>
-                    <nuxt-image :src="`/posts/${post.slug}/cover.jpg`" :placeholder="true"/>
-                
+                    <div id='prettypictures' v-else>
+                        <nuxt-image :src="`/posts/${post.slug}/cover.jpg`" :placeholder="true"/>
+                    </div>
                     <div id='signposts'>
-                        <div id='newer' v-if="next" class='post'>
-                            <nuxt-link :to="`/${next.slug}`">
+                        <div id='newer' class='post'>
+                            <nuxt-link v-if="next" :to="`/${next.slug}`">
                                 <nuxt-image class="signpostimg" :src="`/posts/${next.slug}/cover.jpg`" :placeholder="true" width="400" height="400"/>
                                 <div class="signposttext">&laquo; Newer</div>
                             </nuxt-link>
                         </div>
-                        <div id='older' v-if="prev" class='post'>
-                            <nuxt-link :to="`/${prev.slug}`">
+                        <div id='older' class='post'>
+                            <nuxt-link v-if="prev" :to="`/${prev.slug}`">
                                 <nuxt-image class="signpostimg" :src="`/posts/${prev.slug}/cover.jpg`" :placeholder="true" width="400" height="400"/>
                                 <div class="signposttext">Older &raquo;</div>
                             </nuxt-link>
