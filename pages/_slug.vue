@@ -331,10 +331,15 @@ export default {
         margin: 0;
         padding: 50px 0;
         text-align: center;
+
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 1s ease-out, visibility 1s;
     }
 
     #story.openfull #readmorecontainer {
-        display: none;
+        opacity: 0;
+        visibility: hidden;
     }
 
     #readmore {
