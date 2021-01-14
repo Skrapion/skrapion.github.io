@@ -2,12 +2,17 @@
     <div id='singlecontent'>
         <div id='articlecontainer'>
             <article>
-                <div id='story'>
+                <div id='story' :class="{openfull: readmoreclicked}">
+                    <div id='boringwords'>
+                        <nuxt-content :document='post'/>
+                    </div>
                     <div id='date'>
                         {{formatDate(post.date)}}
                     </div>
-                    <div id='boringwords'>
-                        <nuxt-content :document='post'/>
+                    <div id='readmorecontainer'>
+                        <div id='readmore'>
+                            <a href='#' class='button' @click="readmoreclicked = true">Read More</a>
+                        </div>
                     </div>
                 </div>
                 <div id='picturecontainer'>
@@ -58,6 +63,19 @@
 
 <script>
 export default {
+    mounted() {
+        // Show/hide "read more" button depending on how big the text is
+        var story = document.getElementById("story");
+
+        var ro = new ResizeObserver(entries => {
+            var height = story.offsetHeight;
+            console.log("Height: " + height);
+            document.getElementById("readmore").style.display =
+                (height < 150) ? "none" : "block";
+        });
+        story.classList.add("storyjs");
+        ro.observe(story);
+    },
     async asyncData({$content, params, error}) {
         const postPromise = $content('posts', params.slug).fetch();
         const surroundPromise = $content('posts')
@@ -78,7 +96,8 @@ export default {
     data() {
         return {
             similars: [],
-            similarsCategory: ""
+            similarsCategory: "",
+            readmoreclicked: false
         }
     },
     async fetch() {
@@ -176,6 +195,10 @@ export default {
     justify-content: center;
 }
 
+#readmorecontainer {
+    display: none;
+}
+
 #prettypictures {
     grid-area: pics;
     display: flex;
@@ -247,7 +270,8 @@ export default {
 }
 
 #date {
-    grid-area: date;
+    margin-top: -0.75em;
+    margin-bottom: 20px;
     text-align: right;
     font-style: italic;
     height: auto;
@@ -280,7 +304,62 @@ export default {
     }
 
     #story {
+        display: block;
+        position: relative;
         padding-right: 0;
+        overflow: hidden;
+
+        
+        transition: max-height 1s ease-out;
+    }
+
+    #story.storyjs {
+        max-height: 150px;
+        
+    }
+
+    #story.openfull {
+        max-height: auto;
+    }
+
+    #readmorecontainer {
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        margin: 0;
+        padding: 50px 0;
+        text-align: center;
+    }
+
+    #story.openfull #readmorecontainer {
+        display: none;
+    }
+
+    #readmore {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        margin: 0;
+        padding: 50px 0;
+
+        background-image: -webkit-gradient(
+            linear,
+            left top,
+            left bottom,
+            color-stop(0, #1d1d1d00),
+            color-stop(0.4, #1d1d1dcc),
+            color-stop(1, #1d1d1dff));
+    }
+
+    #readmore a {
+        display: block;
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+        text-align: center;
     }
 
     #boringwords {
