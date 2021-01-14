@@ -1,7 +1,7 @@
 <template>
     <div id='headercontainer'>
         <div id='header'>
-            <div id='logo'><nuxt-link to='/'><img src='~/assets/images/hellcat.svg' width='250' alt='Home'/></nuxt-link></div>
+            <div id='logo'><nuxt-link to='/' id='logolink'><img id='logoimg' src='~/assets/images/hellcat.svg' width='250' alt='Home'/></nuxt-link></div>
             <div id='headericons'>
                 <a href='mailto:rick@firefang.com'><img src='~/assets/images/icons/mail.svg' :height='iconheight' alt='email'/></a>
                 <a href='https://facebook.com/skrapion'><img src='~/assets/images/icons/facebook.svg' :height='iconheight' alt='Facebook'/></a>

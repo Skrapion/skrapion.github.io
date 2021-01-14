@@ -90,3 +90,58 @@ a {
     transition: all 1s;
     z-index: unset;
 }
+
+/* 1024 wide */
+@media only screen and (max-width: 1024px) {
+    #headercontainer {
+        position: fixed;
+        width: 100%;
+        height: 40px;
+        border-right: none;
+        border-bottom: 17px solid transparent;
+        border-image: url(~assets/images/halftone.png) 17 repeat;
+        z-index: 2;
+    }
+
+    #contentcontainer {
+        left: 0;
+        right: 0;
+        top: 40px;
+    }
+
+    #header #logo {
+        margin: 0;
+        padding: 0;
+    }
+        
+    #header #headericons {
+        margin: 0;
+        padding: 4px;
+    }
+
+    #logolink {
+        display: block;
+        width: 75px;
+        height: 40px;
+        background: url(~assets/images/hellcat-crop.svg);
+        background-repeat: no-repeat;
+        background-size: auto 40px;
+    }
+
+    #logoimg {
+        display: none;
+    }
+
+    #header {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+/* 480 wide */
+@media only screen and (max-width: 480px) {
+    #indexcontent {
+        grid-template-columns: auto auto;
+        grid-auto-rows: auto;
+    }
+}

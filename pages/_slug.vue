@@ -1,42 +1,45 @@
 <template>
     <div id='singlecontent'>
-        <article>
-            <div id='story'>
-                <div id='date'>
-                    {{formatDate(post.date)}}
-                </div>
-                <div id='boringwords'>
-                    <nuxt-content :document='post'/>
-                </div>
-            </div>
-            <div id='prettypictures' v-if='post.pics'>
-                <div v-for='pic of post.pics' :key='pic'>
-                    <div v-if='pic.substr(pic.length-3, pic.length) == ".yt"' class='pic youtubewrapper'>
-                        <iframe :src="`https://www.youtube.com/embed/${pic.substr(0, pic.length-3)}`" frameborder="0" width="100%" height="100%" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div id='articlecontainer'>
+            <article>
+                <div id='story'>
+                    <div id='date'>
+                        {{formatDate(post.date)}}
                     </div>
-                    <div v-else class='pic'>
-                        <nuxt-image :src="`/posts/${post.slug}/${pic}`" :placeholder="true"/>
+                    <div id='boringwords'>
+                        <nuxt-content :document='post'/>
                     </div>
                 </div>
-            </div>
-            <div id='prettypictures' v-else>
-                <nuxt-image :src="`/posts/${post.slug}/cover.jpg`" :placeholder="true"/>
-            </div>
-            <div id='signposts'>
-                <div id='newer' v-if="next" class='post'>
-                    <nuxt-link :to="`/${next.slug}`">
-                        <nuxt-image class="signpostimg" :src="`/posts/${next.slug}/cover.jpg`" :placeholder="true" width="400" height="400"/>
-                        <div class="signposttext">&laquo; Newer</div>
-                    </nuxt-link>
+                <div id='prettypictures' v-if='post.pics'>
+                    <div v-for='pic of post.pics' :key='pic'>
+                        <div v-if='pic.substr(pic.length-3, pic.length) == ".yt"' class='pic youtubewrapper'>
+                            <iframe :src="`https://www.youtube.com/embed/${pic.substr(0, pic.length-3)}`" frameborder="0" width="100%" height="100%" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div v-else class='pic'>
+                            <nuxt-image :src="`/posts/${post.slug}/${pic}`" :placeholder="true"/>
+                        </div>
+                    </div>
                 </div>
-                <div id='older' v-if="prev" class='post'>
-                    <nuxt-link :to="`/${prev.slug}`">
-                        <nuxt-image class="signpostimg" :src="`/posts/${prev.slug}/cover.jpg`" :placeholder="true" width="400" height="400"/>
-                        <div class="signposttext">Older &raquo;</div>
-                    </nuxt-link>
+                <div id='prettypictures' v-else>
+                    <nuxt-image :src="`/posts/${post.slug}/cover.jpg`" :placeholder="true"/>
+                
+                    <div id='signposts'>
+                        <div id='newer' v-if="next" class='post'>
+                            <nuxt-link :to="`/${next.slug}`">
+                                <nuxt-image class="signpostimg" :src="`/posts/${next.slug}/cover.jpg`" :placeholder="true" width="400" height="400"/>
+                                <div class="signposttext">&laquo; Newer</div>
+                            </nuxt-link>
+                        </div>
+                        <div id='older' v-if="prev" class='post'>
+                            <nuxt-link :to="`/${prev.slug}`">
+                                <nuxt-image class="signpostimg" :src="`/posts/${prev.slug}/cover.jpg`" :placeholder="true" width="400" height="400"/>
+                                <div class="signposttext">Older &raquo;</div>
+                            </nuxt-link>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </article>
+            </article>
+        </div>
         <div id='similars'>
             <div v-if='!$fetchState.pending && similars.length' class="indexcontentpadding">
                 <h2>Other {{similarsCategory}} projects...</h2>
@@ -140,6 +143,12 @@ export default {
 </script>
 
 <style scoped>
+#singlecontent {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 #singlecontent article {
     position: relative;
     display: grid;
@@ -149,7 +158,9 @@ export default {
             ".     signposts";
     font-size: 12pt;
     padding: 20px;
+}
 
+#articlecontainer {
     z-index: 1;
     border-bottom: 17px solid transparent;
     border-image: url(~assets/images/halftone.png) 17 repeat;
@@ -166,27 +177,29 @@ export default {
 
 #prettypictures {
     grid-area: pics;
-    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
 #signposts {
-    grid-area: signposts;
-    display: grid;
-    grid-template-areas: "nextsignpost . prevsignpost";
-    grid-template-columns: 150px auto 150px;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
     padding-bottom: 20px;
 }
 
-#older {
-    grid-area: prevsignpost;
-    text-align: right;
+#newer, #older {
+    width: 200px;
 }
 
 #newer {
-    grid-area: nextsignpost;
+    padding-right: 5px;
+}
+
+#older {
+    padding-left: 5px;
+    text-align: right;
 }
 
 #newer a, #older a {
@@ -199,7 +212,7 @@ export default {
 }
 
 #similars {
-    min-height: 20px;
+    flex-grow: 2;
     position: relative;
     margin-top: -17px;
     background: #262626;
@@ -246,9 +259,45 @@ export default {
 
 #similars h2 {
     font-size: 40px;
+    font-size: min(40px, 8vw);
     font-style: italic;
     font-weight: 100;
     font-family: 'Rouge Script', cursive;
     margin-bottom: 0;
+}
+
+/* 768 wide */
+@media only screen and (max-width: 768px) {
+    #contentcontainer article {
+        display: flex;
+        flex-direction: column;
+
+        max-width: 500px;
+        
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #story {
+        padding-right: 0;
+    }
+
+    #boringwords {
+        margin-left: 0;
+    }
+}
+
+/* 600 wide */
+@media only screen and (max-width: 600px) {
+    #similars {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    #indexcontentpadding {
+        max-width: 500px;
+    
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 </style>
