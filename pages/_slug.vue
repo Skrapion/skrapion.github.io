@@ -31,13 +31,13 @@
                     </div>
                     <div id='signposts'>
                         <div id='newer' class='post'>
-                            <nuxt-link v-if="next" :to="`/${next.slug}`">
+                            <nuxt-link v-if="next" :to="{name: 'slug', params: {slug: next.slug, type: 'next'}}">
                                 <nuxt-image class="signpostimg" :src="`/posts/${next.slug}/cover.jpg`" :placeholder="true" width="400" height="400"/>
                                 <div class="signposttext">&laquo; Newer</div>
                             </nuxt-link>
                         </div>
                         <div id='older' class='post'>
-                            <nuxt-link v-if="prev" :to="`/${prev.slug}`">
+                            <nuxt-link v-if="prev" :to="{name: 'slug', params: {slug: prev.slug, type: 'prev'}}">
                                 <nuxt-image class="signpostimg" :src="`/posts/${prev.slug}/cover.jpg`" :placeholder="true" width="400" height="400"/>
                                 <div class="signposttext">Older &raquo;</div>
                             </nuxt-link>
@@ -64,17 +64,23 @@
 <script>
 export default {
     mounted() {
+        document.documentElement.style.overflowX = 'hidden';
+
         // Show/hide "read more" button depending on how big the text is
         var story = document.getElementById("story");
 
-        var ro = new ResizeObserver(entries => {
-            var height = story.offsetHeight;
-            console.log("Height: " + height);
-            document.getElementById("readmore").style.display =
-                (height < 150) ? "none" : "block";
-        });
-        story.classList.add("storyjs");
-        ro.observe(story);
+        if(story) {
+            var ro = new ResizeObserver(entries => {
+                var height = story.offsetHeight;
+                var readmore = document.getElementById("readmore");
+                if(readmore) {
+                    readmore.style.display =
+                        (height < 150) ? "none" : "block";
+                }
+            });
+            story.classList.add("storyjs");
+            ro.observe(story);
+        }
     },
     async asyncData({$content, params, error}) {
         const postPromise = $content('posts', params.slug).fetch();
@@ -158,11 +164,37 @@ export default {
                 {rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Rouge+Script&display=swap'},
             ]
         }
+    },
+    transition(to, from) {
+        if(!to.params.type) {
+            return 'page';
+        }
+        if(to.params.type == 'next') {
+            return 'slide-right';
+        }
+        return 'slide-left';
     }
 }
 </script>
 
 <style scoped>
+.slide-left-enter-active,
+.slide-left-leave-active,
+.slide-right-enter-active,
+.slide-right-leave-active {
+  transition: opacity 0.2s, transform 0.3s;
+}
+.slide-left-enter,
+.slide-right-leave-to {
+  opacity: 0;
+  transform: translate3d(100px, 0, 0);
+}
+.slide-right-enter,
+.slide-left-leave-to {
+  opacity: 0;
+  transform: translate3d(-100px, 0, 0);
+}
+
 #singlecontent {
     display: flex;
     flex-direction: column;

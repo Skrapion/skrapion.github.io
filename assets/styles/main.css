@@ -8,6 +8,15 @@ a {
     font-style: italic;
 }
 
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.25s;
+}
+.page-enter,
+.page-leave-to {
+  opacity: 0;
+}
+
 #headercontainer {
     position: fixed;
     height: 100%;
@@ -46,7 +55,7 @@ a {
     background: #1d1d1d;
     color: white;
     font-size: 2em;
-    min-height: 100vh;
+    min-height: 101vh;
 }
 
 #indexcontentpadding {
@@ -95,7 +104,7 @@ a {
 @media only screen and (max-width: 1024px) {
     #headercontainer {
         position: fixed;
-        width: 100%;
+        width: 100vw;
         height: 40px;
         border-right: none;
         border-bottom: 17px solid transparent;
