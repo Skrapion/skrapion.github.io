@@ -156,10 +156,6 @@ export default {
                 { hid: 'twitter:title', property: 'twitter:title', content: this.post.title + " - Firefang" },
                 { hid: 'twitter:description', property: 'twitter:description', content: this.post.description },
                 { hid: 'twitter:image', property: 'twitter:image', content: process.env.BaseURL + "posts/" + this.post.slug + "/cover.jpg" }
-            ],
-            link: [
-                {rel: 'preconnect', href: 'https://fonts.gstatic.com'},
-                {rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Rouge+Script&display=swap'},
             ]
         }
     },
@@ -223,6 +219,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    font-family: 'Fraunces', serif;
 }
 
 #readmorecontainer {
@@ -305,6 +302,8 @@ export default {
     margin-bottom: 20px;
     text-align: right;
     font-style: italic;
+    font-family: 'Fraunces', serif;
+    font-size: 1.25em;
     height: auto;
 }
 
