@@ -220,6 +220,7 @@ export default {
     flex-direction: column;
     justify-content: center;
     font-family: 'Fraunces', serif;
+    font-weight: 300;
 }
 
 #readmorecontainer {
@@ -303,6 +304,7 @@ export default {
     text-align: right;
     font-style: italic;
     font-family: 'Fraunces', serif;
+    font-weight: 100;
     font-size: 1.25em;
     height: auto;
 }
