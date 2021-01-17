@@ -96,8 +96,8 @@ a {
 }
 
 .post {
-    transition: all 1s;
-    z-index: unset;
+    transition: transform 1s, z-index 1s;
+    z-index: 0;
 }
 
 /* 1024 wide */
