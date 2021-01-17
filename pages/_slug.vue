@@ -15,21 +15,20 @@
                         </div>
                     </div>
                 </div>
-                <div id='picturecontainer'>
-                    <div id='prettypictures' v-if='post.pics'>
-                        <div v-for='pic of post.pics' :key='pic'>
-                            <div v-if='pic.substr(pic.length-3, pic.length) == ".yt"' class='pic youtubewrapper'>
-                                <iframe :src="`https://www.youtube.com/embed/${pic.substr(0, pic.length-3)}`" frameborder="0" width="100%" height="100%" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                            <div v-else class='pic'>
-                                <nuxt-image :src="`/posts/${post.slug}/${pic}`" :placeholder="true"/>
-                            </div>
+                <div id='prettypictures' v-if='post.pics'>
+                    <div v-for='pic of post.pics' :key='pic'>
+                        <div v-if='pic.substr(pic.length-3, pic.length) == ".yt"' class='pic youtubewrapper'>
+                            <iframe :src="`https://www.youtube.com/embed/${pic.substr(0, pic.length-3)}`" frameborder="0" width="100%" height="100%" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div v-else class='pic'>
+                            <nuxt-image :src="`/posts/${post.slug}/${pic}`" :placeholder="true"/>
                         </div>
                     </div>
-                    <div id='prettypictures' v-else>
-                        <nuxt-image :src="`/posts/${post.slug}/cover.jpg`" :placeholder="true"/>
-                    </div>
-                    <div id='signposts'>
+                </div>
+                <div id='prettypictures' v-else>
+                    <nuxt-image :src="`/posts/${post.slug}/cover.jpg`" :placeholder="true"/>
+                </div>
+                <div id='signposts'>
                         <div id='newer' class='post'>
                             <nuxt-link v-if="next" :to="{name: 'slug', params: {slug: next.slug, type: 'next'}}">
                                 <nuxt-image class="signpostimg" :src="`/posts/${next.slug}/cover.jpg`" :placeholder="true" width="400" height="400"/>
@@ -43,7 +42,6 @@
                             </nuxt-link>
                         </div>
                     </div>
-                </div>
             </article>
         </div>
         <div id='similars'>
@@ -240,6 +238,7 @@ export default {
 
 #signposts {
     display: flex;
+    grid-area: signposts;
     justify-content: space-between;
     padding-top: 20px;
     padding-bottom: 20px;
