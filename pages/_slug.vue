@@ -32,13 +32,11 @@
                         <div id='newer' class='post'>
                             <nuxt-link v-if="next" :to="{name: 'slug', params: {slug: next.slug, type: 'next'}}">
                                 <nuxt-image class="signpostimg" :src="`/posts/${next.slug}/cover.jpg`" :placeholder="true" width="400" height="400"/>
-                                <div class="signposttext">&laquo; Newer</div>
                             </nuxt-link>
                         </div>
                         <div id='older' class='post'>
                             <nuxt-link v-if="prev" :to="{name: 'slug', params: {slug: prev.slug, type: 'prev'}}">
                                 <nuxt-image class="signpostimg" :src="`/posts/${prev.slug}/cover.jpg`" :placeholder="true" width="400" height="400"/>
-                                <div class="signposttext">Older &raquo;</div>
                             </nuxt-link>
                         </div>
                     </div>
@@ -242,7 +240,7 @@ export default {
 #signposts {
     display: flex;
     grid-area: signposts;
-    justify-content: space-between;
+    justify-content: center;
     padding-top: 20px;
     padding-bottom: 20px;
 }
@@ -251,22 +249,14 @@ export default {
     width: 200px;
 }
 
-#newer {
-    padding-right: 5px;
+#newer .signpostimg {
+    clip-path: polygon(100% 0%, 75% 50%, 100% 100%, 25% 100%, 0% 50%, 25% 0%);
+    margin-right: 20px;
 }
 
-#older {
-    padding-left: 5px;
-    text-align: right;
-}
-
-#newer a, #older a {
-    color: white;
-    text-decoration: none;
-}
-
-#newer a:hover, #older a:hover {
-    text-decoration: underline;
+#older .signpostimg {
+    clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
+    margin-left: 20px;
 }
 
 #similars {
