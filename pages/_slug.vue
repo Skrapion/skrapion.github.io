@@ -213,6 +213,7 @@ export default {
     z-index: 1;
     border-bottom: 17px solid transparent;
     border-image: url(~assets/images/halftone.png) 17 repeat;
+    padding-right: 25px;
 }
 
 #story {
@@ -240,23 +241,31 @@ export default {
 #signposts {
     display: flex;
     grid-area: signposts;
-    justify-content: center;
+    justify-content: space-between;
     padding-top: 20px;
     padding-bottom: 20px;
 }
 
 #newer, #older {
-    width: 200px;
+    width: 100px;
+}
+
+#newer {
+    padding-right: 10px;
+}
+
+#older {
+    padding-left: 10px;
 }
 
 #newer .signpostimg {
     clip-path: polygon(100% 0%, 75% 50%, 100% 100%, 25% 100%, 0% 50%, 25% 0%);
-    margin-right: 20px;
+    margin-left: -33%;
 }
 
 #older .signpostimg {
     clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
-    margin-left: 20px;
+    margin-right: -33%;
 }
 
 #similars {
@@ -328,6 +337,10 @@ export default {
         
         margin-left: auto;
         margin-right: auto;
+    }
+
+    #articlecontainer {
+        padding-left: 25px;
     }
 
     #story {
