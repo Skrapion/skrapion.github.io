@@ -60,8 +60,6 @@
 <script>
 export default {
     mounted() {
-        document.documentElement.style.overflowX = 'hidden';
-
         // Show/hide "read more" button depending on how big the text is
         var story = document.getElementById("story");
 
@@ -196,6 +194,9 @@ export default {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+
+    margin-left: -100px;
+    margin-right: -100px;
 }
 
 #singlecontent article {
@@ -213,7 +214,7 @@ export default {
     z-index: 1;
     border-bottom: 17px solid transparent;
     border-image: url(~assets/images/halftone.png) 17 repeat;
-    padding-right: 25px;
+    padding: 20px 125px 20px 100px;
 }
 
 #story {
@@ -273,10 +274,7 @@ export default {
     position: relative;
     margin-top: -17px;
     background: #262626;
-    padding-top: 1px;
-    padding-left: 40px;
-    padding-right: 40px;
-    padding-bottom: 40px;
+    padding: 1px 140px 40px 140px;
     z-index: 0;
 }
 
@@ -340,7 +338,7 @@ export default {
     }
 
     #articlecontainer {
-        padding-left: 25px;
+        padding-left: 125px;
     }
 
     #story {
@@ -415,8 +413,8 @@ export default {
 /* 600 wide */
 @media only screen and (max-width: 600px) {
     #similars {
-        padding-left: 20px;
-        padding-right: 20px;
+        padding-left: 120px;
+        padding-right: 120px;
     }
     #indexcontentpadding {
         max-width: 500px;
