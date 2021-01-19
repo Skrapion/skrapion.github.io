@@ -21,22 +21,22 @@
                             <iframe :src="`https://www.youtube.com/embed/${pic.substr(0, pic.length-3)}`" frameborder="0" width="100%" height="100%" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                         <div v-else class='pic'>
-                            <nuxt-image :src="`/posts/${post.slug}/${pic}`" :placeholder="true"/>
+                            <nuxt-image :src="`/posts/${post.slug}/${pic}`" :placeholder="true" sizes="480,480:720,720:1080,1080:1920"/>
                         </div>
                     </div>
                 </div>
                 <div id='prettypictures' v-else>
-                    <nuxt-image :src="`/posts/${post.slug}/cover.jpg`" :placeholder="true"/>
+                    <nuxt-image :src="`/posts/${post.slug}/cover.jpg`" :placeholder="true" sizes="480,480:720,720:1080,1080:1920"/>
                 </div>
                 <div id='signposts'>
                         <div id='newer' class='post'>
                             <nuxt-link v-if="next" :to="{name: 'slug', params: {slug: next.slug, type: 'next'}}">
-                                <nuxt-image class="signpostimg" :src="`/posts/${next.slug}/cover.jpg`" :placeholder="true" width="400" height="400"/>
+                                <nuxt-image class="signpostimg" :src="`/posts/${next.slug}/cover.jpg`" :placeholder="true" width="400" height="400" sizes="200"/>
                             </nuxt-link>
                         </div>
                         <div id='older' class='post'>
                             <nuxt-link v-if="prev" :to="{name: 'slug', params: {slug: prev.slug, type: 'prev'}}">
-                                <nuxt-image class="signpostimg" :src="`/posts/${prev.slug}/cover.jpg`" :placeholder="true" width="400" height="400"/>
+                                <nuxt-image class="signpostimg" :src="`/posts/${prev.slug}/cover.jpg`" :placeholder="true" width="400" height="400" sizes="200"/>
                             </nuxt-link>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                 <div id="indexcontent">
                     <div v-for="similar of similars" :key='similar.slug' class='post'>
                         <nuxt-link :to="`/${similar.slug}`">
-                            <nuxt-image class="similarimg" :src="`/posts/${similar.slug}/cover.jpg`" :placeholder="true" :alt="similar.title" width="400" height="400"/>
+                            <nuxt-image class="similarimg" :src="`/posts/${similar.slug}/cover.jpg`" :placeholder="true" :alt="similar.title" width="400" height="400" sizes="400"/>
                         </nuxt-link>
                     </div>
                 </div>
