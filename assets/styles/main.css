@@ -34,6 +34,11 @@ a {
     background: #111;
 }
 
+#header svg {
+    width: 250px;
+    height: calc(250px * 413.3757 / 284.75693);
+}
+
 #header div {
     margin-left: auto;
     margin-right: auto;
@@ -129,17 +134,11 @@ a {
         padding: 4px;
     }
 
-    #logolink {
-        display: block;
-        width: 75px;
-        height: 40px;
-        background: url(~assets/images/hellcat-crop.svg);
-        background-repeat: no-repeat;
-        background-size: auto 40px;
-    }
-
-    #logoimg {
-        display: none;
+    #header svg {
+        position: absolute;
+        width: 120px;
+        height: calc(120px * 413.3757 / 284.75693);
+        bottom: -20px;
     }
 
     #header {
