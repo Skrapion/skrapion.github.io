@@ -21,12 +21,12 @@
                             <iframe :src="`https://www.youtube.com/embed/${pic.substr(0, pic.length-3)}`" frameborder="0" width="100%" height="100%" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                         <div v-else class='pic'>
-                            <nuxt-image :src="`/posts/${post.slug}/${pic}`" :placeholder="true" sizes="480,480:720,720:1080,1080:1920"/>
+                            <nuxt-image :src="`/posts/${post.slug}/${pic}`" :placeholder="true" sizes="200,200:400,400:800,800:1200,1200:1920"/>
                         </div>
                     </div>
                 </div>
                 <div id='prettypictures' v-else>
-                    <nuxt-image :src="`/posts/${post.slug}/cover.jpg`" :placeholder="true" sizes="480,480:720,720:1080,1080:1920"/>
+                    <nuxt-image :src="`/posts/${post.slug}/cover.jpg`" :placeholder="true" sizes="200,200:400,400:800,800:1200,1200:1920"/>
                 </div>
                 <div id='signposts'>
                         <div id='newer' class='post'>
@@ -48,7 +48,7 @@
                 <div id="indexcontent">
                     <div v-for="similar of similars" :key='similar.slug' class='post'>
                         <nuxt-link :to="`/${similar.slug}`">
-                            <nuxt-image class="similarimg" :src="`/posts/${similar.slug}/cover.jpg`" :placeholder="true" :alt="similar.title" width="400" height="400" sizes="400"/>
+                            <nuxt-image class="similarimg" :src="`/posts/${similar.slug}/cover.jpg`" :placeholder="true" :alt="similar.title" width="400" height="400" sizes="200,200:400,400:800"/>
                         </nuxt-link>
                     </div>
                 </div>
