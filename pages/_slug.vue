@@ -84,6 +84,7 @@ export default {
             dragMax: 25
         }
         const content = document.getElementById("singlecontent");
+        content.style.transform = null;
         var touchStart = null;
 
         content.addEventListener('touchstart', event => {
@@ -131,22 +132,27 @@ export default {
             if(touchStart != null) {
                 for(const changedTouch of event.changedTouches) {
                     if(touchStart.identifier == changedTouch.identifier) {
-                        //content.style.transform = null;
                         var diff = changedTouch.clientX - touchStart.clientX;
+                        var clicked = false;
                         if(Math.abs(diff) > dragParams.xActivate) {
                             if(diff < 0) {
                                 var olderlink = document.getElementById('olderlink');
                                 if(olderlink) {
                                     olderlink.click();
+                                    clicked = true;
                                 }
                             } else if(diff > 0) {
                                 var newerlink = document.getElementById('newerlink');
                                 if(newerlink) {
                                     newerlink.click();
+                                    clicked = true;
                                 }
                             }
                         }
-                        content.style.transform = null;
+                        
+                        if(clicked == false) {
+                            content.style.transform = null;
+                        }
                         touchStart = null;
                         return;
                     }
@@ -255,17 +261,17 @@ export default {
 .slide-left-leave-active,
 .slide-right-enter-active,
 .slide-right-leave-active {
-  transition: opacity 0.2s, transform 0.3s;
+  transition: opacity 0.2s, transform 0.3s !important;
 }
 .slide-left-enter,
 .slide-right-leave-to {
   opacity: 0;
-  transform: translate3d(100px, 0, 0);
+  transform: translate3d(100px, 0, 0) !important;
 }
 .slide-right-enter,
 .slide-left-leave-to {
   opacity: 0;
-  transform: translate3d(-100px, 0, 0);
+  transform: translate3d(-100px, 0, 0) !important;
 }
 
 #singlecontent {
