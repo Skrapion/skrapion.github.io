@@ -30,12 +30,12 @@
                 </div>
                 <div id='signposts'>
                         <div id='newer' class='post'>
-                            <nuxt-link v-if="next" :to="{name: 'slug', params: {slug: next.slug, type: 'next'}}">
+                            <nuxt-link id='newerlink' v-if="next" :to="{name: 'slug', params: {slug: next.slug, type: 'next'}}">
                                 <nuxt-image class="signpostimg" :src="`/posts/${next.slug}/cover.jpg`" :placeholder="true" width="400" height="400" sizes="200"/>
                             </nuxt-link>
                         </div>
                         <div id='older' class='post'>
-                            <nuxt-link v-if="prev" :to="{name: 'slug', params: {slug: prev.slug, type: 'prev'}}">
+                            <nuxt-link id='olderlink' v-if="prev" :to="{name: 'slug', params: {slug: prev.slug, type: 'prev'}}">
                                 <nuxt-image class="signpostimg" :src="`/posts/${prev.slug}/cover.jpg`" :placeholder="true" width="400" height="400" sizes="200"/>
                             </nuxt-link>
                         </div>
@@ -75,6 +75,84 @@ export default {
             story.classList.add("storyjs");
             ro.observe(story);
         }
+
+        // Touch events for next/prev post
+        const dragParams = {
+            yCancel: 50,
+            xActivate: 100,
+            friction: 4,
+            dragMax: 25
+        }
+        const content = document.getElementById("singlecontent");
+        var touchStart = null;
+
+        content.addEventListener('touchstart', event => {
+            if(touchStart == null) {
+                var changedTouch = event.changedTouches[0];
+                touchStart = {
+                    identifier: changedTouch.identifier,
+                    clientX: changedTouch.clientX,
+                    clientY: changedTouch.clientY
+                };
+            }
+        });
+        content.addEventListener('touchmove', event => {
+            if(touchStart != null) {
+                for(const changedTouch of event.changedTouches) {
+                    if(touchStart.identifier == changedTouch.identifier) {
+                        var diffY = changedTouch.clientY - touchStart.clientY;
+                        if(Math.abs(diffY) > dragParams.yCancel) {
+                            // Cancel touch; scrolled too far.
+                            content.style.transform = null;
+                            touchStart = null;
+                        } else {
+                            var diffX = changedTouch.clientX - touchStart.clientX;
+                            content.style.transform = "translate3d(" 
+                                + Math.max(Math.min(diffX/dragParams.friction, dragParams.dragMax), dragParams.dragMax*-1) 
+                                + "px, 0, 0)";
+                        }
+                        return;
+                    }
+                }
+            }
+        });
+        content.addEventListener('touchcancel', event => {
+            if(touchStart != null) {
+                for(const changedTouch of event.changedTouches) {
+                    if(touchStart.identifier == changedTouch.identifier) {
+                        content.style.transform = null;
+                        touchStart = null;
+                        return;
+                    }
+                }
+            }
+        });
+        content.addEventListener('touchend', event => {
+            if(touchStart != null) {
+                for(const changedTouch of event.changedTouches) {
+                    if(touchStart.identifier == changedTouch.identifier) {
+                        //content.style.transform = null;
+                        var diff = changedTouch.clientX - touchStart.clientX;
+                        if(Math.abs(diff) > dragParams.xActivate) {
+                            if(diff < 0) {
+                                var olderlink = document.getElementById('olderlink');
+                                if(olderlink) {
+                                    olderlink.click();
+                                }
+                            } else if(diff > 0) {
+                                var newerlink = document.getElementById('newerlink');
+                                if(newerlink) {
+                                    newerlink.click();
+                                }
+                            }
+                        }
+                        content.style.transform = null;
+                        touchStart = null;
+                        return;
+                    }
+                }
+            }
+        });
     },
     async asyncData({$content, params, error}) {
         const postPromise = $content('posts', params.slug).fetch();
@@ -197,6 +275,8 @@ export default {
 
     margin-left: -100px;
     margin-right: -100px;
+
+    transition: opacity 0.2s, transform 0.3s;
 }
 
 #singlecontent article {
