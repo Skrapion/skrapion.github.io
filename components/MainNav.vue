@@ -19,7 +19,7 @@
                 <a href='mailto:rick@firefang.com'><img src='~/assets/images/icons/mail.svg' :height='iconheight' alt='email'/></a>
                 <a href='https://facebook.com/skrapion'><img src='~/assets/images/icons/facebook.svg' :height='iconheight' alt='Facebook'/></a>
                 <a href='https://www.youtube.com/channel/UCLCEtL5d5botNpR4TCU_f9w'><img src='~/assets/images/icons/youtube.svg' :height='iconheight' alt='Youtube'/></a>
-                <a href='#'><img src='~/assets/images/icons/bell.svg' :height='iconheight' alt='notifications'/></a>
+                <a href='#' onclick='subscribeToNotifications()'><img src='~/assets/images/icons/bell.svg' :height='iconheight' alt='notifications'/></a>
             </div>
         </div>
     </header>
@@ -30,6 +30,21 @@ export default {
     data() {
         return {
             iconheight: 24
+        }
+    },
+    head() {
+        return {
+            script: [
+                {
+                    innerHTML: `
+                        function subscribeToNotifications() {
+                            OneSignal.push(function() {
+                                OneSignal.showSlidedownPrompt();
+                            });
+                        }
+                    `
+                }
+            ]
         }
     }
 }

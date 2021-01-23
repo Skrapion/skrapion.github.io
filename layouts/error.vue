@@ -46,5 +46,6 @@ h2 {
     font-weight: 100;
     font-style: italic;
     margin-top: 0;
+    text-align: center;
 }
 </style>
