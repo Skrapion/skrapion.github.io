@@ -37,10 +37,15 @@ export default {
             script: [
                 {
                     innerHTML: `
-                        function subscribeToNotifications() {
-                            OneSignal.push(function() {
-                                OneSignal.showSlidedownPrompt();
-                            });
+                        async function subscribeToNotifications() {
+                            const alreadyRegistered = await isPushNotificationsEnabled();
+                            if(alreadyRegistered) {
+                                alert("Thank you for subscribing!");
+                            } else {
+                                OneSignal.push(function() {
+                                    OneSignal.showSlidedownPrompt();
+                                });
+                            }
                         }
                     `
                 }
