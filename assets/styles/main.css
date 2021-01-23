@@ -44,6 +44,12 @@ a {
     margin-right: auto;
 }
 
+#header div.onesignal-customlink-container {
+    margin: 0;
+    display: inline-block;
+    cursor: pointer;
+}
+
 #headericons img:hover {
     transform: scale(1.5);
 }
