@@ -38,7 +38,7 @@ export default {
                 {
                     innerHTML: `
                         async function subscribeToNotifications() {
-                            const alreadyRegistered = await isPushNotificationsEnabled();
+                            const alreadyRegistered = await OneSignal.isPushNotificationsEnabled();
                             if(alreadyRegistered) {
                                 alert("Thank you for subscribing!");
                             } else {
