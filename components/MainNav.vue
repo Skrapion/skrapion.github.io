@@ -43,11 +43,8 @@ export default {
                 var subscribeContent = document.getElementById("subscribe-content");
                 subscribeContent.classList.add("unsupported");
             } else {
-                Promise.all([
-                    OneSignal.isPushNotificationsEnabled(),
-                    OneSignal.isOptedOut()
-                ]).then((enabled, optedOut) => {
-                    this.subscribed = enabled && !optedOut;
+                OneSignal.isPushNotificationsEnabled().then(enabled => {
+                    this.subscribed = enabled;
                 });
             }
         }
@@ -64,7 +61,8 @@ export default {
                 Promise.all([
                     OneSignal.isPushNotificationsEnabled(),
                     OneSignal.isOptedOut()
-                ]).then((enabled, optedOut) => {
+                ]).then(values => {
+                    [enabled, optedOut] = values;
                     if(enabled) {
                         OneSignal.setSubscription(false);
                         this.subscribed = false;
