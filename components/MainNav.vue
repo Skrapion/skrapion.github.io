@@ -39,9 +39,13 @@ export default {
     },
     mounted() {
         if(typeof OneSignal !== 'undefined') {
-            if(OneSignal.isPushNotificationsSupported()) {
+            if(!OneSignal.isPushNotificationsSupported()) {
                 var subscribeContent = document.getElementById("subscribe-content");
                 subscribeContent.classList.add("unsupported");
+            } else {
+                isPushNotificationsEnabled().then((enabled) => {
+                    this.subscribed = enabled;
+                });
             }
         }
     },
