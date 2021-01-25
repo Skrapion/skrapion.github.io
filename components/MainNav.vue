@@ -38,12 +38,12 @@ export default {
         }
     },
     mounted() {
-        OneSignal.isPushNotificationsSupported()
-            .then((supported) => {
-                if(supported) {
-                    alert("test");
-                }
-            });
+        if(OneSignal) {
+            if(OneSignal.isPushNotificationsSupported())
+            {
+                alert("test");
+            }
+        }
         //var subscribeContent = document.getElementById("subscribe-content");
     },
     directives: {
