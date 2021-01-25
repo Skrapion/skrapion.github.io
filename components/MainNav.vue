@@ -37,6 +37,15 @@ export default {
             subscribed: false
         }
     },
+    mounted() {
+        OneSignal.isPushNotificationsSupported()
+            .then((supported) => {
+                if(supported) {
+                    alert("test");
+                }
+            });
+        //var subscribeContent = document.getElementById("subscribe-content");
+    },
     directives: {
         clickOutside: vClickOutside.directive
     },
