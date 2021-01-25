@@ -37,32 +37,36 @@ export default {
         }
     },
     mounted() {
-        if(process.env.NODE_ENV === 'production') {
-            console.log("Production");
-            if(typeof OneSignal === 'undefined') {
-                console.log("Initializing OneSignal")
-                window.OneSignal = window.OneSignal || [];
-                OneSignal.push(function() {
+        if(typeof OneSignal === 'undefined') {
+            console.log("Initializing OneSignal")
+            window.OneSignal = window.OneSignal || [];
+            OneSignal.push(function() {
+                if(process.env.NODE_ENV === 'production') {
                     OneSignal.init({
-                        appId: "3b78268c-b1c0-4037-b3f5-07cb3afb64fe",
+                        appId: "3b78268c-b1c0-4037-b3f5-07cb3afb64fe"
                     });
-                });
-            }
-
-            OneSignal.push(() => {
-                if(!OneSignal.isPushNotificationsSupported()) {
-                    console.log("Push Notifications Not Supported");
-                    var subscribeContent = document.getElementById("subscribe-content");
-                    subscribeContent.classList.add("unsupported");
-                    return false;
-                } else if (OneSignal.isPushNotificationsEnabled()) {
-                    console.log("Push Notifications Enabled");
-                    this.subscribed = true;
                 } else {
-                    console.log("Push notificaition not enabled");
+                    OneSignal.init({
+                        appId: "767434af-9188-4281-9afe-2977206c5a9f",
+                        allowLocalhostAsSecureOrigin: true
+                    });
                 }
             });
         }
+
+        OneSignal.push(() => {
+            if(!OneSignal.isPushNotificationsSupported()) {
+                console.log("Push Notifications Not Supported");
+                var subscribeContent = document.getElementById("subscribe-content");
+                subscribeContent.classList.add("unsupported");
+                return false;
+            } else if (OneSignal.isPushNotificationsEnabled()) {
+                console.log("Push Notifications Enabled");
+                this.subscribed = true;
+            } else {
+                console.log("Push notificaition not enabled");
+            }
+        });
     },
     directives: {
         clickOutside: vClickOutside.directive
@@ -72,26 +76,24 @@ export default {
             this.showNotify = false;
         },
         clickSubscribe() {
-            if(typeof OneSignal !== 'undefined') {
-                Promise.all([
-                    OneSignal.isPushNotificationsEnabled(),
-                    OneSignal.isOptedOut()
-                ]).then(values => {
-                    const [enabled, optedOut] = [values[0], values[1]];
-                    if(enabled) {
-                        OneSignal.setSubscription(false);
-                        this.subscribed = false;
+            console.log("Clicked subscribe");
+            OneSignal.push(() => {
+                if(OneSignal.isPushNotificationsEnabled()) {
+                    console.log("Push enabled: unsubscribing");
+                    OneSignal.setSubscription(false);
+                    this.subscribed = false;
+                } else {
+                    if(OneSignal.isOptedOut()) {
+                        console.log("Opted out: opting in");
+                        OneSignal.setSubscription(true);
                     } else {
-                        if(optedOut) {
-                            OneSignal.setSubscription(true);
-                        } else {
-                            OneSignal.registerForPushNotifications();
-                        }
-                        this.subscribed = true;
-                        OneSignal.sendSelfNotification("Thank you for subscribing!", "Watch this space for new project posts!", "https://firefang.com", "https://nuxt.firefang.com/hellcat.png");
+                        console.log("Registering for push notifications");
+                        OneSignal.registerForPushNotifications();
                     }
-                });
-            }
+                    this.subscribed = true;
+                    OneSignal.sendSelfNotification("Thank you for subscribing!", "Watch this space for new project posts!", "https://firefang.com", "https://nuxt.firefang.com/hellcat.png");
+                }
+            });
         }
     }
 }
