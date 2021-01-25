@@ -43,7 +43,7 @@ export default {
                 var subscribeContent = document.getElementById("subscribe-content");
                 subscribeContent.classList.add("unsupported");
             } else {
-                isPushNotificationsEnabled().then((enabled) => {
+                OneSignal.isPushNotificationsEnabled().then((enabled) => {
                     this.subscribed = enabled;
                 });
             }
