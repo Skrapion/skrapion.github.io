@@ -38,7 +38,9 @@ export default {
     },
     mounted() {
         if(process.env.NODE_ENV === 'production') {
+            console.log("Production");
             if(typeof OneSignal === 'undefined') {
+                console.log("Initializing OneSignal")
                 window.OneSignal = window.OneSignal || [];
                 OneSignal.push(function() {
                     OneSignal.init({
@@ -47,14 +49,19 @@ export default {
                 });
             }
 
-            if(!OneSignal.isPushNotificationsSupported()) {
-                var subscribeContent = document.getElementById("subscribe-content");
-                subscribeContent.classList.add("unsupported");
-            } else {
-                OneSignal.isPushNotificationsEnabled().then(enabled => {
-                    this.subscribed = enabled;
-                });
-            }
+            OneSignal.push(function() {
+                if(!OneSignal.isPushNotificationsSupported()) {
+                    console.log("Push Notifications Not Supported");
+                    var subscribeContent = document.getElementById("subscribe-content");
+                    subscribeContent.classList.add("unsupported");
+                } else {
+                    console.log("Push Notifications Supported");
+                    OneSignal.isPushNotificationsEnabled().then(enabled => {
+                        console.log("Checking Push Notifications Enabled");
+                        this.subscribed = enabled;
+                    });
+                }
+            });
         }
     },
     directives: {
