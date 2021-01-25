@@ -54,12 +54,12 @@ export default {
                     console.log("Push Notifications Not Supported");
                     var subscribeContent = document.getElementById("subscribe-content");
                     subscribeContent.classList.add("unsupported");
+                    return false;
+                } else if (OneSignal.isPushNotificationsEnabled()) {
+                    console.log("Push Notifications Enabled");
+                    this.subscribed = true;
                 } else {
-                    console.log("Push Notifications Supported");
-                    OneSignal.isPushNotificationsEnabled().then(enabled => {
-                        console.log("Checking Push Notifications Enabled");
-                        this.subscribed = enabled;
-                    });
+                    console.log("Push notificaition not enabled");
                 }
             });
         }
