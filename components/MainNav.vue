@@ -62,7 +62,7 @@ export default {
                     OneSignal.isPushNotificationsEnabled(),
                     OneSignal.isOptedOut()
                 ]).then(values => {
-                    [enabled, optedOut] = values;
+                    const [enabled, optedOut] = [values[0], values[1]];
                     if(enabled) {
                         OneSignal.setSubscription(false);
                         this.subscribed = false;
