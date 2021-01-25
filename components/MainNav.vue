@@ -19,7 +19,8 @@
                 <a href='mailto:rick@firefang.com'><img src='~/assets/images/icons/mail.svg' :height='iconheight' alt='email'/></a>
                 <a href='https://facebook.com/skrapion'><img src='~/assets/images/icons/facebook.svg' :height='iconheight' alt='Facebook'/></a>
                 <a href='https://www.youtube.com/channel/UCLCEtL5d5botNpR4TCU_f9w'><img src='~/assets/images/icons/youtube.svg' :height='iconheight' alt='Youtube'/></a>
-                <a href='#' onclick='subscribeToNotifications()'><img src='~/assets/images/icons/bell.svg' :height='iconheight' alt='notifications'/></a>
+                <!-- TODO: https://documentation.onesignal.com/docs/web-push-custom-code-examples -->
+                <a href='#' v-on:click="showNotify = !showNotify"><img src='~/assets/images/icons/bell.svg' :height='iconheight' alt='notifications'/></a><div id='subscribe' :class="{show: showNotify}" ><div id='subscribe-content'><p>Want to be notified whenever I post a new project?</p><div :class='{switchtrack: true, set: subscribed}' v-on:click="subscribed = !subscribed"><div class='switchthumb'></div></div></div></div>
             </div>
         </div>
     </header>
@@ -29,7 +30,9 @@
 export default {
     data() {
         return {
-            iconheight: 24
+            iconheight: 24,
+            showNotify: false,
+            subscribed: false
         }
     },
     head() {
@@ -40,7 +43,7 @@ export default {
                         async function subscribeToNotifications() {
                             const alreadyRegistered = await OneSignal.isPushNotificationsEnabled();
                             if(alreadyRegistered) {
-                                alert("Thank you for subscribing!");
+                                
                             } else {
                                 OneSignal.push(function() {
                                     OneSignal.showSlidedownPrompt();
