@@ -19,7 +19,6 @@
                 <a href='mailto:rick@firefang.com'><img src='~/assets/images/icons/mail.svg' :height='iconheight' alt='email'/></a>
                 <a href='https://facebook.com/skrapion'><img src='~/assets/images/icons/facebook.svg' :height='iconheight' alt='Facebook'/></a>
                 <a href='https://www.youtube.com/channel/UCLCEtL5d5botNpR4TCU_f9w'><img src='~/assets/images/icons/youtube.svg' :height='iconheight' alt='Youtube'/></a>
-                <!-- TODO: https://documentation.onesignal.com/docs/web-push-custom-code-examples -->
                 <div id='notification-block' v-click-outside="hideNotify"><a href='#' v-on:click="showNotify = !showNotify"><img src='~/assets/images/icons/bell.svg' :height='iconheight' alt='notifications'/></a><div id='subscribe' :class="{show: showNotify}"><div id='subscribe-content'><p class='unsupported-message'>Sorry, web push notifications aren't supported on your platform.</p><p>Want to be notified whenever I post a new project?</p><div :class='{switchtrack: true, set: subscribed}' v-on:click="clickSubscribe()"><div class='switchthumb'></div></div></div></div></div>
             </div>
         </div>
@@ -38,7 +37,16 @@ export default {
         }
     },
     mounted() {
-        if(typeof OneSignal !== 'undefined') {
+        if(process.env.NODE_ENV === 'production') {
+            if(typeof OneSignal === 'undefined') {
+                window.OneSignal = window.OneSignal || [];
+                OneSignal.push(function() {
+                    OneSignal.init({
+                        appId: "3b78268c-b1c0-4037-b3f5-07cb3afb64fe",
+                    });
+                });
+            }
+
             if(!OneSignal.isPushNotificationsSupported()) {
                 var subscribeContent = document.getElementById("subscribe-content");
                 subscribeContent.classList.add("unsupported");
@@ -73,29 +81,10 @@ export default {
                             OneSignal.registerForPushNotifications();
                         }
                         this.subscribed = true;
+                        OneSignal.sendSelfNotification("Thank you for subscribing!", "Watch this space for new project posts!", "https://firefang.com", "https://nuxt.firefang.com/hellcat.png");
                     }
                 });
             }
-        }
-    },
-    head() {
-        return {
-            script: [
-                {
-                    innerHTML: `
-                        async function subscribeToNotifications() {
-                            const alreadyRegistered = await OneSignal.isPushNotificationsEnabled();
-                            if(alreadyRegistered) {
-                                
-                            } else {
-                                OneSignal.push(function() {
-                                    OneSignal.showSlidedownPrompt();
-                                });
-                            }
-                        }
-                    `
-                }
-            ]
         }
     }
 }
