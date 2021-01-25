@@ -49,7 +49,7 @@ export default {
                 });
             }
 
-            OneSignal.push(function() {
+            OneSignal.push(() => {
                 if(!OneSignal.isPushNotificationsSupported()) {
                     console.log("Push Notifications Not Supported");
                     var subscribeContent = document.getElementById("subscribe-content");
