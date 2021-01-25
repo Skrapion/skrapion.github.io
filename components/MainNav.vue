@@ -20,7 +20,7 @@
                 <a href='https://facebook.com/skrapion'><img src='~/assets/images/icons/facebook.svg' :height='iconheight' alt='Facebook'/></a>
                 <a href='https://www.youtube.com/channel/UCLCEtL5d5botNpR4TCU_f9w'><img src='~/assets/images/icons/youtube.svg' :height='iconheight' alt='Youtube'/></a>
                 <!-- TODO: https://documentation.onesignal.com/docs/web-push-custom-code-examples -->
-                <div id='notification-block' v-click-outside="swapShowNotify"><a href='#' v-on:click="showNotify = !showNotify"><img src='~/assets/images/icons/bell.svg' :height='iconheight' alt='notifications'/></a><div id='subscribe' :class="{show: showNotify}"><div id='subscribe-content'><p>Want to be notified whenever I post a new project?</p><div :class='{switchtrack: true, set: subscribed}' v-on:click="subscribed = !subscribed"><div class='switchthumb'></div></div></div></div></div>
+                <div id='notification-block' v-click-outside="swapShowNotify"><a href='#' v-on:click="showNotify = !showNotify"><img src='~/assets/images/icons/bell.svg' :height='iconheight' alt='notifications'/></a><div id='subscribe' :class="{show: showNotify}"><div id='subscribe-content'><p class='unsupported-message'>Sorry, web push notifications aren't supported on your platform.</p><p>Want to be notified whenever I post a new project?</p><div :class='{switchtrack: true, set: subscribed}' v-on:click="subscribed = !subscribed"><div class='switchthumb'></div></div></div></div></div>
             </div>
         </div>
     </header>
@@ -38,13 +38,12 @@ export default {
         }
     },
     mounted() {
-        if(OneSignal) {
-            if(OneSignal.isPushNotificationsSupported())
-            {
-                alert("test");
+        if(typeof OneSignal !== 'undefined') {
+            if(OneSignal.isPushNotificationsSupported()) {
+                var subscribeContent = document.getElementById("subscribe-content");
+                subscribeContent.classList.add("unsupported");
             }
         }
-        //var subscribeContent = document.getElementById("subscribe-content");
     },
     directives: {
         clickOutside: vClickOutside.directive

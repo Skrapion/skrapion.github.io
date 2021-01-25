@@ -145,6 +145,19 @@ a {
     z-index: 1;
 }
 
+.unsupported-message {
+    display: none;
+}
+
+.unsupported p,
+.unsupported .switchtrack {
+    display: none;
+}
+
+.unsupported .unsupported-message {
+    display: block;
+}
+
 #contentcontainer {
     display: block;
     position: absolute;
