@@ -68,6 +68,9 @@ export default {
         '@nuxtjs/feed',
         '@nuxtjs/sitemap'
     ],
+    plugins: [
+        { src: "@/plugins/vClickOutside", ssr: false }
+    ],
     components: true,
     generate: {
         dir: 'docs',

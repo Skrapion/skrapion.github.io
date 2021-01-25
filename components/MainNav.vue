@@ -20,19 +20,29 @@
                 <a href='https://facebook.com/skrapion'><img src='~/assets/images/icons/facebook.svg' :height='iconheight' alt='Facebook'/></a>
                 <a href='https://www.youtube.com/channel/UCLCEtL5d5botNpR4TCU_f9w'><img src='~/assets/images/icons/youtube.svg' :height='iconheight' alt='Youtube'/></a>
                 <!-- TODO: https://documentation.onesignal.com/docs/web-push-custom-code-examples -->
-                <a href='#' v-on:click="showNotify = !showNotify"><img src='~/assets/images/icons/bell.svg' :height='iconheight' alt='notifications'/></a><div id='subscribe' :class="{show: showNotify}" ><div id='subscribe-content'><p>Want to be notified whenever I post a new project?</p><div :class='{switchtrack: true, set: subscribed}' v-on:click="subscribed = !subscribed"><div class='switchthumb'></div></div></div></div>
+                <div id='notification-block' v-click-outside="swapShowNotify"><a href='#' v-on:click="showNotify = !showNotify"><img src='~/assets/images/icons/bell.svg' :height='iconheight' alt='notifications'/></a><div id='subscribe' :class="{show: showNotify}"><div id='subscribe-content'><p>Want to be notified whenever I post a new project?</p><div :class='{switchtrack: true, set: subscribed}' v-on:click="subscribed = !subscribed"><div class='switchthumb'></div></div></div></div></div>
             </div>
         </div>
     </header>
 </template>
 
 <script>
+import vClickOutside from 'v-click-outside'
+
 export default {
     data() {
         return {
             iconheight: 24,
             showNotify: false,
             subscribed: false
+        }
+    },
+    directives: {
+        clickOutside: vClickOutside.directive
+    },
+    methods: {
+        swapShowNotify(event) {
+            this.showNotify = false;
         }
     },
     head() {
