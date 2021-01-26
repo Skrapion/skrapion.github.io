@@ -69,7 +69,8 @@ export default {
         '@nuxtjs/sitemap'
     ],
     plugins: [
-        { src: "@/plugins/vClickOutside", ssr: false }
+        { src: "@/plugins/vClickOutside", ssr: false },
+        { src: "@/plugins/OneSignal", ssr: false }
     ],
     components: true,
     generate: {
@@ -103,6 +104,12 @@ export default {
             {rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Rouge+Script&display=swap'},
             {rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;1,100;1,300&display=swap'},
             {rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap'}
+        ],
+        script: [
+            {
+                src: "https://cdn.onesignal.com/sdks/OneSignalSDK.js",
+                async: true
+            }
         ]
     },
     feed: [

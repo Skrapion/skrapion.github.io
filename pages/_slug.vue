@@ -223,9 +223,6 @@ export default {
             return new Date(date).toLocaleString('en', options);
         }
     },
-    env: {
-        "BaseURL": "https://skrapion.gitlab.io/"
-    },
     head() {
         return {
             title: this.post.title + " - Firefang",
