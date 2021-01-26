@@ -39,13 +39,11 @@ export default {
     mounted() {
         OneSignal.push(() => {
             if(!OneSignal.isPushNotificationsSupported()) {
-                console.log("Push Notifications Not Supported");
                 var subscribeContent = document.getElementById("subscribe-content");
                 subscribeContent.classList.add("unsupported");
             } else {
                 OneSignal.isPushNotificationsEnabled().then( (isEnabled) => {
                     if(isEnabled) {
-                        console.log("Push Notifications Enabled");
                         this.subscribed = true;
                     }
                 });
@@ -60,33 +58,27 @@ export default {
             this.showNotify = false;
         },
         clickSubscribe() {
-            console.log("Clicked subscribe");
             OneSignal.push(() => {
                 Promise.all([
                     OneSignal.isPushNotificationsEnabled(),
                     OneSignal.isOptedOut()
                 ]).then((result) => {
-                    console.log("In result");
                     var isPushEnabled = result[0];
                     var isOptedOut = result[1];
 
                     if(isPushEnabled) {
-                        console.log("Push enabled: unsubscribing");
                         OneSignal.setSubscription(false);
                         this.subscribed = false;
                     } else {
                         if(isOptedOut) {
-                            console.log("Opted out: opting in");
                             OneSignal.setSubscription(true);
                         } else {
-                            console.log("Registering for push notifications");
                             OneSignal.registerForPushNotifications();
                         }
                         this.subscribed = true;
 
                         OneSignal.once('subscriptionChange', (isSubscribed) => {
                             if(isSubscribed) {
-                                console.log("Self Send");
                                 OneSignal.sendSelfNotification("Thank you for subscribing!", "Watch this space for new project posts!", process.env.BaseURL, process.env.BaseURL + "hellcat.png");
                             }
                         });
