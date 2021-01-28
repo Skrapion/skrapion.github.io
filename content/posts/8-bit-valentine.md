@@ -7,7 +7,7 @@ pics:
   - cover.jpg
   - minecraft.jpg
 ---
-I tried to design a low-resolution T-shirt design for my Minecraft character. I didn't actually have enough resolution to make this design work in Minecraft, but luckily, real t-shirts have plenty of resolution!
+I tried to design a low-resolution T-shirt for my Minecraft character. I didn't actually have enough resolution to make this work in Minecraft, but luckily, real t-shirts have plenty of resolution!
 
 And I still ended up making a Minecraft skin that resembles this T-shirt :)
 
