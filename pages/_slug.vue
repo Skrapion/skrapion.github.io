@@ -44,7 +44,7 @@
         </div>
         <div id='similars'>
             <div v-if='!$fetchState.pending && similars.length' class="indexcontentpadding">
-                <h2>More {{similarsCategory}} projects...</h2>
+                <h2>{{similarsCategory}}</h2>
                 <div id="indexcontent">
                     <div v-for="similar of similars" :key='similar.slug' class='post'>
                         <nuxt-link :to="`/${similar.slug}`">
@@ -196,7 +196,7 @@ export default {
             })
             .fetch();
         
-        this.similarsCategory = this.post.tags[0];
+        this.similarsCategory = "More " + this.post.tags[0] + " projects...";
         var cat1len = this.similars.length;
 
         // If we don't have enough interesting hits on the main category, check others.
@@ -214,7 +214,7 @@ export default {
 
             // Assuming we actually found more posts, change the category name.
             if(cat1len != this.similars.length)
-                this.similarsCategory = "similar";
+                this.similarsCategory = "More projects like this...";
         }
     },
     methods: {
