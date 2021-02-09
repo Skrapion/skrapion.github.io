@@ -16,9 +16,12 @@
                     </div>
                 </div>
                 <div id='prettypictures' v-if='post.pics'>
-                    <div v-for='pic of post.pics' :key='pic'>
-                        <div v-if='pic.substr(pic.length-3, pic.length) == ".yt"' class='pic youtubewrapper'>
-                            <iframe :src="`https://www.youtube.com/embed/${pic.substr(0, pic.length-3)}`" frameborder="0" width="100%" height="100%" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div v-for='(pic, n) of post.pics' :key='n'>
+                        <div v-if='pic.filename && pic.type == "youtube"' class='pic youtubewrapper'>
+                            <iframe :src="`https://www.youtube.com/embed/${pic.filename}`" frameborder="0" width="100%" height="100%" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div v-else-if='pic.filename' class='pic'>
+                            <nuxt-image :src="`/posts/${post.slug}/${pic.filename}`" :placeholder="true" sizes="200,200:400,400:800,800:1200,1200:1920"/>
                         </div>
                         <div v-else class='pic'>
                             <nuxt-image :src="`/posts/${post.slug}/${pic}`" :placeholder="true" sizes="200,200:400,400:800,800:1200,1200:1920"/>
