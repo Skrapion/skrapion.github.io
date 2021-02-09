@@ -5,7 +5,7 @@ date: 2012-11-14
 pics:
   - { filename: "If7dUFW_NPU", type: "youtube" }
   - { filename: "9UM8ynScU98", type: "youtube" }
-tags: [film challenges, video]
+tags: [film challenge, video]
 ---
 Our submission to this year’s [Toronto 48 Hour Film Challenge](https://www.48hourfilm.com/toronto).
 
