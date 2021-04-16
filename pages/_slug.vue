@@ -306,7 +306,6 @@ export default {
 #story {
     grid-area: story;
     padding-right: 40px;
-    max-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -432,7 +431,7 @@ export default {
         position: relative;
         padding-right: 0;
         overflow: hidden;
-
+        max-height: 100vh;
         
         transition: max-height 1s ease-out;
     }
