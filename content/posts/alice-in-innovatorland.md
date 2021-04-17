@@ -5,6 +5,7 @@ date: 2019-11-25
 pics:
   - { filename: "4Me3zDGkiUQ", type: "youtube" }
 tags: [ film challenge, video ]
+featured: true
 ---
 Enjoy our submission to the annual [Yukon Film Society](https://yukonfilmsociety.com/) 48 hour film challenge!
 
