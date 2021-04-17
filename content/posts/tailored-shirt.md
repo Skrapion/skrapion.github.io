@@ -2,7 +2,7 @@
 title: Tailored Dress Shirt
 description: Fully tailored dress shirt
 date: 2016-08-15
-tags: [costuming]
+tags: [sewing, costuming]
 ---
 A more challenging tailoring job this time. Brought in the sides (with flat-felled seams), the darts, and the arms (the armpits were particularly challenging).
 
