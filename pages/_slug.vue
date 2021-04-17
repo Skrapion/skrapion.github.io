@@ -3,15 +3,17 @@
         <div id='articlecontainer'>
             <article>
                 <div id='story' :class="{openfull: readmoreclicked}">
-                    <div id='boringwords'>
-                        <nuxt-content :document='post'/>
-                    </div>
-                    <div id='date'>
-                        {{formatDate(post.date)}}
-                    </div>
-                    <div id='readmorecontainer'>
-                        <div id='readmore'>
-                            <a href='#' class='button' @click="readmoreclicked = true">Read More</a>
+                    <div id='storycontainer'>
+                        <div id='boringwords'>
+                            <nuxt-content :document='post'/>
+                        </div>
+                        <div id='date'>
+                            {{formatDate(post.date)}}
+                        </div>
+                        <div id='readmorecontainer'>
+                            <div id='readmore'>
+                                <a href='#' class='button' @click="readmoreclicked = true">Read More</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -306,12 +308,16 @@ export default {
 #story {
     grid-area: story;
     padding-right: 40px;
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    min-height: min(100%, 100vh);
+}
+
+#storycontainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    font-family: 'Fraunces', serif;
-    font-weight: 300;
-    height: min(100%, 100vh);
+    min-height: min(100%, 100vh);
 }
 
 #readmorecontainer {
