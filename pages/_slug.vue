@@ -311,6 +311,7 @@ export default {
     justify-content: center;
     font-family: 'Fraunces', serif;
     font-weight: 300;
+    height: min(100%, 100vh);
 }
 
 #readmorecontainer {
