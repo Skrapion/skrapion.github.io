@@ -17,7 +17,10 @@
                         </div>
                     </div>
                 </div>
-                <div id='prettypictures' v-if='post.pics'>
+                    <div id='indexcontent' v-if='children.length'>
+                        <div v-for="child of children" :key="child.slug" :class="{post: true, featured: child.featured}"><nuxt-link :to="child.slug"><nuxt-image :src="`/posts/${child.slug}/cover.jpg`" :alt="child.title" width="400" height="400" :sizes="child.featured ? featuredSizes : sizes" :placeholder="true"/></nuxt-link></div>
+                    </div>
+                <div id='prettypictures' v-else-if='post.pics'>
                     <div v-for='(pic, n) of post.pics' :key='n'>
                         <div v-if='pic.filename && pic.type == "youtube"' class='pic youtubewrapper'>
                             <iframe :src="`https://www.youtube.com/embed/${pic.filename}`" frameborder="0" width="100%" height="100%" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -38,10 +41,16 @@
                             <nuxt-link id='newerlink' v-if="next" :to="{name: 'slug', params: {slug: next.slug, type: 'next'}}">
                                 <nuxt-image class="signpostimg" :src="`/posts/${next.slug}/cover.jpg`" :placeholder="true" width="400" height="400" sizes="200"/>
                             </nuxt-link>
+                            <nuxt-link id='newerlink' v-else-if="post.parent" :to="{name: 'slug', params: {slug: post.parent, type: 'next'}}">
+                                <nuxt-image class="signpostimg" :src="`/posts/${post.parent}/cover.jpg`" :placeholder="true" width="400" height="400" sizes="200"/>
+                            </nuxt-link>
                         </div>
                         <div id='older' class='post'>
                             <nuxt-link id='olderlink' v-if="prev" :to="{name: 'slug', params: {slug: prev.slug, type: 'prev'}}">
                                 <nuxt-image class="signpostimg" :src="`/posts/${prev.slug}/cover.jpg`" :placeholder="true" width="400" height="400" sizes="200"/>
+                            </nuxt-link>
+                            <nuxt-link id='newerlink' v-else-if="post.parent" :to="{name: 'slug', params: {slug: post.parent, type: 'next'}}">
+                                <nuxt-image class="signpostimg" :src="`/posts/${post.parent}/cover.jpg`" :placeholder="true" width="400" height="400" sizes="200"/>
                             </nuxt-link>
                         </div>
                     </div>
@@ -167,17 +176,25 @@ export default {
     },
     async asyncData({$content, params, error}) {
         const postPromise = $content('posts', params.slug).fetch();
-        const surroundPromise = $content('posts')
-            .only(['slug'])
-            .sortBy('date')
-            .surround(params.slug)
+        const childrenPromise = $content('posts')
+            .where({parent: params.slug})
+            .only(['title', 'featured', 'slug'])
+            .sortBy('date', 'desc')
             .fetch();
 
         try {
             const post = await postPromise;
-            const [prev, next] = await surroundPromise;
+            
+            const [prev, next] = await $content('posts')
+                .where({parent: post.parent ? post.parent : {$type: {$ne: 'string'}}})
+                .only(['slug'])
+                .sortBy('date')
+                .surround(params.slug)
+                .fetch();
 
-            return {post, prev, next};
+            const children = await childrenPromise;
+
+            return {post, prev, next, children};
         } catch(e) {
             error({statusCode: 404, message: "Not Found"});
         }
@@ -194,6 +211,8 @@ export default {
             .only(['slug', 'tags', 'title'])
             .where({
                 $and: [{
+                    'parent': { $type: {$ne: 'string'}}
+                },{
                     'slug': { $ne: this.$nuxt.context.params.slug }
                 },{
                     'tags': { $contains: [this.post.tags[0]] }
@@ -210,6 +229,8 @@ export default {
             .only(['slug', 'tags', 'title'])
             .where({
                 $and: [{
+                    'parent': { $type: {$ne: 'string'}}
+                },{
                     'slug': { $ne: this.$nuxt.context.params.slug }
                 },{
                     'tags': { $containsAny: this.post.tags }
@@ -224,7 +245,7 @@ export default {
     },
     methods: {
         formatDate(date) {
-            const options = {year: 'numeric', month: 'long', day: 'numeric'};
+            const options = {year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC'};
             return new Date(date).toLocaleString('en', options);
         }
     },
