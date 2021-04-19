@@ -186,7 +186,7 @@ export default {
             const post = await postPromise;
             
             const surroundPromise = $content('posts')
-                .where({parent: post.parent ? post.parent : {$type: {$ne: 'string'}}})
+                .where({parent: post.parent ? post.parent : {$type: {$eq: 'undefined'}}})
                 .only(['slug'])
                 .sortBy('date')
                 .surround(params.slug)
@@ -196,7 +196,7 @@ export default {
                 .only(['slug', 'tags', 'title'])
                 .where({
                     $and: [{
-                        'parent': { $type: {$ne: 'string'}}
+                        'parent': { $type: {$eq: 'undefined'}}
                     },{
                         'slug': { $ne: params.slug }
                     },{
@@ -214,7 +214,7 @@ export default {
                     .only(['slug', 'tags', 'title'])
                     .where({
                         $and: [{
-                            'parent': { $type: {$ne: 'string'}}
+                            'parent': { $type: {$eq: 'undefined'}}
                         },{
                             'slug': { $ne: params.slug }
                         },{

@@ -10,7 +10,7 @@
 export default {
     async asyncData({$content, params}){
         const posts = await $content('posts')
-            .where({parent: {$type: {$ne: 'string'}}})
+            .where({parent: {$type: {$eq: 'undefined'}}})
             .only(['title', 'featured', 'slug'])
             .sortBy('date', 'desc')
             .fetch();
