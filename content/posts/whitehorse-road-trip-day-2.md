@@ -7,7 +7,7 @@ parent: whitehorse-road-trip
 pics:
  - lake-superior.jpg
  - widow-maker-chasm.jpg
- - the-ojubwe-people.jpg
+ - the-ojibwe-people.jpg
  - cover.jpg
  - photographer-caitlyn.jpg
  - orphan-lake.jpg
