@@ -1,6 +1,6 @@
 <template>
     <ul>
-        <li v-for="post of posts" :key="post.slug"><nuxt-link :to="post.slug">{{post.title}}</nuxt-link></li>
+        <li v-for="post of posts" :key="post.slug"><nuxt-link :to="`/rssgen/${post.slug}`">{{post.title}}</nuxt-link></li>
     </ul>
 </template>
 
