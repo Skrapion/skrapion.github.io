@@ -203,7 +203,17 @@ export default {
         return {
             similars: [],
             similarsCategory: "",
-            readmoreclicked: false
+            readmoreclicked: false,
+            sizes: [{width: 400}],
+            featuredSizes: [
+                {
+                    width: 400
+                },
+                {
+                    breakpoint: 400,
+                    width: 800
+                }
+            ]
         }
     },
     async fetch() {
