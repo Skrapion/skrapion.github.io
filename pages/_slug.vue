@@ -17,9 +17,9 @@
                         </div>
                     </div>
                 </div>
-                    <div id='indexcontent' v-if='children.length'>
-                        <div v-for="child of children" :key="child.slug" :class="{post: true, featured: child.featured}"><nuxt-link :to="child.slug"><nuxt-image :src="`/posts/${child.slug}/cover.jpg`" :alt="child.title" width="400" height="400" :sizes="child.featured ? featuredSizes : sizes" :placeholder="true"/></nuxt-link></div>
-                    </div>
+                <div id='indexcontent' v-if='children.length'>
+                    <div v-for="child of children" :key="child.slug" :class="{post: true, featured: child.featured}"><nuxt-link :to="child.slug"><nuxt-img :src="`/posts/${child.slug}/cover.jpg`" :alt="child.title" width="400" height="400" :sizes="child.featured ? featuredSizes : sizes" :placeholder="true"/></nuxt-link></div>
+                </div>
                 <div id='prettypictures' v-else-if='post.pics'>
                     <div v-for='(pic, n) of post.pics' :key='n'>
                         <div v-if='pic.filename && pic.type == "youtube"' class='pic youtubewrapper'>
@@ -57,7 +57,7 @@
             </article>
         </div>
         <div id='similars'>
-            <div v-if='!$fetchState.pending && similars.length' class="indexcontentpadding">
+            <div v-if='similars.length' class="indexcontentpadding">
                 <h2>{{similarsCategory}}</h2>
                 <div id="indexcontent">
                     <div v-for="similar of similars" :key='similar.slug' class='post'>
@@ -185,16 +185,53 @@ export default {
         try {
             const post = await postPromise;
             
-            const [prev, next] = await $content('posts')
+            const surroundPromise = $content('posts')
                 .where({parent: post.parent ? post.parent : {$type: {$ne: 'string'}}})
                 .only(['slug'])
                 .sortBy('date')
                 .surround(params.slug)
                 .fetch();
 
+            var similars = await $content('posts')
+                .only(['slug', 'tags', 'title'])
+                .where({
+                    $and: [{
+                        'parent': { $type: {$ne: 'string'}}
+                    },{
+                        'slug': { $ne: params.slug }
+                    },{
+                        'tags': { $contains: [post.tags[0]] }
+                    }]
+                })
+                .fetch();
+        
+            var similarsCategory = "More " + post.tags[0] + " projects...";
+            const cat1len = similars.length;
+
+            // If we don't have enough interesting hits on the main category, check others.
+            if(cat1len < 5) {
+                similars = await $content('posts')
+                    .only(['slug', 'tags', 'title'])
+                    .where({
+                        $and: [{
+                            'parent': { $type: {$ne: 'string'}}
+                        },{
+                            'slug': { $ne: params.slug }
+                        },{
+                            'tags': { $containsAny: post.tags }
+                        }]
+                    })
+                    .fetch();
+
+                // Assuming we actually found more posts, change the category name.
+                if(cat1len != similars.length)
+                    similarsCategory = "More projects like this...";
+            }
+
+            const [prev, next] = await surroundPromise;
             const children = await childrenPromise;
 
-            return {post, prev, next, children};
+            return {post, prev, next, children, similars, similarsCategory};
         } catch(e) {
             error({statusCode: 404, message: "Not Found"});
         }
@@ -214,43 +251,6 @@ export default {
                     width: 800
                 }
             ]
-        }
-    },
-    async fetch() {
-        this.similars = await this.$nuxt.context.$content('posts')
-            .only(['slug', 'tags', 'title'])
-            .where({
-                $and: [{
-                    'parent': { $type: {$ne: 'string'}}
-                },{
-                    'slug': { $ne: this.$nuxt.context.params.slug }
-                },{
-                    'tags': { $contains: [this.post.tags[0]] }
-                }]
-            })
-            .fetch();
-        
-        this.similarsCategory = "More " + this.post.tags[0] + " projects...";
-        var cat1len = this.similars.length;
-
-        // If we don't have enough interesting hits on the main category, check others.
-        if(cat1len < 5) {
-            this.similars = await this.$nuxt.context.$content('posts')
-            .only(['slug', 'tags', 'title'])
-            .where({
-                $and: [{
-                    'parent': { $type: {$ne: 'string'}}
-                },{
-                    'slug': { $ne: this.$nuxt.context.params.slug }
-                },{
-                    'tags': { $containsAny: this.post.tags }
-                }]
-            })
-            .fetch();
-
-            // Assuming we actually found more posts, change the category name.
-            if(cat1len != this.similars.length)
-                this.similarsCategory = "More projects like this...";
         }
     },
     methods: {
