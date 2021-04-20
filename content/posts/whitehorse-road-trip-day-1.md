@@ -1,7 +1,7 @@
 ---
 title: Whitehorse Road Trip Day 1
 description: Day one of our cross-country journey to our new home in Whitehorse
-date: 2018-06-18
+date: 2018-06-11
 tags: [photography]
 parent: whitehorse-road-trip
 pics:
