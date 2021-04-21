@@ -5,9 +5,9 @@ date: 2018-06-13
 tags: [photography]
 parent: whitehorse-road-trip
 pics:
- - pebble-beach-rick-balancing-rick.jpg
+ - {filename: 'pebble-beach-rick-balancing-rick.jpg', attrib: 'caitlyn'}
  - pebble-beach-caitlyn.jpg
- - pebble-beach-rick-balancing-pebbles.jpg
+ - {filename: 'pebble-beach-rick-balancing-pebbles.jpg', attrib: 'caitlyn'}
  - aguasabon-gorge.jpg
  - sleeping-giant.jpg
  - cover.jpg

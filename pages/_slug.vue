@@ -31,6 +31,8 @@
                         <div v-else class='pic'>
                             <nuxt-image :src="`/posts/${post.slug}/${pic}`" :placeholder="true" sizes="200,200:400,400:800,800:1200,1200:1920"/>
                         </div>
+
+                        <attribution v-if='pic.attrib' :name='pic.attrib'></attribution>
                     </div>
                 </div>
                 <div id='prettypictures' v-else>
@@ -407,7 +409,7 @@ export default {
 }
 
 .pic {
-    margin-bottom: 20px;
+    padding-top: 20px;
 }
 
 .youtubewrapper {
