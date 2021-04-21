@@ -335,7 +335,7 @@ export default {
     z-index: 1;
     border-bottom: 17px solid transparent;
     border-image: url(~assets/images/halftone.png) 17 repeat;
-    padding: 20px 125px 20px 100px;
+    padding: 0px 125px 20px 100px;
 }
 
 #story {
