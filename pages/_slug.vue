@@ -17,26 +17,27 @@
                         </div>
                     </div>
                 </div>
-                <div id='indexcontent' v-if='children.length'>
-                    <div v-for="child of children" :key="child.slug" :class="{post: true, featured: child.featured}"><nuxt-link :to="child.slug"><nuxt-img :src="`/posts/${child.slug}/cover.jpg`" :alt="child.title" width="400" height="400" :sizes="child.featured ? featuredSizes : sizes" :placeholder="true"/></nuxt-link></div>
-                </div>
-                <div id='prettypictures' v-else-if='post.pics'>
-                    <div v-for='(pic, n) of post.pics' :key='n'>
-                        <div v-if='pic.filename && pic.type == "youtube"' class='pic youtubewrapper'>
-                            <iframe :src="`https://www.youtube.com/embed/${pic.filename}`" frameborder="0" width="100%" height="100%" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                        <div v-else-if='pic.filename' class='pic'>
-                            <nuxt-image :src="`/posts/${post.slug}/${pic.filename}`" :placeholder="true" sizes="200,200:400,400:800,800:1200,1200:1920"/>
-                        </div>
-                        <div v-else class='pic'>
-                            <nuxt-image :src="`/posts/${post.slug}/${pic}`" :placeholder="true" sizes="200,200:400,400:800,800:1200,1200:1920"/>
-                        </div>
+                <div id='prettypictures'>
+                    <div v-if='post.pics && post.pics != "none"'>
+                        <div v-for='(pic, n) of post.pics' :key='n' class='picbox'>
+                            <div v-if='pic.filename && pic.type == "youtube"' class='pic youtubewrapper'>
+                                <iframe :src="`https://www.youtube.com/embed/${pic.filename}`" frameborder="0" width="100%" height="100%" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div v-else-if='pic.filename' class='pic'>
+                                <nuxt-image :src="`/posts/${post.slug}/${pic.filename}`" :placeholder="true" sizes="200,200:400,400:800,800:1200,1200:1920"/>
+                            </div>
+                            <div v-else class='pic'>
+                                <nuxt-image :src="`/posts/${post.slug}/${pic}`" :placeholder="true" sizes="200,200:400,400:800,800:1200,1200:1920"/>
+                            </div>
 
-                        <attribution v-if='pic.attrib' :name='pic.attrib'></attribution>
+                            <attribution v-if='pic.attrib' :name='pic.attrib'></attribution>
+                        </div>
                     </div>
-                </div>
-                <div id='prettypictures' v-else>
-                    <nuxt-image :src="`/posts/${post.slug}/cover.jpg`" :placeholder="true" sizes="200,200:400,400:800,800:1200,1200:1920"/>
+                    <div v-else-if='post.pics != "none"' class='picbox'>
+                        <nuxt-image :src="`/posts/${post.slug}/cover.jpg`" :placeholder="true" sizes="200,200:400,400:800,800:1200,1200:1920"/>
+                    </div>
+
+                    <photo-grid :posts='children'></photo-grid>
                 </div>
                 <div id='signposts'>
                         <div id='newer' class='post'>
@@ -242,17 +243,7 @@ export default {
         return {
             similars: [],
             similarsCategory: "",
-            readmoreclicked: false,
-            sizes: [{width: 400}],
-            featuredSizes: [
-                {
-                    width: 400
-                },
-                {
-                    breakpoint: 400,
-                    width: 800
-                }
-            ]
+            readmoreclicked: false
         }
     },
     methods: {
@@ -335,7 +326,7 @@ export default {
     z-index: 1;
     border-bottom: 17px solid transparent;
     border-image: url(~assets/images/halftone.png) 17 repeat;
-    padding: 0px 125px 20px 100px;
+    padding: 20px 125px 20px 100px;
 }
 
 #story {
@@ -408,8 +399,8 @@ export default {
     height: auto;
 }
 
-.pic {
-    padding-top: 20px;
+.picbox {
+    margin-bottom: 20px;
 }
 
 .youtubewrapper {
