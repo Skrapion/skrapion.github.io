@@ -195,17 +195,21 @@ export default {
                 .surround(params.slug)
                 .fetch();
 
+            var wheres = [{
+                    'tags': { $contains: [post.tags[0]] }
+                },{
+                    'parent': { $type: {$eq: 'undefined'}}
+                },{
+                    'slug': { $ne: params.slug }
+                }];
+            
+            if(post.parent) {
+                wheres.push({'slug': { $ne: post.parent}});
+            }
+
             var similars = await $content('posts')
                 .only(['slug', 'tags', 'title'])
-                .where({
-                    $and: [{
-                        'parent': { $type: {$eq: 'undefined'}}
-                    },{
-                        'slug': { $ne: params.slug }
-                    },{
-                        'tags': { $contains: [post.tags[0]] }
-                    }]
-                })
+                .where({$and: wheres})
                 .fetch();
         
             var similarsCategory = "More " + post.tags[0] + " projects...";
@@ -213,17 +217,10 @@ export default {
 
             // If we don't have enough interesting hits on the main category, check others.
             if(cat1len < 5) {
+                wheres[0] = {'tags': { $containsAny: post.tags }};
                 similars = await $content('posts')
                     .only(['slug', 'tags', 'title'])
-                    .where({
-                        $and: [{
-                            'parent': { $type: {$eq: 'undefined'}}
-                        },{
-                            'slug': { $ne: params.slug }
-                        },{
-                            'tags': { $containsAny: post.tags }
-                        }]
-                    })
+                    .where({$and: wheres})
                     .fetch();
 
                 // Assuming we actually found more posts, change the category name.
