@@ -30,7 +30,7 @@
                                 <nuxt-image :src="`/posts/${post.slug}/${pic}`" :placeholder="true" sizes="200,200:400,400:800,800:1200,1200:1920"/>
                             </div>
 
-                            <attribution v-if='pic.attrib' :name='pic.attrib'></attribution>
+                            <attribution v-if='pic.credit' :name='pic.credit'></attribution>
                         </div>
                     </div>
                     <div v-else-if='post.pics != "none"' class='picbox'>

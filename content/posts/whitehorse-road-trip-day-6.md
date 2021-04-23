@@ -10,8 +10,8 @@ pics:
  - cover.jpg
  - wascana-centre.jpg
  - milky-way.jpg
- - {filename: saskatchewan-landing-house.jpg, attrib: caitlyn}
- - {filename: saskatchewan-landing-rick.jpg, attrib: caitlyn}
+ - {filename: saskatchewan-landing-house.jpg, credit: caitlyn}
+ - {filename: saskatchewan-landing-rick.jpg, credit: caitlyn}
  - saskatchewan-landing-sunset.jpg
  - map.jpg
 ---

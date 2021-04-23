@@ -12,7 +12,7 @@ pics:
  - manitoba-lake-pelicans.jpg
  - riding-mountain-bison.jpg
  - riding-mountain-bears.jpg
- - {filename: manitoba-lake-sunset.jpg, attrib: caitlyn}
+ - {filename: manitoba-lake-sunset.jpg, credit: caitlyn}
 ---
 We're currently camping at Riding Mountain National Park, surrounded by fireflies, beautiful vistas, and the sound of the crackling campfire and waves gently lapping at the shore.
 

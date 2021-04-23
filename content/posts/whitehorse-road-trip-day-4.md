@@ -6,10 +6,10 @@ tags: [photography]
 parent: whitehorse-road-trip
 pics:
  - manitoba.jpg
- - {filename: kakabeka.jpg, attrib: caitlyn}
+ - {filename: kakabeka.jpg, credit: caitlyn}
  - rainy-lake.jpg
  - skinny-dipping.jpg
- - {filename: storm-clouds.jpg, attrib: caitlyn}
+ - {filename: storm-clouds.jpg, credit: caitlyn}
  - cover.jpg
  - map.jpg
 ---

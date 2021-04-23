@@ -7,13 +7,13 @@ parent: whitehorse-road-trip
 pics:
  - alberta.jpg
  - great-sandhills-hawk.jpg
- - {filename: cover.jpg, attrib: caitlyn}
+ - {filename: cover.jpg, credit: caitlyn}
  - great-sandhills-caitlyn.jpg
  - great-sandhills-calm.jpg
  - great-sandhills-lone-trail.jpg
- - {filename: dinosaur-provincial-park-rick.jpg, attrib: caitlyn}
+ - {filename: dinosaur-provincial-park-rick.jpg, credit: caitlyn}
  - dinosaur-provincial-park-hoodoo.jpg
- - {filename: crowsnest-highway.jpg, attrib: caitlyn}
+ - {filename: crowsnest-highway.jpg, credit: caitlyn}
  - map.jpg
 ---
 Day 7! We made it to Alberta!
