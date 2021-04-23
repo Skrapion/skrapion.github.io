@@ -7,7 +7,7 @@ parent: whitehorse-road-trip
 pics:
  - bc.jpg
  - titan-33-19.jpg
- - {filename: morrisey-shore.jpg, credit: caitlyn}
+ - {filename: morrissey-shore.jpg, credit: caitlyn}
  - cover.jpg
  - black-cottonwoods.jpg
  - whiteswan-lake-switchback.jpg
