@@ -1,6 +1,6 @@
 ---
-title: Whitehorse Road Trip Day 10
-description: Day ten of our cross-country journey to our new home in Whitehorse
+title: Whitehorse Road Trip Day 11
+description: Day eleven of our cross-country journey to our new home in Whitehorse
 date: 2018-06-21
 tags: [photography]
 parent: whitehorse-road-trip
