@@ -24,17 +24,17 @@
                                 <iframe :src="`https://www.youtube.com/embed/${pic.filename}`" frameborder="0" width="100%" height="100%" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                             <div v-else-if='pic.filename' class='pic'>
-                                <nuxt-image :src="`/posts/${post.slug}/${pic.filename}`" :placeholder="true" sizes="200,200:400,400:800,800:1200,1200:1920"/>
+                                <nuxt-image class='prettyimg' :src="`/posts/${post.slug}/${pic.filename}`" :placeholder="true" sizes="200,200:400,400:800,800:1200,1200:1920"/>
                             </div>
                             <div v-else class='pic'>
-                                <nuxt-image :src="`/posts/${post.slug}/${pic}`" :placeholder="true" sizes="200,200:400,400:800,800:1200,1200:1920"/>
+                                <nuxt-image class='prettyimg' :src="`/posts/${post.slug}/${pic}`" :placeholder="true" sizes="200,200:400,400:800,800:1200,1200:1920"/>
                             </div>
 
                             <attribution v-if='pic.credit' :name='pic.credit'></attribution>
                         </div>
                     </div>
                     <div v-else-if='post.pics != "none"' class='picbox'>
-                        <nuxt-image :src="`/posts/${post.slug}/cover.jpg`" :placeholder="true" sizes="200,200:400,400:800,800:1200,1200:1920"/>
+                        <nuxt-image class='prettyimg' :src="`/posts/${post.slug}/cover.jpg`" :placeholder="true" sizes="200,200:400,400:800,800:1200,1200:1920"/>
                     </div>
 
                     <photo-grid :posts='children'></photo-grid>
