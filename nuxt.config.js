@@ -112,6 +112,16 @@ export default {
             }
         ]
     },
+    image: {
+        presets: [
+            {
+                name: 'article-img',
+                modifiers: {
+                    fit: 'contain'
+                }
+            }
+        ]
+    },
     feed: [
         {
             path: '/rss.xml',
