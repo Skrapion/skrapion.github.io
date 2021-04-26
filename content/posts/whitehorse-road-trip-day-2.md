@@ -10,7 +10,7 @@ pics:
  - the-ojibwe-people.jpg
  - cover.jpg
  - photographer-caitlyn.jpg
- - orphan-lake.jpg
+ - {filename: orphan-lake.jpg, credit: caitlyn}
  - wawa-goose.jpg
  - map.jpg
 ---
