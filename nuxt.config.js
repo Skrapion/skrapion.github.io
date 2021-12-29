@@ -64,9 +64,9 @@ export default {
     ],
     modules: [
         '@nuxt/content',
-        '@nuxt/image',
         '@nuxtjs/feed',
-        '@nuxtjs/sitemap'
+        '@nuxtjs/sitemap',
+        'nuxt-responsive-loader'
     ],
     plugins: [
         { src: "@/plugins/vClickOutside", ssr: false },
@@ -109,16 +109,9 @@ export default {
             {
                 src: "https://cdn.onesignal.com/sdks/OneSignalSDK.js",
                 async: true
-            }
-        ]
-    },
-    image: {
-        presets: [
+            },
             {
-                name: 'article-img',
-                modifiers: {
-                    fit: 'contain'
-                }
+                src: '/custom.js'
             }
         ]
     },
@@ -135,5 +128,11 @@ export default {
         gzip: true,
         exclude: ['/rssgen'],
         routes: createSitemapRoutes
+    },
+    responsiveLoader: {
+        adapter: require('responsive-loader/sharp'),
+        sizes: process.env.NODE_ENV !== 'production' ? [800] : [200,400,800,1200,1920],
+        placeholder: true,
+        placeholderSize: 20
     }
 }

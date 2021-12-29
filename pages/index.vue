@@ -12,6 +12,9 @@ export default {
             .only(['title', 'featured', 'slug'])
             .sortBy('date', 'desc')
             .fetch();
+        posts.forEach(function(post) {
+            post.cover = '/posts/'+post.slug+'/cover.jpg';
+        });
         return {posts};
     },
     head() {

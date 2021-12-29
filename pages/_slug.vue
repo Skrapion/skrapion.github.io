@@ -24,17 +24,26 @@
                                 <iframe :src="`https://www.youtube.com/embed/${pic.filename}`" frameborder="0" width="100%" height="100%" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                             <div v-else-if='pic.filename' class='pic'>
-                                <nuxt-image class='prettyimg' :src="`+article-img:/posts/${post.slug}/${pic.filename}`" :placeholder="true" sizes="200,200:400,400:800,800:1200,1200:1920"/>
+                                <responsive-img
+                                    :image="require(`~/assets/posts/${post.slug}/${pic.filename}`)"
+                                    fit="contain"
+                                    class='prettyimg'/>
                             </div>
                             <div v-else class='pic'>
-                                <nuxt-image class='prettyimg' :src="`+article-img:/posts/${post.slug}/${pic}`" :placeholder="true" sizes="200,200:400,400:800,800:1200,1200:1920"/>
+                                <responsive-img
+                                    :image="require(`~/assets/posts/${post.slug}/${pic}`)"
+                                    fit="contain"
+                                    class='prettyimg'/>
                             </div>
 
                             <attribution v-if='pic.credit' :name='pic.credit'></attribution>
                         </div>
                     </div>
                     <div v-else-if='post.pics != "none"' class='picbox'>
-                        <nuxt-image class='prettyimg' :src="`+article-img:/posts/${post.slug}/cover.jpg`" :placeholder="true" sizes="200,200:400,400:800,800:1200,1200:1920"/>
+                        <responsive-img
+                                    :image="require(`~/assets/posts/${post.slug}/cover.jpg`)"
+                                    class='prettyimg'/>
+
                     </div>
 
                     <photo-grid :posts='children'></photo-grid>
@@ -42,18 +51,30 @@
                 <div id='signposts'>
                         <div id='newer' class='post'>
                             <nuxt-link id='newerlink' v-if="next" :to="{name: 'slug', params: {slug: next.slug, type: 'next'}}">
-                                <nuxt-image class="signpostimg" :src="`/posts/${next.slug}/cover.jpg`" :placeholder="true" width="400" height="400" sizes="200"/>
+                                <responsive-img
+                                    :image="require(`~/assets/posts/${next.slug}/cover.jpg?size=200`)"
+                                    :alt="`Newer: ${next.title}`"
+                                    class='signpostimg'/>
                             </nuxt-link>
                             <nuxt-link id='newerlink' v-else-if="post.parent" :to="{name: 'slug', params: {slug: post.parent, type: 'next'}}">
-                                <nuxt-image class="signpostimg" :src="`/posts/${post.parent}/cover.jpg`" :placeholder="true" width="400" height="400" sizes="200"/>
+                                <responsive-img
+                                    :image="require(`~/assets/posts/${post.parent}/cover.jpg?size=200`)"
+                                    alt="Back to project"
+                                    class='signpostimg'/>
                             </nuxt-link>
                         </div>
                         <div id='older' class='post'>
                             <nuxt-link id='olderlink' v-if="prev" :to="{name: 'slug', params: {slug: prev.slug, type: 'prev'}}">
-                                <nuxt-image class="signpostimg" :src="`/posts/${prev.slug}/cover.jpg`" :placeholder="true" width="400" height="400" sizes="200"/>
+                                <responsive-img
+                                    :image="require(`~/assets/posts/${prev.slug}/cover.jpg?size=200`)"
+                                    :alt="`Older: ${prev.title}`"
+                                    class='signpostimg'/>
                             </nuxt-link>
                             <nuxt-link id='newerlink' v-else-if="post.parent" :to="{name: 'slug', params: {slug: post.parent, type: 'next'}}">
-                                <nuxt-image class="signpostimg" :src="`/posts/${post.parent}/cover.jpg`" :placeholder="true" width="400" height="400" sizes="200"/>
+                                <responsive-img
+                                    :image="require(`~/assets/posts/${post.parent}/cover.jpg?size=200`)"
+                                    alt="Back to project"
+                                    class='signpostimg'/>
                             </nuxt-link>
                         </div>
                     </div>
@@ -65,7 +86,10 @@
                 <div id="indexcontent">
                     <div v-for="similar of similars" :key='similar.slug' class='post'>
                         <nuxt-link :to="`/${similar.slug}`">
-                            <nuxt-image class="similarimg" :src="`/posts/${similar.slug}/cover.jpg`" :placeholder="true" :alt="similar.title" width="400" height="400" sizes="200,200:400,400:800"/>
+                            <responsive-img
+                                class="similarimg"
+                                :image="require(`~/assets/posts/${similar.slug}/cover.jpg?{sizes:[200,400]}`)"
+                                :alt="similar.title"/>
                         </nuxt-link>
                     </div>
                 </div>
@@ -75,7 +99,9 @@
 </template>
 
 <script>
+import ResponsiveImg from '../components/ResponsiveImg.vue';
 export default {
+  components: { ResponsiveImg },
     mounted() {
         // Show/hide "read more" button depending on how big the text is
         var story = document.getElementById("story");
@@ -190,7 +216,7 @@ export default {
             
             const surroundPromise = $content('posts')
                 .where({parent: post.parent ? post.parent : {$type: {$eq: 'undefined'}}})
-                .only(['slug'])
+                .only(['slug', 'title'])
                 .sortBy('date')
                 .surround(params.slug)
                 .fetch();
@@ -352,6 +378,10 @@ export default {
     justify-content: center;
 }
 
+.prettyimg {
+    border-radius: 20px;
+}
+
 #signposts {
     display: flex;
     grid-area: signposts;
@@ -389,6 +419,10 @@ export default {
     background: #262626;
     padding: 1px 140px 40px 140px;
     z-index: 0;
+}
+
+.similarimg {
+    border-radius: 20px;
 }
 
 #prettypictures .size-post-thumbnail {
