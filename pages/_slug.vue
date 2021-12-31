@@ -43,6 +43,7 @@
                         <div class='pic' onclick="lightboxOpen(this)">
                             <responsive-img
                                 :image="require(`~/assets/posts/${post.slug}/cover.jpg`)"
+                                fit="contain"
                                 class='prettyimg'/>
                         </div>
 
