@@ -2,9 +2,23 @@ window.loaded = function(obj) {
     obj.classList.add('loaded');
 }
 
+window.closeLightboxOnHistory = function(event) {
+    lightboxClose();
+}
+
 window.lightboxClose = function() {
+    window.removeEventListener('popstate', closeLightboxOnHistory);
+    
     var lightbox = document.getElementById("lightbox");
-    lightbox.parentNode.removeChild(lightbox);
+    if(lightbox) {
+        lightbox.style.opacity = '0%';
+    }
+
+    window.setTimeout(function(){
+        var lightbox = document.getElementById("lightbox");
+        if(lightbox) {
+            lightbox.parentNode.removeChild(lightbox);}
+        }, 250);
 }
 
 window.lightboxOpen = function(pic) {
@@ -47,6 +61,8 @@ window.lightboxOpen = function(pic) {
     }
 
     document.getElementById("bodycontainer").appendChild(lightbox).appendChild(picContainer).appendChild(picCopy);
+
+    window.addEventListener('popstate', closeLightboxOnHistory);
 
     window.setTimeout(triggerAnim, 10);
 }
