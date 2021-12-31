@@ -19,7 +19,7 @@ window.lightboxOpen = function(pic) {
     lightbox.style.zIndex = 3;
     lightbox.style.background = '#000d';
     lightbox.style.opacity = '0%';
-    lightbox.style.transition = 'opacity 0.5s ease';
+    lightbox.style.transition = 'opacity 250ms ease-out';
 
     var picContainer = document.createElement("div");
     picContainer.style.position = 'fixed';
@@ -29,8 +29,7 @@ window.lightboxOpen = function(pic) {
     picContainer.style.bottom = (document.documentElement.clientHeight - viewportOffset.bottom)+'px';
     picContainer.style.display = 'flex';
     picContainer.style.alignItems = 'center';
-    picContainer.style.opacity = '0%';
-    picContainer.style.transition = 'all 0.5s';
+    picContainer.style.transition = 'all 500ms';
 
     var picCopy = pic.cloneNode(true);
     picCopy.onclick = null;
@@ -45,7 +44,6 @@ window.lightboxOpen = function(pic) {
         picContainer.style.top = '10px';
         picContainer.style.right = '10px';
         picContainer.style.bottom = '10px';
-        picContainer.style.opacity = '100%';
     }
 
     document.getElementById("bodycontainer").appendChild(lightbox).appendChild(picContainer).appendChild(picCopy);
