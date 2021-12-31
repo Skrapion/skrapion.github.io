@@ -23,13 +23,13 @@
                             <div v-if='pic.filename && pic.type == "youtube"' class='pic youtubewrapper'>
                                 <iframe :src="`https://www.youtube.com/embed/${pic.filename}`" frameborder="0" width="100%" height="100%" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
-                            <div v-else-if='pic.filename' class='pic'>
+                            <div v-else-if='pic.filename' class='pic' onclick="lightboxOpen(this)">
                                 <responsive-img
                                     :image="require(`~/assets/posts/${post.slug}/${pic.filename}`)"
                                     fit="contain"
                                     class='prettyimg'/>
                             </div>
-                            <div v-else class='pic'>
+                            <div v-else class='pic' onclick="lightboxOpen(this)">
                                 <responsive-img
                                     :image="require(`~/assets/posts/${post.slug}/${pic}`)"
                                     fit="contain"
@@ -40,9 +40,11 @@
                         </div>
                     </div>
                     <div v-else-if='post.pics != "none"' class='picbox'>
-                        <responsive-img
-                                    :image="require(`~/assets/posts/${post.slug}/cover.jpg`)"
-                                    class='prettyimg'/>
+                        <div class='pic' onclick="lightboxOpen(this)">
+                            <responsive-img
+                                :image="require(`~/assets/posts/${post.slug}/cover.jpg`)"
+                                class='prettyimg'/>
+                        </div>
 
                     </div>
 
@@ -380,6 +382,11 @@ export default {
 
 .prettyimg {
     border-radius: 20px;
+    cursor: zoom-in;
+}
+
+#lightbox .prettyimg {
+    height: 100%;
 }
 
 #signposts {
