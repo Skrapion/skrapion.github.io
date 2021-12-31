@@ -4,7 +4,9 @@ window.loaded = function(obj) {
 
 window.lightboxClose = function() {
     var lightbox = document.getElementById("lightbox");
-    lightbox.parentNode.removeChild(lightbox);
+    lightbox.style.opacity = '0%';
+
+    window.setTimeout(function(){lightbox.parentNode.removeChild(lightbox);}, 250);
 }
 
 window.lightboxOpen = function(pic) {
