@@ -12,7 +12,7 @@
                         </div>
                         <div id='readmorecontainer'>
                             <div id='readmore'>
-                                <a href='#' class='button' @click="readmoreclicked = true">Read More</a>
+                                <a href='#' class='button' @click="readmore()">Read More</a>
                             </div>
                         </div>
                     </div>
@@ -275,6 +275,16 @@ export default {
         formatDate(date) {
             const options = {year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC'};
             return new Date(date).toLocaleString('en', options);
+        },
+        readmore() {
+            this.readmoreclicked = true;
+
+            // max-height transitions don't work with 'auto' height, so we need to measure the end height.
+            var story = document.getElementById("story");
+            var height = Array.prototype.reduce.call(story.childNodes, function(p, c) {return p + (c.offsetHeight || 0);}, 0) + 'px';
+            story.style.maxHeight = height;
+
+            window.setTimeout(function(){story.style.maxHeight = '100%';}, 1000); // After transition is done, reset max-height to 100%
         }
     },
     head() {
@@ -508,10 +518,6 @@ export default {
     #story.storyjs {
         max-height: 150px;
         
-    }
-
-    #story.openfull {
-        max-height: auto;
     }
 
     #readmorecontainer {
