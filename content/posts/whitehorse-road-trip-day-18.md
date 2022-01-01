@@ -11,7 +11,7 @@ pics:
  - mountain-goats.jpg
  - cover.jpg
  - bison-herd.jpg
- - liard.jpg
+ - {filename: liard.jpg, credit: caitlyn}
  - yukon-unofficial.jpg
  - yukon.jpg
  - map.jpg
