@@ -1,7 +1,7 @@
 ---
-title: Whitehorse Road Trip Day 16
-description: Day sixteen of our cross-country journey to our new home in Whitehorse
-date: 2018-06-26
+title: Whitehorse Road Trip Day 17
+description: Day seventeen of our cross-country journey to our new home in Whitehorse
+date: 2018-06-27
 tags: [photography]
 parent: whitehorse-road-trip
 pics:
@@ -17,7 +17,7 @@ pics:
  - stone-mountain-lake-view.jpg
  - map.jpg
 ---
-Day 16!
+Day 17!
 
 It's finally starting to set in on us that we're actually doing it. We're actually moving to the Yukon.
 
