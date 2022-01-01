@@ -10,7 +10,7 @@ pics:
  - numa-upper.jpg
  - numa-washout.jpg
  - {filename: paint-pots-rick.jpg, credit: caitlyn}
- - cover.jpg
+ - {filename: cover.jpg, credit: caitlyn}
  - {filename: canyon-falls-birdseye.jpg, credit: caitlyn}
  - {filename: canyon-falls-upper.jpg, credit: caitlyn}
  - canyon-falls-chasm.jpg
