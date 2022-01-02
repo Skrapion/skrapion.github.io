@@ -3,7 +3,7 @@ import { hostname } from 'os';
 const fs = require('fs').promises;
 const path = require('path');
 
-const baseUrl = "https://nuxt.firefang.com/";
+const baseUrl = "https://firefang.com/";
 const desc = "Rick Yorgason's portfolio blog. Everything from traditional woodworking to video game development."
 
 const constructFeedItem = async (post) => {
