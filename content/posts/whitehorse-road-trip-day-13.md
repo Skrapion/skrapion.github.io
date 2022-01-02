@@ -4,6 +4,7 @@ description: Day thirteen of our cross-country journey to our new home in Whiteh
 date: 2018-06-23
 tags: [photography]
 parent: whitehorse-road-trip
+featured: true
 pics:
  - {filename: peyto-rick.jpg, credit: caitlyn}
  - peyto-rick-and-caitlyn.jpg

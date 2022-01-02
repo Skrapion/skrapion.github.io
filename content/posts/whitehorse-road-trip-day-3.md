@@ -11,6 +11,7 @@ pics:
  - aguasabon-gorge.jpg
  - sleeping-giant.jpg
  - cover.jpg
+ - map.jpg
 ---
 Day 3 on our move to Whitehorse!
 

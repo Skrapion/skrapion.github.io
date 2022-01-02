@@ -4,6 +4,7 @@ description: Day five of our cross-country journey to our new home in Whitehorse
 date: 2018-06-15
 tags: [photography]
 parent: whitehorse-road-trip
+featured: true
 pics:
  - riding-mountain-moon.jpg
  - cover.jpg
@@ -13,6 +14,7 @@ pics:
  - riding-mountain-bison.jpg
  - riding-mountain-bears.jpg
  - {filename: manitoba-lake-sunset.jpg, credit: caitlyn}
+ - map.jpg
 ---
 We're currently camping at Riding Mountain National Park, surrounded by fireflies, beautiful vistas, and the sound of the crackling campfire and waves gently lapping at the shore.
 

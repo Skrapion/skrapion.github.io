@@ -4,6 +4,7 @@ description: Day seven of our cross-country journey to our new home in Whitehors
 date: 2018-06-17
 tags: [photography]
 parent: whitehorse-road-trip
+featured: true
 pics:
  - alberta.jpg
  - great-sandhills-hawk.jpg
