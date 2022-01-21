@@ -1,6 +1,6 @@
 * ~~Everything from Thingiverse~~
 * ~~Everything from YouTube~~
-* Everything from Facebook
+* ~~Everything from Facebook~~
 * Halloween/Comicon costumes
 * Mail box
 * Electronics bins
