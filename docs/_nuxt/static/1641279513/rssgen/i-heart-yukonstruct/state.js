@@ -1,1 +1,0 @@
-window.__NUXT__=(function(a){return {staticAssetsBase:"\u002F_nuxt\u002Fstatic\u002F1641279513",layout:"empty",error:a,serverRendered:true,routePath:"\u002Frssgen\u002Fi-heart-yukonstruct",config:{_app:{basePath:"\u002F",assetsPath:"\u002F_nuxt\u002F",cdnURL:a},content:{dbHash:"906532a1"}}}}(null));
