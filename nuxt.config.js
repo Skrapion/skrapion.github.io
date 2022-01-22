@@ -1,4 +1,5 @@
 import { hostname } from 'os';
+import sharp from 'sharp';
 
 const fs = require('fs').promises;
 const path = require('path');
@@ -10,10 +11,27 @@ const constructFeedItem = async (post) => {
     const filePath = path.join(__dirname, `docs/rssgen/${post.slug}/index.html`);
     const content = await fs.readFile(filePath, 'utf8');
     const url = `${baseUrl}${post.slug}/`;
+
+    const srcPath = path.join(__dirname, `assets/posts/${post.slug}/cover.jpg`);
+    const imageData = await fs.readFile(srcPath);
+    const dstFolder = path.join(__dirname, `docs/${post.slug}`);
+    const dstPath = path.join(dstFolder, 'cover.jpg');
+    fs.mkdir(dstFolder, {recursive: true});
+
+    const sharp = require('sharp');
+    sharp(imageData)
+        .metadata()
+        .then( ({width}) => sharp(imageData)
+            .resize(
+                Math.min(2000, width),
+                Math.round(Math.min(2000, width) * 0.5),
+                { fit: sharp.fit.cover})
+            .toFile(dstPath));
+        
     return {
         title: post.title,
         date: new Date(post.date),
-        image: `${baseUrl}posts/${post.slug}/cover.jpg`,
+        image: `${baseUrl}${post.slug}/cover.jpg`,
         id: url,
         link: url,
         description: post.description,
