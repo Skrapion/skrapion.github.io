@@ -5,7 +5,6 @@ date: 2016-10-30
 tags: [costuming]
 pics:
  - cover.jpg
- - silver-snail.jpg
 ---
 For Halloween this year, I dressed up all my friends as the Aqua Teen Hunger Force.
 
