@@ -2,9 +2,10 @@
 * ~~Everything from YouTube~~
 * ~~Everything from Facebook~~
 * Halloween/Comicon costumes
-  * Mysterio
-  * Flycatcher
+  * ~~Mysterio~~
+  * ~~Flycatcher~~
   * Icarus
+* Hegemony
 * Mail box
 * Electronics bins
 * Jump rope
