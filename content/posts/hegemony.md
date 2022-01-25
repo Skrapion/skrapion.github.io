@@ -2,6 +2,7 @@
 title: "Hegemony Gold: Wars of Ancient Greece"
 description: Conquer the ancient Greek world
 date: 2012-03-30
+postdate: 2022-01-24
 tags: [software]
 pics:
   - { filename: "_f9vcujY_H8", type: "youtube" }

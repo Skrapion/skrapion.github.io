@@ -8,8 +8,6 @@ const baseUrl = "https://firefang.com/";
 const desc = "Rick Yorgason's portfolio blog. Everything from traditional woodworking to video game development."
 
 const constructFeedItem = async (post) => {
-    const filePath = path.join(__dirname, `docs/rssgen/${post.slug}/index.html`);
-    const content = await fs.readFile(filePath, 'utf8');
     const url = `${baseUrl}${post.slug}/`;
 
     const srcPath = path.join(__dirname, `assets/posts/${post.slug}/cover.jpg`);
@@ -30,18 +28,19 @@ const constructFeedItem = async (post) => {
         
     return {
         title: post.title,
-        date: new Date(post.date),
+        date: new Date(post.postdate ? post.postdate : post.date),
         image: `${baseUrl}${post.slug}/cover.jpg`,
         id: url,
         link: url,
         description: post.description,
-        content: content
+        content: post.bodyHtml
     }
 }
 
 const fetchPosts = async () => {
     const {$content} = require('@nuxt/content');
     return $content('posts')
+        .sortBy('postdate', 'desc')
         .sortBy('date', 'desc')
         .fetch();
 }
@@ -81,6 +80,12 @@ export default {
         "~/assets/styles/main.css"
     ],
     modules: [
+        ['nuxt-content-body-html', {
+            highlighter: undefined, 
+            rehypePlugins: [
+                ['rehype-urls', url => (url.host ? url : new URL(url.href, baseUrl))],
+            ],
+        }],
         '@nuxt/content',
         '@nuxtjs/feed',
         '@nuxtjs/sitemap',
