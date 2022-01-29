@@ -298,7 +298,7 @@ export default {
                 { hid: 'og:url', property: "og:url", content: process.env.BaseURL + this.post.slug },
                 { hid: 'og:type', property: "og:type", content: this.post.youtube ? "video" : "article" },
                 { hid: 'og:description', property: "og:description", content: this.post.description },
-                { hid: 'og:image', property: 'og:image', content: process.env.BaseURL + this.post.slug + "/cover.jpg" }
+                { hid: 'og:image', property: 'og:image', content: process.env.BaseURL + this.post.slug + "/ogImage.jpg" }
             ]
         }
     },

@@ -13,7 +13,7 @@ const constructFeedItem = async (post) => {
     const srcPath = path.join(__dirname, `assets/posts/${post.slug}/cover.jpg`);
     const imageData = await fs.readFile(srcPath);
     const dstFolder = path.join(__dirname, `docs/${post.slug}`);
-    const dstPath = path.join(dstFolder, 'cover.jpg');
+    const dstPath = path.join(dstFolder, 'ogImage.jpg');
     fs.mkdir(dstFolder, {recursive: true});
 
     const sharp = require('sharp');
@@ -22,14 +22,14 @@ const constructFeedItem = async (post) => {
         .then( ({width}) => sharp(imageData)
             .resize(
                 Math.min(2000, width),
-                Math.round(Math.min(2000, width) * 0.5),
+                Math.round(Math.min(2000, width) / 1.9),
                 { fit: sharp.fit.cover})
             .toFile(dstPath));
         
     return {
         title: post.title,
         date: new Date(post.postdate ? post.postdate : post.date),
-        image: `${baseUrl}${post.slug}/cover.jpg`,
+        image: `${baseUrl}${post.slug}/ogImage.jpg`,
         id: url,
         link: url,
         description: post.description,
@@ -114,11 +114,7 @@ export default {
 
             { hid: 'og:title', property: "og:title", content: "Firefang" },
             { hid: 'og:description', property: "og:description", content: desc },
-            { hid: 'og:image', property: 'og:image', content: baseUrl + "RickHoldingTheWorld.jpg" },
-
-            { hid: 'twitter:title', property: 'twitter:title', content: "Firefang" },
-            { hid: 'twitter:description', property: 'twitter:description', content: desc },
-            { hid: 'twitter:image', property: 'twitter:image', content: baseUrl + "RickHoldingTheWorld.jpg" }
+            { hid: 'og:image', property: 'og:image', content: baseUrl + "RickHoldingTheWorld.jpg" }
         ],
         link: [
             {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },

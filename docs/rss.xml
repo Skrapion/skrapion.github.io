@@ -4,7 +4,7 @@
         <title>Firefang</title>
         <link>https://firefang.com/rss.xml</link>
         <description>Rick Yorgason's portfolio blog. Everything from traditional woodworking to video game development.</description>
-        <lastBuildDate>Sat, 29 Jan 2022 01:29:50 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 29 Jan 2022 02:49:59 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/nuxt-community/feed-module</generator>
         <image>
@@ -23,7 +23,7 @@
 <p>The game was coded from scratch in C++ and DirectX, and my most notable programming contributions were the questing system, the camera and controls, and the GUI code.</p>
 <p>As a designer, my most notable contribution was probably the Peloponnesian War scenarios. I was responsible for all the research, writing, and quests in those scenarios. I also did all the writing, editing, and even voice overs for all of the cutscenes. One of my favourite sources for research was <em>the Peloponnesian War</em> by Donald Kagan, which I still keep on my bookshelf as a memento.</p>
 <p>Pick up a copy at <a href="https://longbowgames.com/hegemony/" rel="nofollow noopener noreferrer" target="_blank">Longbow Games</a>.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/hegemony/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/hegemony/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Anniversary Waffles]]></title>
@@ -33,7 +33,7 @@
             <description><![CDATA[Dessert waffles for brunch! A perfect way to celebrate our five-year anniversary.]]></description>
             <content:encoded><![CDATA[<p>Celebrating 5 years with Caitlyn 💞</p>
 <p>Caitlyn got me a waffle-maker for last Christmas, so I it seemed like the perfect way to celebrate our anniversary. Served with a strawberry compote, whipped cream, and dark chocolate drizzle.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/anniversary-waffles/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/anniversary-waffles/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Whitehorse Bagels]]></title>
@@ -44,7 +44,7 @@
             <content:encoded><![CDATA[<p>Fresh Whitehorse bagels!</p>
 <p>What makes a Whitehorse bagel? Well, I figured if New York bagels are made with barley malt, and Montreal bagels are made with honey, then Whitehorse bagels must be made with birch syrup!</p>
 <p>Topped with sesame, poppy, and fennel seeds, and ready for lox and cream cheese!</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/whitehorse-bagels/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/whitehorse-bagels/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Doctor Mario]]></title>
@@ -54,7 +54,7 @@
             <description><![CDATA[It's a me! Doctor Mario!]]></description>
             <content:encoded><![CDATA[<p>It's a me! Doctor Mario!</p>
 <p>This is my first time making a latex prosthetic, and I'm pretty happy with it! Made the master mould out of Monster Clay and brushed many layers of liquid latex on it. Wish it came out a little smoother, but I think I would have needed to do a slush cast instead of a brush cast for that. Lots to learn still!</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/doctor-mario/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/doctor-mario/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Strawberry Cake Pie]]></title>
@@ -63,7 +63,7 @@
             <pubDate>Sat, 28 Mar 2020 00:00:00 GMT</pubDate>
             <description><![CDATA[A quick-bread strawberry cake.]]></description>
             <content:encoded><![CDATA[<p>Just a simple strawberry quick-bread cake served in a pie pan. Nothing too complicated, but I was really happy with how it turned out.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/strawberry-cake-pie/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/strawberry-cake-pie/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Segmented Vase]]></title>
@@ -72,7 +72,7 @@
             <pubDate>Sat, 25 Jan 2020 00:00:00 GMT</pubDate>
             <description><![CDATA[Maple and walnut vase turned out of 240 segments.]]></description>
             <content:encoded><![CDATA[<p>Here's my late Christmas present to Caitlyn. I had to precisely cut and glue together 240 tiny pieces of maple and walnut. Along the way, I made a 3D model of the vase in order to calculate the correct cut lengths, I made a custom sled for the table saw in order to cut the angles perfectly, and I designed <a href="https://firefang.com/steady-rest/">a large steady rest</a> on the CNC in order to turn such a large piece on the lathe. It's fair to say I learned a tonne!</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/segmented-vase/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/segmented-vase/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Steady Rest]]></title>
@@ -82,7 +82,7 @@
             <description><![CDATA[CNC-machined steady rest of a lathe]]></description>
             <content:encoded><![CDATA[<p>A steady rest for the wood lathe at Yukonstruct. I designed this specifically for this segmented vase, and cut it out on our CNC router.</p>
 <p>This was designed as a parametric model in Fusion 360 and cut out of some scrap plywood. All the files, and the required hardware, <a href="https://www.thingiverse.com/thing:4109405" rel="nofollow noopener noreferrer" target="_blank">can be found on Thingiverse</a>.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/steady-rest/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/steady-rest/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Scratches, Splinters, and Scrapes Station]]></title>
@@ -99,7 +99,7 @@
 <li>Uncle Bills Super Gripper tweezers</li>
 </ul>
 <p>This was modelled in Fusion 360 as a parametric model, so it can be easily modified if your first aid supplies are a different size. All files, including the label, <a href="https://www.thingiverse.com/thing:4125659" rel="nofollow noopener noreferrer" target="_blank">can be found on Thingiverse</a>.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/scratches-splinters-and-scrapes-station/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/scratches-splinters-and-scrapes-station/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Tree Coasters]]></title>
@@ -110,7 +110,7 @@
             <content:encoded><![CDATA[<p>Here's the gift I made for our Yukonstruct Secret Santa this year. It's a set of coasters made out of birch pallet wood.</p>
 <p>I used a CNC to carve out different species of trees, and then filled the carvings with resin and copper mica powder.</p>
 <p>The source images all came from one of my favorite reference books: <a href="https://lostartpress.com/products/with-the-grain-a-craftsman-s-guide-to-understanding-wood" rel="nofollow noopener noreferrer" target="_blank">With the Grain, by Christian Becksvoort</a>. For those wondering, the trees are birch, pine, poplar, and maple.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/tree-coasters/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/tree-coasters/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Alice in Innovatorland]]></title>
@@ -121,7 +121,7 @@
             <content:encoded><![CDATA[<p>Enjoy our submission to the annual <a href="https://yukonfilmsociety.com/" rel="nofollow noopener noreferrer" target="_blank">Yukon Film Society</a> 48 hour film challenge!</p>
 <p>How it works: we were given 48 hours to write, film, and edit a 5 minute film. There was just one limitation: this year, we had to use a fish!</p>
 <p><a href="https://www.youtube.com/watch?v=4Me3zDGkiUQ&#x26;list=PLejSYJ7FH1s2KTYgidFS0SdPvHUOSkT_W" rel="nofollow noopener noreferrer" target="_blank">Watch my entire film challenge play list here.</a></p>]]></content:encoded>
-            <enclosure url="https://firefang.com/alice-in-innovatorland/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/alice-in-innovatorland/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Flycatcher]]></title>
@@ -131,7 +131,7 @@
             <description><![CDATA[Cosplaying as Flycatcher]]></description>
             <content:encoded><![CDATA[<p>In time for Yukomicon this year I put together a costume for Flycatcher from Fables.</p>
 <p>I ended up using a surprising number of tools from Yukonstruct for this costume. The eyes were 3D printed globes, with vinyl-cut irises, the spots on Flycatchers cap were laser cut out of felt, and the jumpsuit was way baggier than in the comics, so I tailored it to fit like a glove.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/flycatcher/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/flycatcher/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[I Heart Yukonstruct]]></title>
@@ -142,7 +142,7 @@
             <content:encoded><![CDATA[<p>I Love Yukonstuct!</p>
 <p>I needed an excuse to learn how to make customized shapes in Tinkercad, and the arrival of some new 3D printers at Yukonstruct seemed to be the perfect fit.</p>
 <p>If you also want to show your love for Yukonstruct, <a href="https://www.thingiverse.com/thing:3837605" rel="nofollow noopener noreferrer" target="_blank">the STL can be found on Thingiverse</a>.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/i-heart-yukonstruct/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/i-heart-yukonstruct/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Repair Café Screwdriver]]></title>
@@ -152,7 +152,7 @@
             <content:encoded><![CDATA[<p>At our Makerspace we run a monthly repair café, but we lost the handle for our security bits, so I made this little replacement. Made with a one-colour printer by pausing the print when it got to the text and changing the filament.</p>
 <p>Modelled in Fusion 360 and printed in ABS on a Zortrax M200.</p>
 <p>The files for this project <a href="https://www.thingiverse.com/thing:4169891" rel="nofollow noopener noreferrer" target="_blank">can be found on Thingiverse</a>.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/repair-cafe-screwdriver/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/repair-cafe-screwdriver/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Unreal Engine Basics]]></title>
@@ -162,7 +162,7 @@
             <description><![CDATA[A basic overview of how to build a level with a simple house in Unreal Engine]]></description>
             <content:encoded><![CDATA[<p>This is a basic overview of how to build a level with a simple house in Unreal Engine 4.20.</p>
 <p>This tutorial is part of an after school class that I'm teaching at the Yukonstruct Makespace here in Whitehorse.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/unreal-engine-basics/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/unreal-engine-basics/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Yukon Wildlife Preserve]]></title>
@@ -174,7 +174,7 @@
 <p>Caitlyn and I had been here when we first visited the Yukon a couple years ago, but we didn’t have much time to enjoy it the first time. Now that we’ve had our first out-of-town visitor, we decided to show him all the wonderful animals the preserve is protecting, and not only did we get to take our time, but we took a guided tour which was really interesting! Did you know that ground squirrels freeze every winter, dropping to -6°C, and every spring they regrow the brain cells they lost? Or that Yukon has twice as many moose as people? Or that the wood bison (the heaviest animal on the continent at 2000lbs!) were thought to be extinct until they found a herd of 200 in Alberta in the 1950s?</p>
 <p>We also met a red fox (apparently all foxes with white tips are red foxes) who was “rescued” as a “puppy”, and her rescuers found a dog to nurse it, until they realized it wasn’t a puppy at all! After they realized it was a fox, they called the preserve to take over raising her. The woman who gave us the tour said she’s been trapping foxes for 30 years, and this is the first one she’s seen that rolls over, wags its tail, and tries to bark. She’s escaped a few times, and every time she just wants to see the handlers that raised her. It turns out, she probably wasn’t even abandoned, because vixens make multiple trips to move their kits, so if you ever see an abandoned fox (or deer — this happened with them too) wait half a day before calling any authorities.</p>
 <p>It was a beautiful day for a walk through a gorgeous, gigantic park (750 acres!) that felt like unspoiled wilderness, and then we capped it off with a soak in the nearby Takhini Hot Springs, and came home for some delicious locally-made bison sausages.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/yukon-wildlife-preserve/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/yukon-wildlife-preserve/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Whitehorse Road Trip]]></title>
@@ -186,7 +186,7 @@
 <p>We spent 19 days driving from Toronto to Whitehorse in what ended up being a sort of pilgrimage as we explored our vast country on the way to our new home.</p>
 <p>This is our travelogue. Each of the images here links to one day of our journey.</p>
 <p>Happy Canada Day everyone! This was an incredible way to celebrate it.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/whitehorse-road-trip/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/whitehorse-road-trip/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Whitehorse Road Trip Day 19]]></title>
@@ -203,7 +203,7 @@
 <p>We still have a lot of work to do to make our apartment a home, and it's kind of weird settling down in one place after nearly three weeks of nomadic life, but our new home is already starting to feel more... homely.</p>
 <p>We miss you all, but we'll be in touch! Thank you to everyone who has followed our journey during these past 19 days. It's meant a lot to us to read your comments and reactions, and just to know that you're all thinking of us!</p>
 <p>Have a wonderful day, friends. The sun is shining in the Klondike!</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/whitehorse-road-trip-day-19/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/whitehorse-road-trip-day-19/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Whitehorse Road Trip Day 18]]></title>
@@ -221,7 +221,7 @@
 <p>This truly is the land of the midnight sun. It's midnight, and there's still daylight coming through our tent.</p>
 <p>This is it! This our first night sleeping in our new home territory, and our last night camping before we reach our new home.</p>
 <p>Goodnight friends!</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/whitehorse-road-trip-day-18/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/whitehorse-road-trip-day-18/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Whitehorse Road Trip Day 17]]></title>
@@ -238,7 +238,7 @@
 <p>When we arrived at the signpost for the campsite we were looking for tonight, we turned into a ghost town of sorts: an old lodge and gas station which the proprietors had just walked away from and left to the wildlife and vandals. As we walked through the abandoned buildings, it was unclear what damage was done by humans or by fauna, but it was neat to see it being reclaimed by nature, with a swift nest above each window inside the café. Still, it was eerie to see this moment frozen in time with the dated decor, tube TVs (satellite television!), and other fragments recent enough to still be recognizable from our lifetimes.</p>
 <p>We're currently camped at Stone Mountain National Park in that little corner of British Columbia that's in Mountain Time. It's still twilight at midnight, and we've worked out that we only have one more night of camping before we're in our new home in Whitehorse. It's surreal to imagine being in the same place after two and a half weeks of moving every day, and being so far away from our friends and family back in Ontario.</p>
 <p>Goodnight friends. It's starting to dawn on us how much we'll miss you.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/whitehorse-road-trip-day-17/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/whitehorse-road-trip-day-17/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Whitehorse Road Trip Day 16]]></title>
@@ -257,7 +257,7 @@
 <p>Throughout the hike and in the hours since we completed this challenge together, we have both felt physically taxed but emotionally energized, and awestruck, unable to comprehend that the two of us could do something that seems so exotic. It is so unlike anything we do on a regular basis. Sharing this challenging and rewarding endeavor was a great bonding experience for us - an acute high point in this adventure we've undertaken together on this cross country tour and through life.</p>
 <p>Riding high on this feeling, we said goodbye to Jasper National Park and hit the road again. We're on route to our next camp site, just south of Grande Prairie, and so far have seen a bull elk, three deer, two moose (a mama and baby pair), and a beautiful sunset, which seems to last forever this far north.</p>
 <p>Sleep tight friends! Wishing you the kind of emotional high that we've been experiencing. 💖</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/whitehorse-road-trip-day-16/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/whitehorse-road-trip-day-16/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Whitehorse Road Trip Day 15]]></title>
@@ -272,7 +272,7 @@
 <p>We got to our campsite at Pocahontas early tonight, much to the delight of Caitlyn, whom I've been keeping up late these last two weeks. We got a nice walk-in spot away from all the other campers by the side of the creek, and it's wonderful to listen to the babbling as I write this. We went for a little hike to yet another waterfall, and even had time to make the most glamourous meal we've prepared this whole trip: mac and cheese with fake crab and a side of carrots!</p>
 <p>Finally, as Caitlyn seized the opportunity to enjoy some quiet time with a book, I took my camera out for another hike, and ended up on the precipice of an old mining site. It was truly exhilarating to be up there all by myself, feeling the whistling gusts of wind press against me, whipping the camera strap around as I took a panorama of the view. And walking back after the sunset, knowing that there's bears in this neck of the woods, the shadows certainly kept me on my toes, constantly prepared to pull out my bear spray or use my tripod in self defence.</p>
 <p>And now, we're off to bed. Goodnight, friends!</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/whitehorse-road-trip-day-15/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/whitehorse-road-trip-day-15/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Whitehorse Road Trip Day 14]]></title>
@@ -289,7 +289,7 @@
 <p>After this point, we decided to bypass Jasper in order to see Maligne Lake while we still had good light. Along Maligne Lake Road we followed two wonderful hikes: the Maligne Canyon, and the Mary Schaffer Trail around the north end of the lake itself. At this point, we were so overwhelmed by all the beautiful water and canyons that I'm not even sure we can add much more than what I've written above!</p>
 <p>Finally, we headed back to Jasper to find a campsite, stopping only to take a shot of the purple mountains over Medicine Lake after the sun set behind the mountains.</p>
 <p>A few days after the solstice, and this far north, it's still light out at 10:30 at night.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/whitehorse-road-trip-day-14/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/whitehorse-road-trip-day-14/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Whitehorse Road Trip Day 13]]></title>
@@ -302,7 +302,7 @@
 <p>North of here was entirely new territory for us, so we stopped at almost every viewpoint along the way, and were particularly excited about the Tangle Falls. Not only did they offer a jaw dropping view from the road, but they also provided a very fun scramble most of the way up the cliffside, and the two of us were giggling by the time we made it to the top.</p>
 <p>Finally, we decided to camp overnight at Honeymoon Lake, and as we were driving there, the sunset behind the mountains continued to get more and more beautiful, until I insisted that we stop the truck and climb up the rockface along the side of the road to capture the moment. It turns out it was a little risky, because by the time we got to the campsite, we got the very last spot, right next to the noisiest neighbours, but it was worth it!</p>
 <p>Good night friends! We'll be in touch ;)</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/whitehorse-road-trip-day-13/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/whitehorse-road-trip-day-13/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Whitehorse Road Trip Day 12]]></title>
@@ -316,7 +316,7 @@
 <p>Then we made our way up the Icefields Parkway to find a campsite for the night. We skipped a lot of the interesting stuff we did in Banff <a href="https://firefang.com/banff-landscapes">last year</a>, but even so, we still came across something we hadn't expected: a black bear grazing on dandelions along the side of the parkway! And also a very cute raven following me around as I took photos; I'm looking forward to making friends with the ravens in Whitehorse! (And don't worry: one of the things we bought during our shopping trip in Banff was bear spray :) )</p>
 <p>We had hoped to camp at Mosquitto Creek, which had nice campsites right up to the rushing water, but it was chock full, so we went a little further to the Waterfowl Lakes campground, which is beautiful, and has a gorgeous view of the mountains and our favourite Mistaya River. It's going to rain tonight, so we made sure we're well prepared with a tarp protecting our tent.</p>
 <p>That's all for tonight! Good night, friends!</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/whitehorse-road-trip-day-12/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/whitehorse-road-trip-day-12/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Whitehorse Road Trip Day 11]]></title>
@@ -330,7 +330,7 @@
 <p>Next up was the paint pots, an expanse of ochre-rich mud which was used by the First Nations to make red and yellow paint. After the strikingly red water of the paint pots, we went to the strikingly blue water of the Marble Canyon Falls, which was a never-ending parade of deeper and more impressive crevasses, filled with the loveliest sound of rushing water echoing up the canyon walls. The series of interpretive signs describing the water's influence on the geological history of the canyon was particularly well presented.</p>
 <p>Now that we're in Banff, we're just settling down for the night. We're expecting another stormy night to serenade us with the beautiful sounds of raindrops 💧😊</p>
 <p>Goodnight, friends!</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/whitehorse-road-trip-day-11/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/whitehorse-road-trip-day-11/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Whitehorse Road Trip Day 10]]></title>
@@ -343,7 +343,7 @@
 <p>We also explored the beautiful towns of Cranbrook and Kimberley. We were hoping to see the Ktunaxa Interpretive Centre — which had very inspiring programming, but had already closed — and the Teck Sunmine — Canada's largest tracking solar panel installation — but despite our best attempts, we couldn't find any public vantages of it :(</p>
 <p>Finally, after traversing the cliffside gravel roads of the Rockies, we made it to Whiteswan Lake Provincial Park, where they have the most wonderful hot springs either of us have ever seen. Unlike most hot springs, which have been developed into conventional swimming pools, the Lussier Hot Springs are mostly natural, with some strategically placed rocks forming pools of varying temperatures as the hot spring mixes with the cold river flowing past.</p>
 <p>That's all for now. Have a wonderful day, friends!</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/whitehorse-road-trip-day-10/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/whitehorse-road-trip-day-10/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Whitehorse Road Trip Day 9]]></title>
@@ -357,7 +357,7 @@
 <p>But it also had its own beauty, especially with the cottonwood releasing its fluffy seed parachutes into the wind, along with the occasional sighting of marmots and the squeaks of pikas.</p>
 <p>The lighting was a little less than inspiring today, so I spent a bit more time in post on some of these photos to give them some more interest :)</p>
 <p>That's all for now. It's time to head to bed, because we're back on the road tomorrow morning!</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/whitehorse-road-trip-day-9/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/whitehorse-road-trip-day-9/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Whitehorse Road Trip Day 7]]></title>
@@ -371,7 +371,7 @@
 <p>Next we crossed into Alberta and visited Dinosaur Provincial Park, an area that has yielded five percent of the world's known dinosaur fossils. The most interesting part was the geology of the badlands, particularly the hoodoos: those ironstone capped pillars that the Blackfoot people referred to as sleeping giants.</p>
 <p>We ended the evening with a beautiful drive down the Crowsnest Highway through southern Alberta, seeing lots of cows and lakes, and the mountains off in the distance. We are grateful for the company and hospitality of friends here in Crowsnest Pass and will enjoy being stationary for the next couple days.</p>
 <p>And now, for some well-deserved rest. Good night, friends!</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/whitehorse-road-trip-day-7/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/whitehorse-road-trip-day-7/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Whitehorse Road Trip Day 6]]></title>
@@ -386,7 +386,7 @@
 <p>This evening's drive was an idyllic jaunt through the province's canola fields, bizarre snow-like sodium sulphate hills, and the historic architecture of Moosejaw, with blackbirds, mule deer, and livestock grazing by the side of the road.</p>
 <p>We decided to sleep at Saskatchewan Landing Provincial Park, and got here just in time for a picturesque sunset, before pitching our tent and putting on our bunnyhugs to keep us warm for the night!</p>
 <p>Good night, friends!</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/whitehorse-road-trip-day-6/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/whitehorse-road-trip-day-6/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Whitehorse Road Trip Day 5]]></title>
@@ -399,7 +399,7 @@
 <p>Inside the park we found a mama bison and her calf, and a I climbed on top of the truck to get the shot you see here. A little further down the road we saw a mama black bear and her two cubs, climbing the trees for safety. Clearly they could tell Caitlyn was tempted to snuggle them!</p>
 <p>We've had a very restful night at our campsite, enjoying the sunset over the water, dinner over the campfire, the calls of the loons, and the gentle breeze.</p>
 <p>It's twenty to midnight, and there's still light on the horizon. And we're headed north.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/whitehorse-road-trip-day-5/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/whitehorse-road-trip-day-5/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Whitehorse Road Trip Day 4]]></title>
@@ -411,7 +411,7 @@
 <p>Today's theme was water! After breakfast, we went to Kakabeka Falls outside Thunder Bay, which was a breathtaking send-off from Ontario. But before leaving the province, we decided to go for a little swim in Rainy Lake, since it was such a beautiful day for a swim! (And we didn't bother searching our luggage for our bathing suits 😉)</p>
 <p>Once we got to Manitoba, I was quite surprised at how quickly everything got very flat and very straight, and Winnipeg welcomed us with a massive storm. It looked like we were driving straight into Mordor! As it turns out, driving in a dark, stormy, windy, unfamiliar city is quite nerve wracking!</p>
 <p>Thankfully, Caitlyn's mom was extraordinarily generous and booked us a luxurious room in the Marriott tonight, and this was a perfect night for it! We're so thankful to have a warm, dry, comfy bed to sleep in tonight!</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/whitehorse-road-trip-day-4/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/whitehorse-road-trip-day-4/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Whitehorse Road Trip Day 3]]></title>
@@ -425,7 +425,7 @@
 <p>Finally, we made it to Thunder Bay. Today's Giant Thing™ is the Sleeping Giant, a park across from Thunder Bay that appears to be a giant lying on his back in the lake. We also found a very cute fox in Hillcrest Park which I followed until I could get a nice shot of him :)</p>
 <p>Tonight, we're sleeping in a very comfy bed care of Chris James and his remarkably hospitable parents! We were greeted with incredible warmth and an unexpected (and delicious!) meal! Thank you to our incredibly gracious hosts! It feels good to get a nice shower and a warm bed!</p>
 <p>Good night, friends!</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/whitehorse-road-trip-day-3/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/whitehorse-road-trip-day-3/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Whitehorse Road Trip Day 1]]></title>
@@ -439,7 +439,7 @@
 <p>Beautiful views from the Orphan Lake trail, and finally, more giant things! This time a giant goose celebrating the completion of the Trans Canada Highway.</p>
 <p>Now it's time to find a place to spend the night. We might "camp" in the truck instead of our tent in order to stay out of the forecast thunderstorms ⛈️💤</p>
 <p>Good night, friends!</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/whitehorse-road-trip-day-2/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/whitehorse-road-trip-day-2/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Whitehorse Road Trip Day 1]]></title>
@@ -450,7 +450,7 @@
             <content:encoded><![CDATA[<p>Not a lot of stops; we were trying to get as many miles behind us as possible in Ontario, but neither of us had driven much further beyond Sudbury before, so from here on out everything is brand new territory!</p>
 <p>We stopped by the giant nickel, of course. That will be the first of many giant monuments. We're currently staying overnight in Blind River, where we took in the beautiful sunset, and caught a glimpse of a moose in the wild! (Also a fox, but it ran away before we could snap a photo!)</p>
 <p>Good night friends! We'll keep you updated as we go ♥</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/whitehorse-road-trip-day-1/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/whitehorse-road-trip-day-1/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Quilting Ruler Holder]]></title>
@@ -462,7 +462,7 @@
 <p>It's made out of maple and walnut, and has quite a bit of heft! Made entirely with traditional hand tools and then finished with a pyrographic Celtic knot and some Danish oil.</p>
 <p>It was a joy to make, and I hope it sees a lot of use as its new owner makes her wonderfully creative and detailed quilts!</p>
 <p>Merry Christmas, everyone!</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/quilting-ruler-holder/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/quilting-ruler-holder/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Air Plant Planter]]></title>
@@ -474,7 +474,7 @@
 <p>As always, made with meat-powered tools and traditional methods, including mixing my own animal hide glue and shellac from flakes.</p>
 <p>I also crushed some of the geode I found a while back to use as aggregate under the air plants.</p>
 <p>I particularly enjoyed making a very modern looking planter with very traditional methods!</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/air-plant-planter/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/air-plant-planter/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Despecialized Edition Boxset]]></title>
@@ -484,7 +484,7 @@
             <description><![CDATA[A physical boxset for the Star Wars Despecialized Edition]]></description>
             <content:encoded><![CDATA[<p>This was a gift for a friend who is a big Star Wars fan. It's is a boxset for Harmy's Star Wars Despecialized Edition — a fan-made remastering of the original trilogy, but without any of the special edition additions.</p>
 <p>I can't take too much credit for this, as it's mostly just taking other people's work and putting it together, but I did have fun with the actual box, which I made by repurposing the backing of sketchbooks and lining it with construction paper, and pulling together some graphics to print on sticker paper.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/despecialized-edition/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/despecialized-edition/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Banff Landscapes]]></title>
@@ -498,7 +498,7 @@
 <p>Next up was Moraine Lake and the Valley of the Ten Peaks, which older viewers might remember from the $20 bill some years ago. One of the most fun parts of this site was the huge rockpile which was deposited by retreating glaciers. As the dark clouds rolled in, this rock pile gave a wonderful view of the forested valley framing Armour Peak.</p>
 <p>At the north end of our journey was Athabasca, with it's severe, ominous views under the dark clouds, and the cheery, bubbly creeks of the glacial meltwater. This is the first time I've ever seen subarctic landscapes, with struggling brush and the red scrubby foliage that has specialized to thrive in this barren landscape.</p>
 <p>We made our way back south along the Bow Valley Parkway, along the history railway and the beautiful fields of autumn colours.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/banff-landscapes/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/banff-landscapes/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Toronto Street Photography]]></title>
@@ -508,7 +508,7 @@
             <description><![CDATA[Just some photos from a walk in my hometown.]]></description>
             <content:encoded><![CDATA[<p>This was my first outing with my new camera rig. It's a mix of old and new: a Sony a6300 mirrorless camera, and a speed booster with a Soviet-era Helios 44 lens.</p>
 <p>Just a nice walk in my hometown to get some pretty pictures.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/toronto-street-photography/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/toronto-street-photography/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Pencil Crayon Roll]]></title>
@@ -517,7 +517,7 @@
             <pubDate>Sat, 09 Sep 2017 00:00:00 GMT</pubDate>
             <description><![CDATA[A roll to hold a 24-set of pencil crayons]]></description>
             <content:encoded><![CDATA[<p>Here's the birthday present I made for Caitlyn this year. It's a roll for her pencil crayons, so it packs up nice and small. Some of the nice touches are the silver thread, silver acanthus leaves stenciled on the outside, and gold stippling painted on the inside.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/pencil-crayon-roll/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/pencil-crayon-roll/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Whisky Stones]]></title>
@@ -530,7 +530,7 @@
 <p>Routing the holes for the stones was particularly tricky. If I did it again, I would just resaw the bottom, drill out the holes, and laminate it back together.</p>
 <p>I wasn't sure if I wanted to polish the stones with beeswax or not. In the end, I decided to leave them natural, in case the beeswax flavours the drink at all.</p>
 <p>In the end, I was pretty happy with it. This is my first time playing with soapstone, and it turned out to be a pretty nice medium to work with.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/whisky-stones/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/whisky-stones/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Handmade Ornaments]]></title>
@@ -540,7 +540,7 @@
             <description><![CDATA[Christmas tree with handmade ornaments]]></description>
             <content:encoded><![CDATA[<p>One of my favourite memories of Christmas was making ornaments for the tree, like lollipops and stringers of beads, popcorn, and paper. So this year, Caitlyn and I decided to do as much as we could from scratch: we cut down our own tree, and we got crafty.</p>
 <p>Lots of paper, twine, beads, and we recycled a book I bought for a dollar that was falling apart.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/handmade-ornaments/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/handmade-ornaments/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Aqua Teen Hunger Force]]></title>
@@ -550,7 +550,7 @@
             <description><![CDATA[Number \#1 in the hood, G.]]></description>
             <content:encoded><![CDATA[<p>For Halloween this year, I dressed up all my friends as the Aqua Teen Hunger Force.</p>
 <p>Frylock and Master Shake were mostly made out of wire and felt. Meatwad was sewn as a pillow.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/aqua-teen-hunger-force/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/aqua-teen-hunger-force/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Glass Paperweight]]></title>
@@ -560,7 +560,7 @@
             <description><![CDATA[My first glass-blowing project]]></description>
             <content:encoded><![CDATA[<p>The first time I visited Whitehorse with Caitlyn, we had a "hot date" as Lumel Studios, and we each made a paperweight and a flower.</p>
 <p>After a somewhat muddled-looking flower, I learned the importance of restraint. This was just two colors twisted together, and the clear coating was dipped in water to give it that cracked texture.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/glass-paperweight/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/glass-paperweight/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Otter Figurine]]></title>
@@ -572,7 +572,7 @@
 <p>I started with a stock model of an otter and rigged it in Blender so it could be posed. After that, it was just a matter of modelling the sign and slicing it for the printer.</p>
 <p>He's painted with acrylics and a toothpick for the fur texture. The lettering on the sign was originally included in the 3D model, but it wasn't very legible, so I sanded off the lettering and printed the lettering on paper so I could glue it in place.</p>
 <p>The base was a whole separate project. His feet were too fragile and fell off when I was cutting off the supports, so I wanted something to keep him sturdy. I glued together four plastic cards and Dremelled them down to shape before throwing on a coat of spray paint before gluing him down. Kind of wish I spent more time sanding it down; would have looked really cool with a mirror finish.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/otter/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/otter/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Tailored Dress Shirt]]></title>
@@ -582,7 +582,7 @@
             <description><![CDATA[Fully tailored dress shirt]]></description>
             <content:encoded><![CDATA[<p>A more challenging tailoring job this time. Brought in the sides (with flat-felled seams), the darts, and the arms (the armpits were particularly challenging).</p>
 <p>In the process of experimenting with how to do this, I had to rip a lot of stitches, I ruined a Value Village shirt I was practicing on, and I never figured out a good way to sew flat-felled seams on sleeves, but it certainly looks a lot better now.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/tailored-shirt/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/tailored-shirt/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Selfié]]></title>
@@ -593,7 +593,7 @@
             <content:encoded><![CDATA[<p>For those of you with selfie sticks and good imaginations!</p>
 <p>Despite the levity, the imagary is actually based off of a diagram from <em>Encyclopédie</em>, which is an incredible compilation of knowledge compiled by Denis Diderot during the enlightenment.</p>
 <p>This design can be purchased on an actual T-shirt from <a href="https://www.designbyhumans.com/shop/t-shirt/men/touch/242656/" rel="nofollow noopener noreferrer" target="_blank">Design by Hümans</a> or <a href="https://skrapion.threadless.com/designs/selfie" rel="nofollow noopener noreferrer" target="_blank">Threadless</a>.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/selfie/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/selfie/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[STM32 Programmer]]></title>
@@ -602,7 +602,7 @@
             <pubDate>Thu, 24 Mar 2016 00:00:00 GMT</pubDate>
             <description><![CDATA[KiCAD Model of an STM32 programmer]]></description>
             <content:encoded><![CDATA[<p>I've been learning how to program STM32 microcontrollers lately. So far I've just been using a development board, but eventually I want to be able to move away from the development board and embed the microcontroller directly in my projects. So I designed this programmer board in KiCAD to let me program said projects without a development board.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/stm32-programmer/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/stm32-programmer/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Hand-tooled Leather Journal]]></title>
@@ -611,7 +611,7 @@
             <pubDate>Sun, 17 Jan 2016 00:00:00 GMT</pubDate>
             <description><![CDATA[Hand-tooled, hand-dyed, and hand-stitched leather journal]]></description>
             <content:encoded><![CDATA[<p>Another Secret Santa project. A hand-tooled, hand-dyed, and hand-stitched journal made of top-grain leather. The tooling on the front represents the twin oaks outside the recipient's cottage, under which her dog runs around like mad.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/leather-journal/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/leather-journal/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Rabbit Pie]]></title>
@@ -620,7 +620,7 @@
             <pubDate>Fri, 15 Jan 2016 00:00:00 GMT</pubDate>
             <description><![CDATA[Rabbit pie with pork belly, pork mince, thyme, shallots, duck fat, apple cider, and hot water pastry with fresh lard.]]></description>
             <content:encoded><![CDATA[<p>Rabbit pie with pork belly, pork mince, thyme, shallots, duck fat, apple cider, and hot water pastry with fresh lard. Still need to let it cool and fill it with chicken stock gelatin and it'll be ready for potluck lunch on Sunday.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/rabbit-pie/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/rabbit-pie/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Sailor Tattoo]]></title>
@@ -630,7 +630,7 @@
             <description><![CDATA[Jagua ink temporary tattoo of classic Sailor Jerry sparrow design.]]></description>
             <content:encoded><![CDATA[<p>A couple friends threw a wonderful 1940’s-themed party tonight, so I painted my arms with jagua tattoos and went as a WWII sailor. Most of the tattoos were classic Sailor Jerry designs. Here’s the best tattoo (after practicing with different tattoos on the rest of my body).</p>
 <p>It’ll be about 10 days before these fade away, but I still have some jagua left over, and it only lasts in the fridge for 2 months, so if any of my artist friends want to use me as a temporary canvas, go ahead and send me your design.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/sailor-tattoo/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/sailor-tattoo/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Cheese Tray]]></title>
@@ -641,7 +641,7 @@
             <content:encoded><![CDATA[<p>I get to share this now. Here’s the cheese tray I made for a friend for Secret Santa. It’s made of riven maple and walnut with a pyrographic monogram for her and her fiancé over an acanthus leaf design.</p>
 <p>It’s made almost entirely with traditional, meat-powered tools, although I will shamefully admit that the soldering iron I used for the wood burning is electric. I’m pretty happy with it.</p>
 <p>Originally I planned on making a drawbored cutting board, but when I started splitting the wood, I ended up with slats that suggested a form that was thinner and rounder.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/cheese-tray/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/cheese-tray/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Mysterion]]></title>
@@ -652,7 +652,7 @@
             <content:encoded><![CDATA[<p>I'm an angel keeping watch over the city at night. As violence and darkness take over the streets I work to rid this city of crime. I'm the symbol this town needs.</p>
 <p>Definite some flashback to my <a href="https://firefang.com/riddler/">Riddler costume</a> here. Another question mark made out of foam, and I re-used the leather mask under Mysterion's hood to give it structure.</p>
 <p>By far the most complicated part of the costume was the sewing. I made a pattern out of my running clothes and resewed it in lavender spandex.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/mysterion/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/mysterion/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Traditional Bucksaw]]></title>
@@ -661,7 +661,7 @@
             <pubDate>Fri, 25 Sep 2015 00:00:00 GMT</pubDate>
             <description><![CDATA[Traditional bucksaw built with traditional hand tools. Perfect for camping.]]></description>
             <content:encoded><![CDATA[<p>A traditional bucksaw built with traditional tools. Disassembles nicely, so should be good for portaging next week. (The red oak isn’t typically what would be used traditionally, it’s just what I had on hand.)</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/traditional-bucksaw/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/traditional-bucksaw/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[8-Bit Valentine]]></title>
@@ -672,7 +672,7 @@
             <content:encoded><![CDATA[<p>I tried to design a low-resolution T-shirt for my Minecraft character. I didn't actually have enough resolution to make this work in Minecraft, but luckily, real t-shirts have plenty of resolution!</p>
 <p>And I still ended up making a Minecraft skin that resembles this T-shirt :)</p>
 <p>This design can be purchased on an actual T-shirt from <a href="https://www.designbyhumans.com/shop/t-shirt/men/8-bit-valentine/242422/" rel="nofollow noopener noreferrer" target="_blank">Design by Hümans</a> or <a href="https://skrapion.threadless.com/designs/8-bit-valentine" rel="nofollow noopener noreferrer" target="_blank">Threadless</a>.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/8-bit-valentine/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/8-bit-valentine/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Roman Brush Calligraphy]]></title>
@@ -682,7 +682,7 @@
             <description><![CDATA[A brush calligraphy font recreated from an ancient manuscript of Virgil's Aeneid.]]></description>
             <content:encoded><![CDATA[<p>Completed a new font based on an ancient manuscript of Virgil’s Aeneid. It’s a couple hundred years older than the era I’m going for, but it’s the oldest sample of Roman brush calligraphy I could find. I actually recreated this script by hand with a brush and some India ink before digitizing it.</p>
 <p>Lanuvium looks especially weird, but I found other examples of UV being rendered as VV. Also, the R and S break modern typographical rules.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/roman-brush-calligraphy/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/roman-brush-calligraphy/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Mint and chocolate truffles]]></title>
@@ -691,7 +691,7 @@
             <pubDate>Thu, 23 Oct 2014 00:00:00 GMT</pubDate>
             <description><![CDATA[Hand-made mint and orange flavoured truffles dipped in milk chocolate.]]></description>
             <content:encoded><![CDATA[<p>Mint and orange truffles for a friend’s Halloween/birthday party, dipped in milk chocolate and drizzled with dark chocolate, with just after little presentation.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/mint-and-chocolate-truffles/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/mint-and-chocolate-truffles/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[An Outlet for Drama]]></title>
@@ -701,7 +701,7 @@
             <description><![CDATA[T-shirt designed after drama masks and electrical outlets]]></description>
             <content:encoded><![CDATA[<p>Based on the electrical outlets used in America and Denmark. The Danish are clearly a very optimistic people.</p>
 <p>This design can be purchased on an actual T-shirt from <a href="https://www.designbyhumans.com/shop/t-shirt/men/an-outlet-for-drama/242424/" rel="nofollow noopener noreferrer" target="_blank">Design by Hümans</a> or <a href="https://skrapion.threadless.com/designs/an-outlet-for-drama-1" rel="nofollow noopener noreferrer" target="_blank">Threadless</a>.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/an-outlet-for-drama/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/an-outlet-for-drama/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Breaking the Case]]></title>
@@ -724,7 +724,7 @@
 <li>Audience Choice: Group D</li>
 </ul>
 <p><a href="https://www.youtube.com/watch?v=4Me3zDGkiUQ&#x26;list=PLejSYJ7FH1s2KTYgidFS0SdPvHUOSkT_W" rel="nofollow noopener noreferrer" target="_blank">Watch my entire film challenge play list here.</a></p>]]></content:encoded>
-            <enclosure url="https://firefang.com/breaking-the-case/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/breaking-the-case/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[VH Love]]></title>
@@ -742,7 +742,7 @@
 </ul>
 <p>Also, enjoy some outtakes from the metalhead tape!</p>
 <p><a href="https://www.youtube.com/watch?v=4Me3zDGkiUQ&#x26;list=PLejSYJ7FH1s2KTYgidFS0SdPvHUOSkT_W" rel="nofollow noopener noreferrer" target="_blank">Watch my entire film challenge play list here.</a></p>]]></content:encoded>
-            <enclosure url="https://firefang.com/vh-love/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/vh-love/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Spider Jerusalem]]></title>
@@ -752,7 +752,7 @@
             <description><![CDATA[Cosplaying as Spider Jerusalem]]></description>
             <content:encoded><![CDATA[<p>This time I dressed up as Spider Jerusalem from Transmetropolitan. I bought the glasses from a maker on Etsy, so this costume was mostly down to replicating Spider's tattoos and his attitude. <img alt=":)" src="https://firefang.com/spider-jerusalem/smile.png" style="height: 1em"></p>
 <p>Oh, and lots of hair removal.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/spider-jerusalem/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/spider-jerusalem/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Riddler]]></title>
@@ -762,7 +762,7 @@
             <description><![CDATA[Riddler costume from Batman the Animated Series]]></description>
             <content:encoded><![CDATA[<p>I have billions of eyes, yet I live in darkness. I have millions of ears, yet only four lobes. I have no muscle, yet I rule two hemispheres. What am I?</p>
 <p>My Riddler costume was a lot of fun to make! The mask was molded from leather, and the cane head was foam, fiberglass, and threaded rod.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/riddler/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/riddler/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[A Warning of What is to Come, and a Tale of Hope, for Hope is Not Yet Lost]]></title>
@@ -773,7 +773,7 @@
             <content:encoded><![CDATA[<p>This summer we decided to give ourselves a film challenge of our own making. After picking ideas from a hat and giving ourselves 48 hours to get principal photography in the can, this is what we ended up with.</p>
 <p>This was an official selection of the Grand River Film Festival.</p>
 <p><a href="https://www.youtube.com/watch?v=4Me3zDGkiUQ&#x26;list=PLejSYJ7FH1s2KTYgidFS0SdPvHUOSkT_W" rel="nofollow noopener noreferrer" target="_blank">Watch my entire film challenge play list here.</a></p>]]></content:encoded>
-            <enclosure url="https://firefang.com/a-warning/cover.jpg" length="0" type="image/jpg"/>
+            <enclosure url="https://firefang.com/a-warning/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
     </channel>
 </rss>
