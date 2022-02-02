@@ -4,7 +4,7 @@
         <title>Firefang</title>
         <link>https://firefang.com/rss.xml</link>
         <description>Rick Yorgason's portfolio blog. Everything from traditional woodworking to video game development.</description>
-        <lastBuildDate>Sat, 29 Jan 2022 02:49:59 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 02 Feb 2022 06:28:18 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/nuxt-community/feed-module</generator>
         <image>
@@ -12,6 +12,17 @@
             <url>https://firefang.com/favicon.ico</url>
             <link>https://firefang.com/rss.xml</link>
         </image>
+        <item>
+            <title><![CDATA[Hegemony Rome: The Rise of Caesar]]></title>
+            <link>https://firefang.com/hegemony-rome/</link>
+            <guid>https://firefang.com/hegemony-rome/</guid>
+            <pubDate>Tue, 01 Feb 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Four new campaigns follow the conquests of Julius Caesar as he wrote them in Commentarii de Bello Gallico.]]></description>
+            <content:encoded><![CDATA[<p>The second game in the Hegemony series. I was a programmer and lead designer on this one, and responsible for all the historical research, story, writing, and quests, both on the programming and designing side.</p>
+<p>On a personal note, I've always had a soft spot for typography. While I created one of the type faces in the first Hegemony game, I'm quite proud of the font I made for the map this time around. It was based off of an ancient manuscript of Virgil’s Aeneid. It’s a couple hundred years older than the era the game takes place in, but it’s the oldest sample of Roman brush calligraphy I could find. I started by recreating the font on paper with a brush and a pot of India ink, so I could understand its form. It breaks some modern typographical rules, especially in the R and the S, and I quite happily preserved those quirks.</p>
+<p>Pick up a copy at <a href="https://longbowgames.com/rome/" rel="nofollow noopener noreferrer" target="_blank">Longbow Games</a>.</p>]]></content:encoded>
+            <enclosure url="https://firefang.com/hegemony-rome/ogImage.jpg" length="0" type="image/jpg"/>
+        </item>
         <item>
             <title><![CDATA[Hegemony Gold: Wars of Ancient Greece]]></title>
             <link>https://firefang.com/hegemony/</link>
@@ -673,16 +684,6 @@
 <p>And I still ended up making a Minecraft skin that resembles this T-shirt :)</p>
 <p>This design can be purchased on an actual T-shirt from <a href="https://www.designbyhumans.com/shop/t-shirt/men/8-bit-valentine/242422/" rel="nofollow noopener noreferrer" target="_blank">Design by Hümans</a> or <a href="https://skrapion.threadless.com/designs/8-bit-valentine" rel="nofollow noopener noreferrer" target="_blank">Threadless</a>.</p>]]></content:encoded>
             <enclosure url="https://firefang.com/8-bit-valentine/ogImage.jpg" length="0" type="image/jpg"/>
-        </item>
-        <item>
-            <title><![CDATA[Roman Brush Calligraphy]]></title>
-            <link>https://firefang.com/roman-brush-calligraphy/</link>
-            <guid>https://firefang.com/roman-brush-calligraphy/</guid>
-            <pubDate>Wed, 25 Feb 2015 00:00:00 GMT</pubDate>
-            <description><![CDATA[A brush calligraphy font recreated from an ancient manuscript of Virgil's Aeneid.]]></description>
-            <content:encoded><![CDATA[<p>Completed a new font based on an ancient manuscript of Virgil’s Aeneid. It’s a couple hundred years older than the era I’m going for, but it’s the oldest sample of Roman brush calligraphy I could find. I actually recreated this script by hand with a brush and some India ink before digitizing it.</p>
-<p>Lanuvium looks especially weird, but I found other examples of UV being rendered as VV. Also, the R and S break modern typographical rules.</p>]]></content:encoded>
-            <enclosure url="https://firefang.com/roman-brush-calligraphy/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Mint and chocolate truffles]]></title>

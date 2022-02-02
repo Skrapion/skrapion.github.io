@@ -1,1 +1,0 @@
-window.__NUXT__={staticAssetsBase:"\u002F_nuxt\u002Fstatic\u002F1643424593",layout:"error",error:{statusCode:404,message:"Not Found"},serverRendered:false,routePath:"\u002Frssgen",config:{_app:{basePath:"\u002F",assetsPath:"\u002F_nuxt\u002F",cdnURL:null},content:{dbHash:"235cb555"}}};
