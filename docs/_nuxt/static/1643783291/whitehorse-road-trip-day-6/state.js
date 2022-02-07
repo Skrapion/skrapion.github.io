@@ -1,1 +1,0 @@
-window.__NUXT__=(function(a){return {staticAssetsBase:"\u002F_nuxt\u002Fstatic\u002F1643783291",layout:"default",error:a,serverRendered:true,routePath:"\u002Fwhitehorse-road-trip-day-6",config:{_app:{basePath:"\u002F",assetsPath:"\u002F_nuxt\u002F",cdnURL:a},content:{dbHash:"c96f796c"}}}}(null));
