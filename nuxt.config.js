@@ -99,8 +99,7 @@ export default {
     generate: {
         dir: 'docs',
         fallback: '404.html',
-        nestedProperties: ['posts.tags'],
-        routes: ['/rssgen/']
+        nestedProperties: ['posts.tags']
     },
     env: {
         BaseURL: baseUrl
