@@ -1,5 +1,6 @@
 import { hostname } from 'os';
 import sharp from 'sharp';
+import { existsSync } from 'fs';
 
 const fs = require('fs').promises;
 const path = require('path');
@@ -10,7 +11,10 @@ const desc = "Rick Yorgason's portfolio blog. Everything from traditional woodwo
 const constructFeedItem = async (post) => {
     const url = `${baseUrl}${post.slug}/`;
 
-    const srcPath = path.join(__dirname, `assets/posts/${post.slug}/cover.jpg`);
+    let srcPath = path.join(__dirname, `assets/posts/${post.slug}/ogImage.jpg`);
+    if(false == existsSync(srcPath)) {
+        srcPath = path.join(__dirname, `assets/posts/${post.slug}/cover.jpg`);
+    }
     const imageData = await fs.readFile(srcPath);
     const dstFolder = path.join(__dirname, `docs/${post.slug}`);
     const dstPath = path.join(dstFolder, 'ogImage.jpg');
