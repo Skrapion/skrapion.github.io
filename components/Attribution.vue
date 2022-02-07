@@ -13,7 +13,8 @@ export default {
         return {
             contributors: {
                 'caitlyn': { fullname: "Caitlyn MacMaster" },
-                'sean': { fullname: "Sean Montgomery", site: "https://artofsean.threadless.com/" }
+                'sean': { fullname: "Sean Montgomery", site: "https://artofsean.threadless.com/" },
+                'jon': { fullname: "Jonathan Stainton", site: "https://www.instagram.com/jonathanstainton/" }
             }
         }
     }
