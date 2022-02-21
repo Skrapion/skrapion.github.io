@@ -1,7 +1,7 @@
 <template>
     <div id='indexcontent'>
         <div v-for="post of posts" :key="post.slug" :class="{post: true, featured: post.featured}">
-            <nuxt-link class='photosquare' :to="post.slug">
+            <nuxt-link class='photosquare' :to="`/${post.slug}`">
                 <responsive-img v-if="post.featured"
                     :image="require(`~/assets/posts/${post.slug}/cover.jpg?{sizes:[200,400,800]}`)"
                     :alt="post.title"/>
