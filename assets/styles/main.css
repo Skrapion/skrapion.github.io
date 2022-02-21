@@ -180,7 +180,7 @@ a {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, auto));
     grid-gap: 10px;
-    grid-auto-rows: minmax(200px, auto);
+    grid-auto-columns: minmax(200px, auto);
     grid-auto-flow: dense;
 }
 
