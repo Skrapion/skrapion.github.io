@@ -4,7 +4,7 @@
         <title>Firefang</title>
         <link>https://firefang.com/rss.xml</link>
         <description>Rick Yorgason's portfolio blog. Everything from traditional woodworking to video game development.</description>
-        <lastBuildDate>Mon, 21 Feb 2022 07:32:06 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 12 Sep 2023 03:51:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/nuxt-community/feed-module</generator>
         <image>
@@ -69,6 +69,15 @@
 <p>What makes a Whitehorse bagel? Well, I figured if New York bagels are made with barley malt, and Montreal bagels are made with honey, then Whitehorse bagels must be made with birch syrup!</p>
 <p>Topped with sesame, poppy, and fennel seeds, and ready for lox and cream cheese!</p>]]></content:encoded>
             <enclosure url="https://firefang.com/whitehorse-bagels/ogImage.jpg" length="0" type="image/jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[Baby Yoda]]></title>
+            <link>https://firefang.com/grogu/</link>
+            <guid>https://firefang.com/grogu/</guid>
+            <pubDate>Fri, 18 Dec 2020 00:00:00 GMT</pubDate>
+            <description><![CDATA[Crocheted Grogu.]]></description>
+            <content:encoded><![CDATA[<p>Another Secret Santa gift! This time I decided to learn crochet in order to make this adorable little guy. I always know I hit the mark when somebody thinks their gift was store-bought.</p>]]></content:encoded>
+            <enclosure url="https://firefang.com/grogu/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
         <item>
             <title><![CDATA[Doctor Mario]]></title>
@@ -674,7 +683,7 @@
             <pubDate>Sat, 31 Oct 2015 00:00:00 GMT</pubDate>
             <description><![CDATA[Cosplaying as Mysterion]]></description>
             <content:encoded><![CDATA[<p>I'm an angel keeping watch over the city at night. As violence and darkness take over the streets I work to rid this city of crime. I'm the symbol this town needs.</p>
-<p>Definite some flashback to my <a href="https://firefang.com/riddler/">Riddler costume</a> here. Another question mark made out of foam, and I re-used the leather mask under Mysterion's hood to give it structure.</p>
+<p>Definitely some flashbacks to my <a href="https://firefang.com/riddler/">Riddler costume</a> here. Another question mark made out of foam, and I re-used the leather mask under Mysterion's hood to give it structure.</p>
 <p>By far the most complicated part of the costume was the sewing. I made a pattern out of my running clothes and resewed it in lavender spandex.</p>]]></content:encoded>
             <enclosure url="https://firefang.com/mysterion/ogImage.jpg" length="0" type="image/jpg"/>
         </item>
