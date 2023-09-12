@@ -1,7 +1,6 @@
 * Mail box
 * Electronics bins
 * Jump rope
-* Baby Yoda
 * Ulu gift
 * Yukon River
 * 2018 hikes
