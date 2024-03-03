@@ -49,6 +49,8 @@ async fn pre_generate(post_dir: &PathBuf, out_dir: &PathBuf, regenerate: bool)
 
         let post_data = deserialize_md(&path)?;
 
+        fs::create_dir_all(&out_dir.clone().join(&post_data.slug))?;
+
         post_titles.insert(post_data.slug.clone(), post_data.title.clone());
 
         if post_data.parent == "" {
@@ -150,9 +152,9 @@ async fn pre_generate(post_dir: &PathBuf, out_dir: &PathBuf, regenerate: bool)
     }
 
     Ok(PreprocessVars {
-        posts_by_parent: posts_by_parent,
-        post_titles: post_titles,
-        thumbnail_map: thumbnail_map,
+        posts_by_parent,
+        post_titles,
+        thumbnail_map,
     })
 }
 
@@ -183,7 +185,6 @@ async fn generate_site(regenerate: bool) -> Result<()> {
             };
 
             let post_dir = out_dir.clone().join(&post_data.slug);
-            fs::create_dir_all(&post_dir)?;
 
             handlebars.register_template_string("body", post_data.body.clone())?;
             let rendered = handlebars.render("post", &post_with_children)
