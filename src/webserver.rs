@@ -15,7 +15,7 @@ use tokio::{fs::File, net::TcpListener};
 use tokio_util::io::ReaderStream;
 
 pub async fn start_server() -> anyhow::Result<()> {
-    let addr: SocketAddr = "127.0.0.1:8000".parse().unwrap();
+    let addr: SocketAddr = "127.0.0.1:3000".parse().unwrap();
 
     let listener = TcpListener::bind(addr).await?;
     println!("Listening on http://{}", addr);

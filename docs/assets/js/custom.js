@@ -232,6 +232,7 @@ function initOneSignal() {
         var subscribe = document.getElementById("subscribe");
         if(notificationBlock.contains(e.target)) {
             subscribe.className = "show";
+            setOneSignalSwitch();
         } else {
             subscribe.className = "";
         }
@@ -240,17 +241,31 @@ function initOneSignal() {
     window.OneSignalDeferred = window.OneSignalDeferred || [];
     OneSignalDeferred.push(function(OneSignal) {
         OneSignal.init({
-            appId: "3b78268c-b1c0-4037-b3f5-07cb3afb64fe",
+            appId: location.hostname == "localhost" ?
+                "767434af-9188-4281-9afe-2977206c5a9f" :
+                "3b78268c-b1c0-4037-b3f5-07cb3afb64fe",
+            autoResubscribe: true,
         });
     });
+}
+
+function setOneSignalSwitch() {
+    var switchtrack = document.getElementById("switchtrack");
+    switchtrack.classList.remove("set");
 
     OneSignalDeferred.push(function(OneSignal) {
-        if(!OneSignal.isPushNotificationsSupported()) {
+        if(!OneSignal.Notifications.isPushSupported()) {
             var subscribeContent = document.getElementById("subscribe-content");
             subscribeContent.classList.add("unsupported");
         } else {
-            OneSignal.isPushNotificationsEnabled().then( (isEnabled) => {
-                if(isEnabled) {
+            Promise.all([
+                OneSignal.Notifications.permission,
+                OneSignal.User.PushSubscription.optedIn,
+            ]).then((result) => {
+                var isPushEnabled = result[0];
+                var isOptedIn = result[1];
+
+                if(isPushEnabled && isOptedIn) {
                     document.getElementById("switchtrack").classList.add("set");
                 }
             });
@@ -258,31 +273,36 @@ function initOneSignal() {
     });
 }
 
+function permissionChangeListener(permission) {
+    if (permission) {
+        var switchtrack = document.getElementById("switchtrack");
+        OneSignal.User.PushSubscription.optIn();
+        switchtrack.classList.add("set");
+    }
+}
+
 function clickSubscribe(switchtrack) {
     OneSignalDeferred.push(function(OneSignal) {
         Promise.all([
-            OneSignal.isPushNotificationsEnabled(),
-            OneSignal.isOptedOut()
+            OneSignal.Notifications.permission,
+            OneSignal.User.PushSubscription.optedIn,
         ]).then((result) => {
             var isPushEnabled = result[0];
-            var isOptedOut = result[1];
+            var isOptedIn = result[1];
 
-            if(isPushEnabled) {
-                OneSignal.setSubscription(false);
-                switchtrack.classList.remove("set");
+            if(!isPushEnabled) {
+                OneSignal.Notifications.requestPermission();
+                OneSignalDeferred.push(function() {
+                      OneSignal.Notifications.addEventListener("permissionChange", permissionChangeListener);
+                });
             } else {
-                if(isOptedOut) {
+                if(!isOptedIn) {
+                    OneSignal.User.PushSubscription.optIn();
                     switchtrack.classList.add("set");
                 } else {
-                    OneSignal.registerForPushNotifications();
+                    OneSignal.User.PushSubscription.optOut();
+                    switchtrack.classList.remove("set");
                 }
-                switchtrack.classList.add("set");
-
-                OneSignal.once('subscriptionChange', (isSubscribed) => {
-                    if(isSubscribed) {
-                        OneSignal.sendSelfNotification("Thank you for subscribing!", "Watch this space for new project posts!", process.env.BaseURL, process.env.BaseURL + "hellcat.png");
-                    }
-                });
             }
         });
     });
