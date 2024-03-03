@@ -1,0 +1,314 @@
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+a {
+    color: #e00;
+    font-style: italic;
+}
+
+.fade-transition.htmx-swapping {
+    opacity: 0;
+}
+.fade-transition.htmx-settling {
+    opacity: 0;
+}
+.fade-transition {
+    opacity: 1;
+    transition: opacity 0.25s;
+}
+
+#headercontainer {
+    position: fixed;
+    height: 100%;
+    width: 300px;
+    border-right: 17px solid transparent;
+    border-image: url(/assets/images/halftone.png) 17 repeat;
+    z-index: 2;
+}
+
+#header {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #111;
+}
+
+#header svg {
+    width: 250px;
+    height: calc(250px * 413.3757 / 284.75693);
+}
+
+#header div {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#headericons img:hover {
+    transform: scale(1.5);
+}
+
+#headericons img {
+    transition: all 300ms;
+}
+
+#notification-block {
+    display: inline-block;
+}
+
+#subscribe {
+    display: inline-block;
+    position: relative;
+    width: 0;
+    height: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 0.25s, opacity 0.25s;
+}
+
+#subscribe.show {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s linear 0s, opacity 0.25s;
+}
+
+#subscribe-content {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    z-index: 3;
+    top: -15px;
+    left: 13px;
+    width: 300px;
+    height: auto;
+    background: #333;
+    box-shadow: 5px 5px 10px #000;
+    border-radius: 10px;
+    padding: 10px 20px 10px 20px;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    font-family: 'Quicksand', sans-serif;
+}
+
+#subscribe-content:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: -15px;
+    top: 0px;
+    border-top: 15px solid #333;
+    border-right: 15px solid #333;
+    border-bottom: 15px solid transparent;
+    border-left: 15px solid transparent;
+    z-index: 0;
+}
+
+.switchtrack {
+    flex-shrink: 0;
+    width: 20px;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    background: #aaa;
+    border-radius: 10px;
+    z-index: 1;
+    cursor: pointer;
+    transition: background 0.25s;
+}
+
+.switchtrack.set {
+    background: red;
+}
+
+.switchthumb {
+    position: relative;
+    width: 22px;
+    height: 22px;
+    top: 0;
+    left: -1px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0px 1px 5px #000;
+    transition: top 0.25s;
+}
+
+.set .switchthumb {
+    top: calc(40px - 22px);
+}
+
+#subscribe p {
+    margin: 0;
+    margin-right: 10px;
+    padding: 0;
+    z-index: 1;
+}
+
+.unsupported-message {
+    display: none;
+}
+
+.unsupported p,
+.unsupported .switchtrack {
+    display: none;
+}
+
+.unsupported .unsupported-message {
+    display: block;
+}
+
+#contentcontainer {
+    display: block;
+    position: absolute;
+    left: 300px;
+    right: 0;
+    background: #1d1d1d;
+    color: white;
+    font-size: 2em;
+    min-height: 101vh;
+    overflow-x: hidden;
+}
+
+#indexcontentpadding {
+    width: auto;
+    margin: 20px;
+    padding-bottom: 20px;
+}
+
+.indexcontent {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, auto));
+    grid-gap: 10px;
+    grid-auto-columns: minmax(200px, auto);
+    grid-auto-flow: dense;
+}
+
+.post a img {
+    width: 100%;
+    height: 100%;
+}
+
+.featured {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.post a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    height: 100%;
+    width: 100%;
+}
+
+.post:hover {
+    transform: scale(1.05);
+    z-index: 1;
+}
+
+.post {
+    transition: transform 1s, z-index 1s;
+    z-index: 0;
+}
+
+.prettyimg {
+    max-height: 100vh;
+}
+
+.prettyimg .__nim_o {
+    object-fit: contain !important;
+}
+
+/* 1024 wide */
+@media only screen and (max-width: 1024px) {
+    #headercontainer {
+        position: fixed;
+        width: 100%;
+        height: 40px;
+        border-right: none;
+        border-bottom: 17px solid transparent;
+        border-image: url(/assets/images/halftone.png) 17 repeat;
+        z-index: 2;
+    }
+
+    #subscribe-content {
+        right: 12px;
+        left: auto;
+        top: 15px;
+    }
+
+    #subscribe-content:before {
+        top: -15px;
+        left: auto;
+        right: 0;
+        border-right: 15px solid #333;
+        border-bottom: 15px solid #333;
+        border-left: 15px solid transparent;
+        border-top: 15px solid transparent; 
+    }
+
+    #contentcontainer {
+        left: 0;
+        right: 0;
+        top: 40px;
+    }
+
+    #header #logo {
+        margin: 0;
+        padding: 0;
+    }
+        
+    #header #headericons {
+        margin: 0;
+        padding: 4px;
+    }
+
+    #header svg {
+        position: absolute;
+        width: 120px;
+        height: calc(120px * 413.3757 / 284.75693);
+        bottom: -20px;
+    }
+
+    #header {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+/* 480 wide */
+@media only screen and (max-width: 480px) {
+    .indexcontent {
+        grid-template-columns: auto auto;
+        grid-auto-rows: auto;
+    }
+}
+
+#error {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#error h1 {
+    font-size: 12rem;
+    font-family: 'Rouge Script', cursive;
+    font-weight: 100;
+    font-style: italic;
+    line-height: 0.5em;
+    margin: 0;
+}
+
+#error h2 {
+    font-size: 4rem;
+    font-family: 'Rouge Script', cursive;
+    font-weight: 100;
+    font-style: italic;
+    margin-top: 0;
+    text-align: center;
+}

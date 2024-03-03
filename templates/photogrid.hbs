@@ -1,0 +1,13 @@
+<div class='indexcontent'>
+    {{#each posts}}
+        <div class="post{{#if featured}} featured{{/if}}">
+            <a class="photosquare" hx-get="/{{slug}}/content.html" href="/{{slug}}" hx-replace-url="/{{slug}}" onclick="return setTransitionName('fade-transition')" preload>
+                {{#if featured}}
+                    {{>responsiveimg class="photosquare" slug=slug filename="cover.jpg" fit="cover" w="200" h="200" maxwidth="800"}}
+                {{else}}
+                    {{>responsiveimg class="photosquare" slug=slug filename="cover.jpg" fit="cover" w="200" h="200" maxwidth="400"}}
+                {{/if}}
+            </a>
+        </div>
+    {{/each}}
+</div>

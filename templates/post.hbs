@@ -1,0 +1,94 @@
+<div id='singlecontent'>
+    <div id='articlecontainer'>
+        <article>
+            <div id='story' class='swapjs'>
+                <div id='storycontainer'>
+                    <div id='boringwords'>{{>body}}</div>
+                    <div id='date'>{{format-date post.date "%B %-d, %Y"}}</div>
+                    <div id='readmorecontainer'>
+                        <div id='readmore'>
+                            <a href='#' class='button' onclick="readmore()">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id='prettypictures'>
+                <div>
+                    {{#each post.pics as pic}}
+                        <div class='picbox'>
+                            {{#if (eq type "youtube")}}
+                                <div class='pic youtubewrapper'>
+                                    <iframe src="https://www.youtube.com/embed/{{post.filename}}" frameborder="0" width="100%" height="100%" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                            {{else}}
+                                {{#if (eq type "pic")}}
+                                    <div class='pic' onclick="lightboxOpen(this)">
+                                        {{>responsiveimg class="prettyimg" slug=../post.slug filename=filename fit="contain" w=(pic ../post.slug filename 'width') h=(pic ../post.slug filename 'height')}}
+                                    </div>
+                                {{/if}}
+                            {{/if}}
+
+                            {{#if credit}}
+                                <div class="attribution">
+                                    Photo credit:
+                                    {{#if site}}
+                                        <a href="{{site}}">{{fullname}}</a>
+                                    {{else}}
+                                        {{fullname}}
+                                    {{/if}}
+                                </attribution>
+                            {{/if}}
+                        </div>
+                    {{/each}}
+                </div>
+                {{#if children}}
+                    {{>photogrid posts=children}}
+                {{/if}}
+            </div>
+            <div id='signposts'>
+                <div id='newer' class='post'>
+                    {{#if post.newer}}
+                        <a hx-get="/{{post.newer}}/content.html" href="/{{post.newer}}" hx-replace-url="/{{post.newer}}" id="newerlink" onclick="return setTransitionName('right-transition')" preload="preload:init">
+                            {{>responsiveimg class="signpostimg" slug=post.newer filename="cover.jpg" title=(titlelookup post.newer) fit="cover" w="200" h="200" maxwidth="400"}}
+                        </a>
+                    {{else}}
+                        {{#if post.parent}}
+                            <a hx-get="/{{post.parent}}/content.html" href="/{{post.parent}}" hx-replace-url="/{{post.parent}}" id="newerlink" onclick="return setTransitionName('right-transition')" preload="preload:init">
+                                {{>responsiveimg class="signpostimg" slug=post.parent filename="cover.jpg" title=(titlelookup post.parent) fit="cover" w="200" h="200" maxwidth="400"}}
+                            </a>
+                        {{/if}}
+                    {{/if}}
+                </div>
+                <div id='older' class='post'>
+                    {{#if post.older}}
+                        <a hx-get="/{{post.older}}/content.html" href="/{{post.older}}" hx-replace-url="/{{post.older}}" id="olderlink" onclick="return setTransitionName('left-transition')" preload="preload:init">
+                            {{>responsiveimg class="signpostimg" slug=post.older filename="cover.jpg" title=(titlelookup post.older) fit="cover" w="200" h="200" maxwidth="400"}}
+                        </a>
+                    {{else}}
+                        {{#if post.parent}}
+                            <a hx-get="/{{post.parent}}/content.html" href="/{{post.parent}}" hx-replace-url="/{{post.parent}}" id="olderlink" onclick="return setTransitionName('left-transition')" preload="preload:init">
+                                {{>responsiveimg class="signpostimg" slug=post.parent filename="cover.jpg" title=(titlelookup post.parent) fit="cover" w="200" h="200" maxwidth="400"}}
+                            </a>
+                        {{/if}}
+                    {{/if}}
+                </div>
+            </div>
+        </article>
+    </div>
+    <div id='similars'>
+        {{#if post.similars_category}}
+            <div class="indexcontentpadding">
+                <h2>More {{post.similars_category}} projects...</h2>
+                <div class="indexcontent">
+                    {{#each post.similars}}
+                        <div class="post">
+                            <a class="photosquare" hx-get="/{{this}}/content.html" href="/{{this}}" hx-replace-url="/{{this}}" onclick="return setTransitionName('fade-transition')" preload>
+                                {{>responsiveimg title=(titlelookup this) class="photosquare" slug=this filename="cover.jpg" fit="cover" w="200" h="200" maxwidth="400"}}
+                            </a>
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+        {{/if}}
+    </div>
+</div>

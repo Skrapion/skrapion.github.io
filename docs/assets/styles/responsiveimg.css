@@ -1,0 +1,56 @@
+.attribution {
+    font-style: italic;
+    text-align: right;
+}
+
+.attribution, .attribution a {
+    color: #aaa;
+}
+
+.responsive {
+    position: relative;
+    overflow: hidden;
+}
+
+.cover {
+    object-fit: cover;
+}
+
+.contain {
+    object-fit: contain;
+}
+
+.placeholder {
+    filter: blur(15px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.actual {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    transition: opacity 800ms ease 0ms;
+    opacity: 0;
+}
+
+.loaded {
+    opacity: 1;
+}
+
+.photosquare {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.photosquare .actual,
+.photosquare .placeholder {
+    object-fit: cover;
+}
+

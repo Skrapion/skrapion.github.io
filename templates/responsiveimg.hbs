@@ -1,0 +1,5 @@
+<div class="responsive {{class}}">
+    <img src="{{pic slug filename 'placeholder'}}" width="{{w}}" height="{{h}}" aria-hidden="true" class="placeholder cover"/>
+    <img alt="{{title}}" onload="loaded(this)" src="{{pic slug filename 'src'}}" srcset="{{pic slug filename 'srcset' maxwidth}}" width="{{w}}" height="{{h}}" class="actual {{fit}}" loading="lazy"/>
+    <div style="width: 100%; padding-bottom: {{ratio w h}}"></div>
+</div>
