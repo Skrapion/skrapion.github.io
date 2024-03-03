@@ -42,18 +42,18 @@
                     {{/each}}
                 </div>
                 {{#if children}}
-                    {{>photogrid posts=children}}
+                    {{>photogrid posts=children latest_date=header.latest_date}}
                 {{/if}}
             </div>
             <div id='signposts'>
                 <div id='newer' class='post'>
                     {{#if post.newer}}
-                        <a hx-get="/{{post.newer}}/content.html" href="/{{post.newer}}" hx-replace-url="/{{post.newer}}" id="newerlink" onclick="return setTransitionName('right-transition')" preload="preload:init">
+                        <a hx-get="/{{post.newer}}/content.html?{{header.latest_date}}" href="/{{post.newer}}" hx-replace-url="/{{post.newer}}" id="newerlink" onclick="return setTransitionName('right-transition')" preload="preload:init">
                             {{>responsiveimg class="signpostimg" slug=post.newer filename="cover.jpg" title=(titlelookup post.newer) fit="cover" w="200" h="200" maxwidth="400"}}
                         </a>
                     {{else}}
                         {{#if post.parent}}
-                            <a hx-get="/{{post.parent}}/content.html" href="/{{post.parent}}" hx-replace-url="/{{post.parent}}" id="newerlink" onclick="return setTransitionName('right-transition')" preload="preload:init">
+                            <a hx-get="/{{post.parent}}/content.html?{{header.latest_date}}" href="/{{post.parent}}" hx-replace-url="/{{post.parent}}" id="newerlink" onclick="return setTransitionName('right-transition')" preload="preload:init">
                                 {{>responsiveimg class="signpostimg" slug=post.parent filename="cover.jpg" title=(titlelookup post.parent) fit="cover" w="200" h="200" maxwidth="400"}}
                             </a>
                         {{/if}}
@@ -61,12 +61,12 @@
                 </div>
                 <div id='older' class='post'>
                     {{#if post.older}}
-                        <a hx-get="/{{post.older}}/content.html" href="/{{post.older}}" hx-replace-url="/{{post.older}}" id="olderlink" onclick="return setTransitionName('left-transition')" preload="preload:init">
+                        <a hx-get="/{{post.older}}/content.html?{{header.latest_date}}" href="/{{post.older}}" hx-replace-url="/{{post.older}}" id="olderlink" onclick="return setTransitionName('left-transition')" preload="preload:init">
                             {{>responsiveimg class="signpostimg" slug=post.older filename="cover.jpg" title=(titlelookup post.older) fit="cover" w="200" h="200" maxwidth="400"}}
                         </a>
                     {{else}}
                         {{#if post.parent}}
-                            <a hx-get="/{{post.parent}}/content.html" href="/{{post.parent}}" hx-replace-url="/{{post.parent}}" id="olderlink" onclick="return setTransitionName('left-transition')" preload="preload:init">
+                            <a hx-get="/{{post.parent}}/content.html?{{header.latest_date}}" href="/{{post.parent}}" hx-replace-url="/{{post.parent}}" id="olderlink" onclick="return setTransitionName('left-transition')" preload="preload:init">
                                 {{>responsiveimg class="signpostimg" slug=post.parent filename="cover.jpg" title=(titlelookup post.parent) fit="cover" w="200" h="200" maxwidth="400"}}
                             </a>
                         {{/if}}
@@ -82,7 +82,7 @@
                 <div class="indexcontent">
                     {{#each post.similars}}
                         <div class="post">
-                            <a class="photosquare" hx-get="/{{this}}/content.html" href="/{{this}}" hx-replace-url="/{{this}}" onclick="return setTransitionName('fade-transition')" preload>
+                            <a class="photosquare" hx-get="/{{this}}/content.html?{{../header.latest_date}}" href="/{{this}}" hx-replace-url="/{{this}}" onclick="return setTransitionName('fade-transition')" preload>
                                 {{>responsiveimg title=(titlelookup this) class="photosquare" slug=this filename="cover.jpg" fit="cover" w="200" h="200" maxwidth="400"}}
                             </a>
                         </div>

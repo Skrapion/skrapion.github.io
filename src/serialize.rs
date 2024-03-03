@@ -71,17 +71,19 @@ fn default_cover() -> Vec<PicMetadataIn> {
 pub type Posts = Vec<PostData>;
 
 #[derive(Serialize)]
-pub struct PostWithChildren<'a> {
-    pub post: &'a PostData,
-    pub children: Option<&'a Posts>,
-}
-
-#[derive(Serialize)]
 pub struct HeaderData<'a> {
     pub title: &'a str,
     pub description: &'a str,
     pub url: &'a str,
     pub thumbnail: &'a str,
+    pub latest_date: &'a str,
+}
+
+#[derive(Serialize)]
+pub struct PostWithChildren<'a> {
+    pub post: Option<&'a PostData>,
+    pub children: Option<&'a Posts>,
+    pub header: &'a HeaderData<'a>,
 }
 
 pub fn deserialize_md(dir: &PathBuf) -> Result<PostData> {

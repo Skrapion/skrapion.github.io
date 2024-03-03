@@ -31,6 +31,7 @@ struct PreprocessVars {
     posts_by_parent: BTreeMap<String, Posts>,
     post_titles: BTreeMap<String, String>,
     thumbnail_map: ThumbnailMap,
+    latest_date: String,
 }
 
 async fn pre_generate(post_dir: &PathBuf, out_dir: &PathBuf, regenerate: bool) 
@@ -40,6 +41,7 @@ async fn pre_generate(post_dir: &PathBuf, out_dir: &PathBuf, regenerate: bool)
         BTreeMap::<String, BTreeMap<String, PostData>>::new();
     let mut post_titles = BTreeMap::new();
     let mut reverse_tags = BTreeMap::new();
+    let mut latest_date = String::new();
 
     let mut thumbnail_futures_map = ThumbnailFuturesMap::default();
 
@@ -48,6 +50,9 @@ async fn pre_generate(post_dir: &PathBuf, out_dir: &PathBuf, regenerate: bool)
         let path = entry.path();
 
         let post_data = deserialize_md(&path)?;
+        if &latest_date < &post_data.postdate {
+            latest_date = post_data.postdate.clone();
+        }
 
         fs::create_dir_all(&out_dir.clone().join(&post_data.slug))?;
 
@@ -155,6 +160,7 @@ async fn pre_generate(post_dir: &PathBuf, out_dir: &PathBuf, regenerate: bool)
         posts_by_parent,
         post_titles,
         thumbnail_map,
+        latest_date,
     })
 }
 
@@ -172,6 +178,14 @@ async fn generate_site(regenerate: bool) -> Result<()> {
         println!("Parent post: {}", parent);
         for post_data in posts {
             println!("Generating {}", post_data.slug);
+            let header_data = HeaderData {
+                title: &(post_data.title.clone() + " - " + SITENAME),
+                description: &post_data.description,
+                url: &post_data.slug,
+                thumbnail: &(post_data.slug.clone() + "/ogImage.jpg"),
+                latest_date: &ppv.latest_date,
+            };
+
             let post_with_children = PostWithChildren {
                 children: {
                     match ppv.posts_by_parent.get(&post_data.slug) {
@@ -181,7 +195,8 @@ async fn generate_site(regenerate: bool) -> Result<()> {
                         }
                     }
                 },
-                post: &post_data,
+                post: Some(&post_data),
+                header: &header_data,
             };
 
             let post_dir = out_dir.clone().join(&post_data.slug);
@@ -192,12 +207,6 @@ async fn generate_site(regenerate: bool) -> Result<()> {
             let mut output = File::create(post_dir.clone().join("content.html"))?;
             write!(output, "{}", rendered)?;
 
-            let header_data = HeaderData {
-                title: &(post_data.title.clone() + " - " + SITENAME),
-                description: &post_data.description,
-                url: &post_data.slug,
-                thumbnail: &(post_data.slug.clone() + "/ogImage.jpg"),
-            };
             handlebars.register_template_string("content", rendered)?;
             let output = File::create(post_dir.clone().join("index.html"))?;
             handlebars.render_to_write("default", &header_data, output)
@@ -206,19 +215,23 @@ async fn generate_site(regenerate: bool) -> Result<()> {
     }
 
     println!("Generating front page");
-    let mut postmap = BTreeMap::new();
-    postmap.insert("posts", &ppv.posts_by_parent[""]);
-    let rendered = handlebars.render("frontpage", &postmap)
-        .map_err(|e| { format!("{:?}", e )}).unwrap();
-    let mut output = File::create(out_dir.clone().join("content.html"))?;
-    write!(output, "{}", rendered)?;
-
     let header_data = HeaderData {
         title: SITENAME,
         description: DESCRIPTION,
         url: "",
         thumbnail: "assets/images/RickHoldingTheWorld.jpg",
+        latest_date: &ppv.latest_date,
     };
+    let post_with_children = PostWithChildren {
+        children: Some(&ppv.posts_by_parent[""]),
+        post: None,
+        header: &header_data,
+    };
+    let rendered = handlebars.render("frontpage", &post_with_children)
+        .map_err(|e| { format!("{:?}", e )}).unwrap();
+    let mut output = File::create(out_dir.clone().join("content.html"))?;
+    write!(output, "{}", rendered)?;
+
     handlebars.register_template_string("content", rendered)?;
     let output = File::create(out_dir.clone().join("index.html"))?;
     handlebars.render_to_write("default", &header_data, output)
@@ -247,6 +260,7 @@ async fn generate_site(regenerate: bool) -> Result<()> {
         description: DESCRIPTION,
         url: "/404.html",
         thumbnail: "assets/images/RickHoldingTheWorld.jpg",
+        latest_date: &ppv.latest_date,
     };
     handlebars.register_template_string("content", rendered)?;
     let output = File::create(out_dir.clone().join("404.html"))?;
