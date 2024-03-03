@@ -8,19 +8,6 @@ use handlebars::*;
 
 use crate::{ThumbnailData, ThumbnailMap, SIZES};
 
-fn date_now(
-    _: &Helper,
-    _: &Handlebars,
-    _: &Context,
-    _: &mut RenderContext,
-    out: &mut dyn Output
-) -> HelperResult {
-    let local: DateTime<Local> = Local::now();
-    let formatted = format!("{}", local.format("%a, %d %b %Y %H:%M:%S %z"));
-    out.write(&format!("{}", formatted))?;
-    Ok(())
-}
-
 fn format_date(
     h: &Helper,
     _: &Handlebars,
@@ -202,7 +189,6 @@ pub fn setup_handlebars(
 {
     let mut handlebars = Handlebars::new();
 
-    handlebars.register_helper("now", Box::new(date_now));
     handlebars.register_helper("format-date", Box::new(format_date));
     handlebars.register_helper("ratio", Box::new(ratio));
     handlebars.register_helper("titlelookup", Box::new(

@@ -3,7 +3,7 @@
         <title>Firefang</title>
         <link>https://firefang.com</link>
         <description>Rick Yorgason's portfolio blog. Everything from traditional woodworking to video game development.</description>
-        <lastBuildDate>{{now}}</lastBuildDate>
+        <lastBuildDate>{{#with (lookup posts 0)}}{{format-date postdate "%a, %d %b %Y 00:00:00 -0700"}}{{/with}}</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <image>
             <title>Firefang</title>
