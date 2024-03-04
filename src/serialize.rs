@@ -76,7 +76,7 @@ pub struct HeaderData<'a> {
     pub description: &'a str,
     pub url: &'a str,
     pub thumbnail: &'a str,
-    pub latest_date: &'a str,
+    pub cachebust: &'a str,
 }
 
 #[derive(Serialize)]

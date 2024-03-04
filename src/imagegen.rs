@@ -82,7 +82,7 @@ async fn load_images(
     let post_dir = current_dir.clone().join("posts");
     let out_dir = current_dir.clone().join("docs");
     let dir = PathBuf::from(slug);
-    let in_file = post_dir.join(dir.clone()).join(file);
+    let in_file = post_dir.join(dir.clone()).join(&file);
     let basename = in_file.file_stem().unwrap()
         .to_str().unwrap().to_string();
 
@@ -119,10 +119,12 @@ async fn load_images(
         }
     }
 
-    let og_image_file = out_dir.join(dir.clone()).join("ogImage.jpg");
-    if regenerate || should_update_from_time(&in_file_modified, &og_image_file) {
-        println!("Generating {}", og_image_file.display());
-        scale_image(&mut img, &in_file, &og_image_file, 1200, 630, true);
+    if file == "cover.jpg" {
+        let og_image_file = out_dir.join(dir.clone()).join("ogImage.jpg");
+        if regenerate || should_update_from_time(&in_file_modified, &og_image_file) {
+            println!("Generating {}", og_image_file.display());
+            scale_image(&mut img, &in_file, &og_image_file, 1200, 630, true);
+        }
     }
 
     println!("Placeholder Ready {}", in_file.display());

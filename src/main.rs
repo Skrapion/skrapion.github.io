@@ -5,6 +5,7 @@ use std::io::Write;
 use std::path::PathBuf;
 
 use anyhow::Result;
+use chrono::NaiveDate;
 use clap::Parser;
 
 mod serialize;
@@ -173,6 +174,10 @@ async fn generate_site(regenerate: bool) -> Result<()> {
 
     let mut handlebars = setup_handlebars(ppv.post_titles, &ppv.thumbnail_map)?;
 
+    let cachebust = NaiveDate::parse_from_str(&ppv.latest_date, "%F")?
+        .signed_duration_since(NaiveDate::from_ymd_opt(2020, 1, 1).unwrap())
+        .num_days().to_string();
+
     println!("Generating posts");
     for (parent, posts) in &ppv.posts_by_parent {
         println!("Parent post: {}", parent);
@@ -183,7 +188,7 @@ async fn generate_site(regenerate: bool) -> Result<()> {
                 description: &post_data.description,
                 url: &post_data.slug,
                 thumbnail: &(post_data.slug.clone() + "/ogImage.jpg"),
-                latest_date: &ppv.latest_date,
+                cachebust: &cachebust,
             };
 
             let post_with_children = PostWithChildren {
@@ -220,7 +225,7 @@ async fn generate_site(regenerate: bool) -> Result<()> {
         description: DESCRIPTION,
         url: "",
         thumbnail: "assets/images/RickHoldingTheWorld.jpg",
-        latest_date: &ppv.latest_date,
+        cachebust: &cachebust,
     };
     let post_with_children = PostWithChildren {
         children: Some(&ppv.posts_by_parent[""]),
@@ -260,7 +265,7 @@ async fn generate_site(regenerate: bool) -> Result<()> {
         description: DESCRIPTION,
         url: "/404.html",
         thumbnail: "assets/images/RickHoldingTheWorld.jpg",
-        latest_date: &ppv.latest_date,
+        cachebust: &cachebust,
     };
     handlebars.register_template_string("content", rendered)?;
     let output = File::create(out_dir.clone().join("404.html"))?;
