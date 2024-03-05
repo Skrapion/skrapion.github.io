@@ -239,10 +239,10 @@ function initOneSignal() {
     });
 
     window.OneSignalDeferred = window.OneSignalDeferred || [];
-    OneSignalDeferred.push(function(OneSignal) {
-        OneSignal.init({
+    OneSignalDeferred.push(async function(OneSignal) {
+        await OneSignal.init({
             appId: location.hostname == "localhost" ?
-                "767434af-9188-4281-9afe-2977206c5a9f" :
+                "96ba05c2-8cf9-44d3-ab5e-6c5396ea8d85" :
                 "3b78268c-b1c0-4037-b3f5-07cb3afb64fe",
             autoResubscribe: true,
         });
@@ -253,7 +253,7 @@ function setOneSignalSwitch() {
     var switchtrack = document.getElementById("switchtrack");
     switchtrack.classList.remove("set");
 
-    OneSignalDeferred.push(function(OneSignal) {
+    OneSignalDeferred.push(async function(OneSignal) {
         if(!OneSignal.Notifications.isPushSupported()) {
             var subscribeContent = document.getElementById("subscribe-content");
             subscribeContent.classList.add("unsupported");
@@ -273,37 +273,40 @@ function setOneSignalSwitch() {
     });
 }
 
-function permissionChangeListener(permission) {
-    if (permission) {
-        var switchtrack = document.getElementById("switchtrack");
-        OneSignal.User.PushSubscription.optIn();
-        switchtrack.classList.add("set");
-    }
-}
-
-function clickSubscribe(switchtrack) {
-    OneSignalDeferred.push(function(OneSignal) {
+function clickSubscribe() {
+    OneSignalDeferred.push(async function(OneSignal) {
         Promise.all([
             OneSignal.Notifications.permission,
             OneSignal.User.PushSubscription.optedIn,
-        ]).then((result) => {
+        ]).then(async (result) => {
             var isPushEnabled = result[0];
             var isOptedIn = result[1];
 
             if(!isPushEnabled) {
-                OneSignal.Notifications.requestPermission();
-                OneSignalDeferred.push(function() {
-                      OneSignal.Notifications.addEventListener("permissionChange", permissionChangeListener);
-                });
+                if(await OneSignal.Notifications.requestPermission()) {
+                    await OneSignal.User.PushSubscription.optIn();
+                }
             } else {
                 if(!isOptedIn) {
-                    OneSignal.User.PushSubscription.optIn();
-                    switchtrack.classList.add("set");
+                    await OneSignal.User.PushSubscription.optIn();
                 } else {
-                    OneSignal.User.PushSubscription.optOut();
-                    switchtrack.classList.remove("set");
+                    await OneSignal.User.PushSubscription.optOut();
                 }
             }
+
+            Promise.all([
+                OneSignal.Notifications.permission,
+                OneSignal.User.PushSubscription.optedIn,
+            ]).then(async (result) => {
+                var isPushEnabled = result[0];
+                var isOptedIn = result[1];
+
+                if(isPushEnabled && isOptedIn) {
+                    switchtrack.classList.add("set");
+                } else {
+                    switchtrack.classList.remove("set");
+                }
+            });
         });
     });
 }
