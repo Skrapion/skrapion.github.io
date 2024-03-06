@@ -20,7 +20,8 @@ use imagegen::*;
 mod utils;
 use utils::*;
 
-mod credits;
+mod config;
+use config::*;
 
 mod webserver;
 use webserver::start_server;
@@ -35,7 +36,11 @@ struct PreprocessVars {
     latest_date: String,
 }
 
-async fn pre_generate(post_dir: &PathBuf, out_dir: &PathBuf, regenerate: bool) 
+async fn pre_generate(
+    post_dir: &PathBuf, 
+    out_dir: &PathBuf, 
+    regenerate: bool,
+    config: &Config) 
     -> Result<PreprocessVars>
 {
     let mut posts_by_parent_sorted = 
@@ -50,7 +55,7 @@ async fn pre_generate(post_dir: &PathBuf, out_dir: &PathBuf, regenerate: bool)
         let entry = entry?;
         let path = entry.path();
 
-        let post_data = deserialize_md(&path)?;
+        let post_data = deserialize_md(&path, &config)?;
         if &latest_date < &post_data.postdate {
             latest_date = post_data.postdate.clone();
         }
@@ -165,12 +170,12 @@ async fn pre_generate(post_dir: &PathBuf, out_dir: &PathBuf, regenerate: bool)
     })
 }
 
-async fn generate_site(regenerate: bool) -> Result<()> {
+async fn generate_site(regenerate: bool, config: &Config) -> Result<()> {
     let current_dir = env::current_dir()?;
     let post_dir = current_dir.clone().join("posts");
     let out_dir = current_dir.join("docs");
 
-    let ppv = pre_generate(&post_dir, &out_dir, regenerate).await?;
+    let ppv = pre_generate(&post_dir, &out_dir, regenerate, &config).await?;
 
     let mut handlebars = setup_handlebars(ppv.post_titles, &ppv.thumbnail_map)?;
 
@@ -286,8 +291,9 @@ struct Args {
 
 #[tokio::main]
 async fn main() -> Result<()> {
+    let config = load_config(&PathBuf::from("config.yaml"))?;
     let args = Args::parse();
-    generate_site(args.regenerate).await?;
+    generate_site(args.regenerate, &config).await?;
     start_server().await?;
     Ok(())
 }

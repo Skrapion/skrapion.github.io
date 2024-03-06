@@ -5,7 +5,8 @@ use std::path::PathBuf;
 
 use anyhow::{anyhow, Result};
 use serde::{Serialize, Deserialize};
-use crate::credits::credits;
+
+use crate::config::*;
 
 #[derive(Deserialize)]
 #[serde(untagged)]
@@ -86,7 +87,7 @@ pub struct PostWithChildren<'a> {
     pub header: &'a HeaderData<'a>,
 }
 
-pub fn deserialize_md(dir: &PathBuf) -> Result<PostData> {
+pub fn deserialize_md(dir: &PathBuf, config: &Config) -> Result<PostData> {
     let slug = dir.file_name().unwrap().to_str().unwrap().to_string();
     println!("Parsing {}", &slug);
 
@@ -149,9 +150,12 @@ pub fn deserialize_md(dir: &PathBuf) -> Result<PostData> {
             }
         }
 
-        let (fullname, site) = credits(&pic_out.credit);
-        pic_out.fullname = fullname.to_string();
-        pic_out.site = site.to_string();
+        if let Some(config) = config.credits.get(&pic_out.credit) {
+            pic_out.fullname = config.name.clone();
+            pic_out.site = config.site.clone();
+        } else {
+            pic_out.fullname = pic_out.credit.clone();
+        }
 
         post_data.pics.push(pic_out);
     }
