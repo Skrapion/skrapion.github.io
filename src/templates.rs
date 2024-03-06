@@ -55,7 +55,7 @@ impl HelperDef for TitleLookupHelper {
         if let Some(title) = self.titles.get(&slug) {
             out.write(title)?;
         } else {
-            Err(RenderErrorReason::Other("Couldn't find title".to_string()))?;
+            Err(RenderErrorReason::Other(format!("Couldn't find title for slug: {}", slug)))?;
         }
 
         Ok(())

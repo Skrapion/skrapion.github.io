@@ -226,87 +226,69 @@ function registerDrag() {
     }
 }
 
+const beamsClient = new PusherPushNotifications.Client({
+    instanceId: '4cd7686e-fb76-40ad-9f36-4a112728fcd0',
+});
+
+function updateSwitch() {
+    var switchtrack = document.getElementById("switchtrack");
+
+    beamsClient
+        .getRegistrationState()
+        .then((state) => {
+            let states = PusherPushNotifications.RegistrationState;
+			switch (state) {
+				case states.PERMISSION_DENIED: {
+					switchtrack.classList.remove("set");
+					break;
+				}
+				case states.PERMISSION_GRANTED_REGISTERED_WITH_BEAMS: {
+					switchtrack.classList.add("set");
+					break;
+				}
+			}
+        });
+}
+
 function initOneSignal() {
     window.addEventListener("click", function(e) {
         var notificationBlock = document.getElementById("notification-block");
         var subscribe = document.getElementById("subscribe");
         if(notificationBlock.contains(e.target)) {
             subscribe.className = "show";
-            setOneSignalSwitch();
         } else {
             subscribe.className = "";
         }
     });
 
-    window.OneSignalDeferred = window.OneSignalDeferred || [];
-    OneSignalDeferred.push(async function(OneSignal) {
-        await OneSignal.init({
-            appId: location.hostname == "localhost" ?
-                "96ba05c2-8cf9-44d3-ab5e-6c5396ea8d85" :
-                "3b78268c-b1c0-4037-b3f5-07cb3afb64fe",
-            autoResubscribe: true,
-        });
-    });
-}
+	updateSwitch();
 
-function setOneSignalSwitch() {
-    var switchtrack = document.getElementById("switchtrack");
-    switchtrack.classList.remove("set");
-
-    OneSignalDeferred.push(async function(OneSignal) {
-        if(!OneSignal.Notifications.isPushSupported()) {
-            var subscribeContent = document.getElementById("subscribe-content");
-            subscribeContent.classList.add("unsupported");
-        } else {
-            Promise.all([
-                OneSignal.Notifications.permission,
-                OneSignal.User.PushSubscription.optedIn,
-            ]).then((result) => {
-                var isPushEnabled = result[0];
-                var isOptedIn = result[1];
-
-                if(isPushEnabled && isOptedIn) {
-                    document.getElementById("switchtrack").classList.add("set");
-                }
-            });
-        }
-    });
 }
 
 function clickSubscribe() {
-    OneSignalDeferred.push(async function(OneSignal) {
-        Promise.all([
-            OneSignal.Notifications.permission,
-            OneSignal.User.PushSubscription.optedIn,
-        ]).then(async (result) => {
-            var isPushEnabled = result[0];
-            var isOptedIn = result[1];
-
-            if(!isPushEnabled) {
-                if(await OneSignal.Notifications.requestPermission()) {
-                    await OneSignal.User.PushSubscription.optIn();
-                }
-            } else {
-                if(!isOptedIn) {
-                    await OneSignal.User.PushSubscription.optIn();
-                } else {
-                    await OneSignal.User.PushSubscription.optOut();
-                }
-            }
-
-            Promise.all([
-                OneSignal.Notifications.permission,
-                OneSignal.User.PushSubscription.optedIn,
-            ]).then(async (result) => {
-                var isPushEnabled = result[0];
-                var isOptedIn = result[1];
-
-                if(isPushEnabled && isOptedIn) {
-                    switchtrack.classList.add("set");
-                } else {
-                    switchtrack.classList.remove("set");
-                }
-            });
+    beamsClient
+        .getRegistrationState()
+        .then((state) => {
+            let states = PusherPushNotifications.RegistrationState;
+			switch (state) {
+				case states.PERMISSION_DENIED: {
+					alert("It appears you have disabled notifications for this site. Please re-enable them if you would like to receive project updates.");
+					break;
+				}
+				case states.PERMISSION_GRANTED_REGISTERED_WITH_BEAMS: {
+                    beamsClient.stop()
+                        .then(() => updateSwitch())
+                        .catch(console.error);
+					break;
+				}
+				case states.PERMISSION_GRANTED_NOT_REGISTERED_WITH_BEAMS:
+				case states.PERMISSION_PROMPT_REQUIRED: {
+					beamsClient.start()
+						.then(() => beamsClient.addDeviceInterest('projects'))
+		                .then(() => updateSwitch())
+						.catch(console.error);
+					break;
+				}
+			}
         });
-    });
 }
