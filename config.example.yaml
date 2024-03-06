@@ -1,3 +1,13 @@
+# These are the default values.
+post_dir: posts
+out_dir: docs
+
+site_name: "My awesome site"
+site_description: "Where all my awesome stuff goes"
+# This is the ogImage to use for pages that aren't posts.
+site_thumbnail: "assets/images/ACoolPhoto.jpg"
+
+# Image credits. Optional, but it's the only way to get links in credits.
 credits:
   joe: {name: "Joe Blow"}
   rick: {name: "Sean Rick Yorgason", site: "https://firefang.com"}

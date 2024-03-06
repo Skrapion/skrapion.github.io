@@ -373,6 +373,7 @@ dependencies = [
  "mime_guess",
  "pulldown-cmark",
  "serde",
+ "serde_json",
  "serde_yaml",
  "tokio",
  "tokio-util",

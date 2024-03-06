@@ -13,8 +13,18 @@ pub struct Credits {
     pub site: String,
 }
 
+fn posts() -> String { "posts".into() }
+fn docs() -> String { "docs".into() }
+
 #[derive(Deserialize)]
 pub struct Config {
+    #[serde(default="posts")]
+    pub post_dir: String,
+    #[serde(default="docs")]
+    pub out_dir: String,
+    pub site_name: String,
+    pub site_description: String,
+    pub site_thumbnail: String,
     pub credits: HashMap<String, Credits>,
 }
 

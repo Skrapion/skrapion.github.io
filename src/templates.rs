@@ -44,12 +44,18 @@ fn ratio(
     Ok(())
 }
 
-struct TitleLookupHelper {
-    titles: BTreeMap<String, String>,
+struct TitleLookupHelper<'a> {
+    titles: &'a BTreeMap<String, String>,
 }
 
-impl HelperDef for TitleLookupHelper {
-    fn call<'reg: 'rc, 'rc>(&self, h: &Helper, _: &Handlebars, _: &Context, _: &mut RenderContext, out: &mut dyn Output) -> HelperResult {
+impl HelperDef for TitleLookupHelper<'_> {
+    fn call<'reg: 'rc, 'rc>(
+        &self, h: &Helper, 
+        _: &Handlebars, 
+        _: &Context, 
+        _: &mut RenderContext, 
+        out: &mut dyn Output
+    ) -> HelperResult {
         let slug = h.param(0).unwrap().value().render();
         
         if let Some(title) = self.titles.get(&slug) {
@@ -66,8 +72,14 @@ struct PicHelper<'a> {
     thumbnail_map: &'a ThumbnailMap,
 }
 
-impl<'a> HelperDef for PicHelper<'a> {
-    fn call<'reg: 'rc, 'rc>(&self, h: &Helper, _: &Handlebars, _: &Context, _: &mut RenderContext, out: &mut dyn Output) -> HelperResult {
+impl HelperDef for PicHelper<'_> {
+    fn call<'reg: 'rc, 'rc>(
+        &self, h: &Helper, 
+        _: &Handlebars, 
+        _: &Context, _: 
+        &mut RenderContext, 
+        out: &mut dyn Output
+    ) -> HelperResult {
         let slug = h.param(0).unwrap().value().render();
         let file = h.param(1).unwrap().value().render();
         let cmd = h.param(2).unwrap().value().render();
@@ -102,9 +114,9 @@ impl<'a> HelperDef for PicHelper<'a> {
 }
 
 impl PicHelper<'_> {
-    fn src(&self, thumbnail: &ThumbnailData, slug: &String, file: &String) 
-        -> Result<String, RenderError>
-    {
+    fn src(
+        &self, thumbnail: &ThumbnailData, slug: &String, file: &String
+    ) -> Result<String, RenderError> {
         let out = PathBuf::from(file).file_stem().unwrap()
             .to_str().unwrap().to_string();
         let mut out = "/".to_string() + &slug + "/" + &out + "-";
@@ -124,9 +136,8 @@ impl PicHelper<'_> {
               thumbnail: &ThumbnailData, 
               slug: &String, 
               file: &String,
-              max_width: u32) 
-        -> Result<String, RenderError>
-    {
+              max_width: u32,
+    ) -> Result<String, RenderError> {
         let basename = PathBuf::from(file).file_stem().unwrap()
             .to_str().unwrap().to_string();
         let basename = "/".to_string() + &slug + "/" + &basename + "-";
@@ -171,7 +182,14 @@ struct HeightHelper<'a> {
 }
 
 impl<'a> HelperDef for HeightHelper<'a> {
-    fn call<'reg: 'rc, 'rc>(&self, h: &Helper, _: &Handlebars, _: &Context, _: &mut RenderContext, out: &mut dyn Output) -> HelperResult {
+    fn call<'reg: 'rc, 'rc>(
+        &self, h: 
+        &Helper, 
+        _: &Handlebars, 
+        _: &Context, 
+        _: &mut RenderContext, 
+        out: &mut dyn Output
+    ) -> HelperResult {
         let slug = h.param(0).unwrap().value().render();
         let file = h.param(1).unwrap().value().render();
         let path = slug.clone() + "/" + &file;
@@ -182,17 +200,18 @@ impl<'a> HelperDef for HeightHelper<'a> {
     }
 }
 
-pub fn setup_handlebars(
-    post_titles: BTreeMap<String, String>, 
-    thumbnail_map: &ThumbnailMap) 
-    -> Result<Handlebars>
+pub fn setup_handlebars<'a, 'b>(
+    post_titles: &'a BTreeMap<String, String>, 
+    thumbnail_map: &'a ThumbnailMap
+) -> Result<Handlebars<'b>>
+where 'a: 'b
 {
     let mut handlebars = Handlebars::new();
 
     handlebars.register_helper("format-date", Box::new(format_date));
     handlebars.register_helper("ratio", Box::new(ratio));
     handlebars.register_helper("titlelookup", Box::new(
-            TitleLookupHelper { titles: post_titles }
+            TitleLookupHelper { titles: &post_titles }
             ));
     handlebars.register_helper("pic", Box::new(
             PicHelper { thumbnail_map: &thumbnail_map }

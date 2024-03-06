@@ -7,6 +7,7 @@ use std::path::PathBuf;
 use anyhow::Result;
 use chrono::NaiveDate;
 use clap::Parser;
+use handlebars::Handlebars;
 
 mod serialize;
 use serialize::*;
@@ -26,90 +27,17 @@ use config::*;
 mod webserver;
 use webserver::start_server;
 
-const SITENAME: &str = "Firefang";
-const DESCRIPTION: &str = "Rick Yorgason's portfolio blog. Everything from traditional woodworking to video game development.";
-
-struct PreprocessVars {
+struct CollectedPosts {
     posts_by_parent: BTreeMap<String, Posts>,
     post_titles: BTreeMap<String, String>,
     thumbnail_map: ThumbnailMap,
     latest_date: String,
 }
 
-async fn pre_generate(
-    post_dir: &PathBuf, 
-    out_dir: &PathBuf, 
-    regenerate: bool,
-    config: &Config) 
-    -> Result<PreprocessVars>
-{
-    let mut posts_by_parent_sorted = 
-        BTreeMap::<String, BTreeMap<String, PostData>>::new();
-    let mut post_titles = BTreeMap::new();
-    let mut reverse_tags = BTreeMap::new();
-    let mut latest_date = String::new();
-
-    let mut thumbnail_futures_map = ThumbnailFuturesMap::default();
-
-    for entry in fs::read_dir(&post_dir)? {
-        let entry = entry?;
-        let path = entry.path();
-
-        let post_data = deserialize_md(&path, &config)?;
-        if &latest_date < &post_data.postdate {
-            latest_date = post_data.postdate.clone();
-        }
-
-        fs::create_dir_all(&out_dir.clone().join(&post_data.slug))?;
-
-        post_titles.insert(post_data.slug.clone(), post_data.title.clone());
-
-        if post_data.parent == "" {
-            for tag in &post_data.tags {
-                reverse_tags.entry(tag.clone())
-                    .and_modify(|v: &mut BTreeSet<String>| {
-                        v.insert(post_data.slug.clone());
-                    })
-                    .or_insert({
-                        let mut v = BTreeSet::new();
-                        v.insert(post_data.slug.clone());
-                        v
-                    });
-            }
-        }
-
-        for pic in &post_data.pics {
-            match pic.filetype.as_str() {
-                "pic" => {
-                    thumbnail_futures_map.queue_image(
-                        post_data.slug.clone(), 
-                        pic.filename.clone(),
-                        regenerate);
-                },
-                "copy" => {
-                    let in_file = post_dir.join(post_data.slug.clone())
-                        .join(pic.filename.clone());
-                    let out_file = out_dir.join(post_data.slug.clone())
-                        .join(pic.filename.clone());
-                    if regenerate || should_update(&in_file, &out_file)? {
-                        println!("Copying {}", out_file.display());
-                        fs::copy(in_file, out_file)?;
-                    }
-                },
-                _ => {}
-            }
-        }
-
-        thumbnail_futures_map.queue_image(
-            post_data.slug.clone(), "cover.jpg".to_string(), regenerate
-        );
-
-        posts_by_parent_sorted.entry(post_data.parent.clone())
-            .or_insert(Default::default())
-            .insert(post_data.date.clone() + &post_data.slug, post_data);
-    }
-
-    let thumbnail_map = thumbnail_futures_map.join_all().await?;
+async fn collate_posts<'a>(
+    reverse_tags: &BTreeMap<String, BTreeSet<String>>,
+    posts_by_parent_sorted: BTreeMap<String, BTreeMap<String, PostData>>,
+) -> Result<BTreeMap<String, Posts>> {
     let mut posts_by_parent = BTreeMap::<String, Posts>::new();
 
     for (k, mut posts) in posts_by_parent_sorted {
@@ -162,7 +90,88 @@ async fn pre_generate(
         posts_by_parent.insert(k.clone(), posts_vec);
     }
 
-    Ok(PreprocessVars {
+    Ok(posts_by_parent)
+}
+
+
+async fn collect_posts(
+    config: &Config, regenerate: bool,
+) -> Result<CollectedPosts> {
+    let post_dir = env::current_dir()?.join(&config.post_dir);
+    let out_dir = env::current_dir()?.join(&config.out_dir);
+
+    let mut posts_by_parent_sorted = 
+        BTreeMap::<String, BTreeMap<String, PostData>>::new();
+    let mut post_titles = BTreeMap::new();
+    let mut reverse_tags = BTreeMap::new();
+    let mut latest_date = String::new();
+
+    let mut thumbnail_futures_map = ThumbnailFuturesMap::default();
+
+    for entry in fs::read_dir(&post_dir)? {
+        let entry = entry?;
+        let path = entry.path();
+
+        let post_data = deserialize_md(&path, &config)?;
+        if &latest_date < &post_data.postdate {
+            latest_date = post_data.postdate.clone();
+        }
+
+        fs::create_dir_all(&out_dir.clone().join(&post_data.slug))?;
+
+        post_titles.insert(post_data.slug.clone(), post_data.title.clone());
+
+        if post_data.parent == "" {
+            for tag in &post_data.tags {
+                reverse_tags.entry(tag.clone())
+                    .and_modify(|v: &mut BTreeSet<String>| {
+                        v.insert(post_data.slug.clone());
+                    })
+                    .or_insert({
+                        let mut v = BTreeSet::new();
+                        v.insert(post_data.slug.clone());
+                        v
+                    });
+            }
+        }
+
+        for pic in &post_data.pics {
+            match pic.filetype.as_str() {
+                "pic" => {
+                    thumbnail_futures_map.queue_image(
+                        post_data.slug.clone(), 
+                        pic.filename.clone(),
+                        &config,
+                        regenerate);
+                },
+                "copy" => {
+                    let in_file = post_dir.join(post_data.slug.clone())
+                        .join(pic.filename.clone());
+                    let out_file = out_dir.join(post_data.slug.clone())
+                        .join(pic.filename.clone());
+                    if regenerate || should_update(&in_file, &out_file)? {
+                        println!("Copying {}", out_file.display());
+                        fs::copy(in_file, out_file)?;
+                    }
+                },
+                _ => {}
+            }
+        }
+
+        thumbnail_futures_map.queue_image(
+            post_data.slug.clone(), "cover.jpg".to_string(), &config, regenerate
+        );
+
+        posts_by_parent_sorted.entry(post_data.parent.clone())
+            .or_insert(Default::default())
+            .insert(post_data.date.clone() + &post_data.slug, post_data);
+    }
+
+    let posts_by_parent = 
+        collate_posts(&reverse_tags, posts_by_parent_sorted).await?;
+    let thumbnail_map = thumbnail_futures_map.join_all().await?;
+
+    Ok(CollectedPosts {
         posts_by_parent,
         post_titles,
         thumbnail_map,
@@ -170,26 +179,21 @@ async fn pre_generate(
     })
 }
 
-async fn generate_site(regenerate: bool, config: &Config) -> Result<()> {
-    let current_dir = env::current_dir()?;
-    let post_dir = current_dir.clone().join("posts");
-    let out_dir = current_dir.join("docs");
-
-    let ppv = pre_generate(&post_dir, &out_dir, regenerate, &config).await?;
-
-    let mut handlebars = setup_handlebars(ppv.post_titles, &ppv.thumbnail_map)?;
-
-    let cachebust = NaiveDate::parse_from_str(&ppv.latest_date, "%F")?
-        .signed_duration_since(NaiveDate::from_ymd_opt(2020, 1, 1).unwrap())
-        .num_days().to_string();
+async fn generate_posts(
+    config: &Config,
+    cposts: &CollectedPosts, 
+    handlebars: &mut Handlebars<'_>,
+    cachebust: &str,
+) -> Result<()> {
+    let out_dir = env::current_dir()?.join(&config.out_dir);
 
     println!("Generating posts");
-    for (parent, posts) in &ppv.posts_by_parent {
+    for (parent, posts) in &cposts.posts_by_parent {
         println!("Parent post: {}", parent);
         for post_data in posts {
             println!("Generating {}", post_data.slug);
             let header_data = HeaderData {
-                title: &(post_data.title.clone() + " - " + SITENAME),
+                title: &(post_data.title.clone() + " - " + &config.site_name),
                 description: &post_data.description,
                 url: &post_data.slug,
                 thumbnail: &(post_data.slug.clone() + "/ogImage.jpg"),
@@ -198,7 +202,7 @@ async fn generate_site(regenerate: bool, config: &Config) -> Result<()> {
 
             let post_with_children = PostWithChildren {
                 children: {
-                    match ppv.posts_by_parent.get(&post_data.slug) {
+                    match cposts.posts_by_parent.get(&post_data.slug) {
                         None => None,
                         Some(k) => {
                             Some(&k)
@@ -224,16 +228,27 @@ async fn generate_site(regenerate: bool, config: &Config) -> Result<()> {
         }
     }
 
+    Ok(())
+}
+
+async fn generate_root_pages(
+    config: &Config,
+    cposts: &CollectedPosts, 
+    handlebars: &mut Handlebars<'_>,
+    cachebust: &str,
+) -> Result<()> {
+    let out_dir = env::current_dir()?.join(&config.out_dir);
+
     println!("Generating front page");
     let header_data = HeaderData {
-        title: SITENAME,
-        description: DESCRIPTION,
+        title: &config.site_name,
+        description: &config.site_description,
         url: "",
         thumbnail: "assets/images/RickHoldingTheWorld.jpg",
         cachebust: &cachebust,
     };
     let post_with_children = PostWithChildren {
-        children: Some(&ppv.posts_by_parent[""]),
+        children: Some(&cposts.posts_by_parent[""]),
         post: None,
         header: &header_data,
     };
@@ -251,11 +266,11 @@ async fn generate_site(regenerate: bool, config: &Config) -> Result<()> {
     println!("Generating RSS");
     let mut postmap = BTreeMap::new();
     let mut postdate_map = BTreeMap::<String, &PostData>::new();
-    for post in &ppv.posts_by_parent[""] {
+    for post in &cposts.posts_by_parent[""] {
         postdate_map.insert(post.postdate.clone() + &post.slug, &post);
     }
     let postdate_vec: Vec<&&PostData> = postdate_map.values().rev().collect();
-    postmap.insert("posts", &postdate_vec);
+    postmap.insert(config.post_dir.clone(), &postdate_vec);
     let output = File::create(out_dir.clone().join("rss.xml"))?;
     handlebars.render_to_write("rss", &postmap, output)
         .map_err(|e| { format!("{:?}", e )}).unwrap();
@@ -266,8 +281,8 @@ async fn generate_site(regenerate: bool, config: &Config) -> Result<()> {
         .map_err(|e| { format!("{:?}", e )}).unwrap();
 
     let header_data = HeaderData {
-        title: &("Error 404 - ".to_string() + SITENAME),
-        description: DESCRIPTION,
+        title: &("Error 404 - ".to_string() + &config.site_name),
+        description: &config.site_description,
         url: "/404.html",
         thumbnail: "assets/images/RickHoldingTheWorld.jpg",
         cachebust: &cachebust,
@@ -277,6 +292,21 @@ async fn generate_site(regenerate: bool, config: &Config) -> Result<()> {
     handlebars.render_to_write("default", &header_data, output)
         .map_err(|e| { format!("{:?}", e) }).unwrap();
 
+    Ok(())
+}
+
+async fn generate_site(regenerate: bool, config: &Config) -> Result<()> {
+    let cposts = collect_posts(&config, regenerate).await?;
+
+    let mut handlebars = setup_handlebars(&cposts.post_titles, 
+                                          &cposts.thumbnail_map)?;
+
+    let cachebust = NaiveDate::parse_from_str(&cposts.latest_date, "%F")?
+        .signed_duration_since(NaiveDate::from_ymd_opt(2020, 1, 1).unwrap())
+        .num_days().to_string();
+
+    generate_posts(&config, &cposts, &mut handlebars, &cachebust).await?;
+    generate_root_pages(&config, &cposts, &mut handlebars, &cachebust).await?;
 
     Ok(())
 }
@@ -294,6 +324,6 @@ async fn main() -> Result<()> {
     let config = load_config(&PathBuf::from("config.yaml"))?;
     let args = Args::parse();
     generate_site(args.regenerate, &config).await?;
-    start_server().await?;
+    start_server(config).await?;
     Ok(())
 }

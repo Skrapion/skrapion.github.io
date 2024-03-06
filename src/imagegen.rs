@@ -8,6 +8,7 @@ use base64::{display::Base64Display, engine::general_purpose::STANDARD};
 use image::imageops::FilterType;
 use tokio::task::JoinHandle;
 
+use crate::config::*;
 use crate::utils::*;
 
 pub const SIZES: [u32;6] = [20, 200, 400, 800, 1200, 1920];
@@ -30,12 +31,21 @@ impl ThumbnailFuturesMap {
         self: &mut Self, 
         slug: String, 
         file: String,
-        regenerate: bool) 
-    {
+        config: &Config,
+        regenerate: bool,
+    ) {
         let path = slug.clone() + "/" + &file;
         if let hash_map::Entry::Vacant(entry) = self.hashmap.entry(path) {
-            entry.insert(Box::new(
-                    tokio::task::spawn(load_images(slug, file, regenerate)))
+            entry.insert(
+                Box::new(
+                    tokio::task::spawn(
+                        load_images(
+                            slug, file, 
+                            config.post_dir.clone(), config.out_dir.clone(), 
+                            regenerate
+                        )
+                    )
+                )
             );
         }
     }
@@ -57,8 +67,8 @@ fn scale_image(
     img: &mut Option<image::DynamicImage>, 
     in_file: &PathBuf, out_file: &PathBuf, 
     w: u32, h: u32,
-    fill: bool) 
-{
+    fill: bool,
+) {
     if let None = img {
         *img = Some(image::open(&in_file).unwrap());
     }
@@ -75,12 +85,13 @@ fn scale_image(
 async fn load_images(
     slug: String, 
     file: String,
-    regenerate: bool) 
-    -> Result<ThumbnailData> 
-{
+    post_dir: String,
+    out_dir: String,
+    regenerate: bool,
+) -> Result<ThumbnailData> {
     let current_dir = env::current_dir()?;
-    let post_dir = current_dir.clone().join("posts");
-    let out_dir = current_dir.clone().join("docs");
+    let post_dir = current_dir.clone().join(post_dir);
+    let out_dir = current_dir.clone().join(out_dir);
     let dir = PathBuf::from(slug);
     let in_file = post_dir.join(dir.clone()).join(&file);
     let basename = in_file.file_stem().unwrap()

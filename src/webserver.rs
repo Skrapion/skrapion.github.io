@@ -1,20 +1,21 @@
 use std::env;
 use std::fs;
+use std::future::Future;
 use std::net::SocketAddr;
+use std::pin::Pin;
 
 use bytes::Bytes;
-use futures::executor::block_on;
-use futures_util::TryStreamExt;
-use http_body_util::{combinators::BoxBody, BodyExt, StreamBody};
-use hyper::body::Frame;
-use hyper::service::service_fn;
+use http_body_util::Full;
+use hyper::body::Incoming as IncomingBody;
+use hyper::service::Service;
 use hyper::{Method, Request, Response, StatusCode};
 use hyper_util::rt::{tokio::TokioIo, TokioExecutor};
 use hyper_util::server::conn::auto;
-use tokio::{fs::File, net::TcpListener};
-use tokio_util::io::ReaderStream;
+use tokio::net::TcpListener;
 
-pub async fn start_server() -> anyhow::Result<()> {
+use crate::config::*;
+
+pub async fn start_server(config: Config) -> anyhow::Result<()> {
     let addr: SocketAddr = "127.0.0.1:3000".parse().unwrap();
 
     let listener = TcpListener::bind(addr).await?;
@@ -24,11 +25,18 @@ pub async fn start_server() -> anyhow::Result<()> {
         let (stream, _) = listener.accept().await?;
         let io = TokioIo::new(stream);
 
+        let server = Server {
+            dir: config.out_dir.clone()
+        };
+
         tokio::task::spawn(async move {
+            let server = server.clone();
             if let Err(err) = 
                 auto::Builder::new(TokioExecutor::new())
-                    .serve_connection(io, service_fn(response))
-                    .await
+                    .serve_connection(
+                        io, 
+                        server
+                    ).await
             {
                 println!("Failed to serve connection: {:?}", err);
             }
@@ -36,78 +44,87 @@ pub async fn start_server() -> anyhow::Result<()> {
     }
 }
 
-async fn response (
-    req: Request<hyper::body::Incoming>,
-) -> hyper::Result<Response<BoxBody<Bytes, std::io::Error>>> 
-{
-    match (req.method(), req.uri().path()) {
-        (&Method::GET, path) => simple_file_send(path).await,
-        _ => Ok(not_found()),
-    }
+#[derive(Debug, Clone)]
+struct Server {
+    dir: String,
 }
 
-/// HTTP status code 404
-fn not_found() -> Response<BoxBody<Bytes, std::io::Error>> {
-    Response::builder()
-        .status(StatusCode::NOT_FOUND)
-        .body(block_on(simple_file_send("404.html")).unwrap().into_body())
-        .unwrap()
-}
+impl Service<Request<IncomingBody>> for Server {
+    type Response = Response<Full<Bytes>>;
+    type Error = hyper::Error;
+    type Future = Pin<Box<dyn Future<Output = Result<Self::Response, Self::Error>> + Send>>;
 
-async fn simple_file_send(filename: &str) 
-    -> hyper::Result<Response<BoxBody<Bytes, std::io::Error>>> 
-{
-    let mut filename = filename.to_string();
-    if filename.starts_with("/") {
-        filename = filename[1..].to_string();
-    }
-    let mut path = env::current_dir().unwrap().join("docs").join(filename);
-    println!("Serving File: {}", path.display());
-
-    let is_dir: bool;
-    match fs::metadata(&path) {
-        Err(_) => {
-            eprintln!("No such file: {}", path.display());
-            return Ok(not_found());
-        },
-        Ok(o) => is_dir = o.is_dir()
-    }
-
-    if is_dir {
-        path.push("index.html");
-    }
-
-    // Open file for reading
-    let file = File::open(&path).await;
-    if file.is_err() {
-        eprintln!("ERROR: Unable to open file: {}", path.display());
-        return Ok(not_found());
-    }
-
-    let file: File = file.unwrap();
-
-    // Wrap to a tokio_util::io::ReaderStream
-    let reader_stream = ReaderStream::new(file);
-
-    // Convert to http_body_util::BoxBody
-    let stream_body = StreamBody::new(reader_stream.map_ok(Frame::data));
-    let boxed_body = stream_body.boxed();
-
-    // Send response
-    let mut response = Response::builder()
-        .status(StatusCode::OK);
-
-
-    if let Some(mimetype) = mime_guess::from_path(path).first() {
-        let mut output: String = mimetype.type_().as_str().to_string();
-        output += "/";
-        output += mimetype.subtype().into();
-        if let Some(suffix) = mimetype.suffix() {
-            output += "+";
-            output += suffix.into();
+    fn call(&self, req: Request<IncomingBody>) -> Self::Future {
+        fn mk_response(
+            status: StatusCode, 
+            data: Vec<u8>, 
+            mime: &str 
+        ) -> Result<Response<Full<Bytes>>, hyper::Error> {
+            Ok(Response::builder()
+               .status(status)
+               .header("Content-Type", mime)
+               .body(Full::new(Bytes::from(data))).unwrap())
         }
-        response = response.header("Content-Type", output);
-    }
 
-    Ok(response.body(boxed_body).unwrap())
+        let dir = self.dir.clone();
+        fn get404(dir: &String, filename: &str) -> Vec<u8> {
+            eprintln!("No such file: {}", filename);
+            let path404 = env::current_dir().unwrap().join(&dir).join("404.html");
+            std::fs::read(&path404).unwrap()
+        }
+
+        let mut filename = match (req.method(), req.uri().path()) {
+            (&Method::GET, path) => path.to_string(),
+            _ => return Box::pin(async move { 
+                mk_response(StatusCode::NOT_FOUND, get404(&dir, ""), "text/html") 
+            })
+        };
+
+        if filename.starts_with("/") {
+            filename = filename[1..].to_string();
+        }
+        let mut path = env::current_dir().unwrap()
+            .join(&self.dir).join(&filename);
+
+        let is_dir: bool;
+        match fs::metadata(&path) {
+            Err(_) => {
+                return Box::pin(async move { 
+                    mk_response(StatusCode::NOT_FOUND, get404(&dir, &filename), "text/html") 
+                });
+            },
+            Ok(o) => is_dir = o.is_dir()
+        }
+
+        if is_dir {
+            path.push("index.html");
+        }
+
+        let output = match std::fs::read(&path) {
+            Ok(o) => o,
+            Err(_) => {
+                return Box::pin(async move { 
+                    mk_response(StatusCode::NOT_FOUND, get404(&dir, &filename), "text/html") 
+                });
+            }
+        };
+
+        let mimestring;
+        if let Some(mimetype) = mime_guess::from_path(&path).first() {
+            let mut output: String = mimetype.type_().as_str().to_string();
+            output += "/";
+            output += mimetype.subtype().into();
+            if let Some(suffix) = mimetype.suffix() {
+                output += "+";
+                output += suffix.into();
+            }
+            mimestring = output;
+        } else {
+            mimestring="application/octet-stream".to_string();
+        }
+
+        println!("Serving File: {}", filename);
+        Box::pin(async move { mk_response(StatusCode::OK, output, &mimestring) })
+    }
 }
+
