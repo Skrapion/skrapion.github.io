@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     document.addEventListener('htmx:afterSwap', afterSwap);
     document.addEventListener('htmx:afterSettle', afterSettle);
     afterSettle();
-    initOneSignal();
+    initPusher();
 });
 
 htmx.on("htmx:responseError", function(evt) {
@@ -238,6 +238,8 @@ function updateSwitch() {
         .then((state) => {
             let states = PusherPushNotifications.RegistrationState;
 			switch (state) {
+				case states.PERMISSION_GRANTED_NOT_REGISTERED_WITH_BEAMS:
+				case states.PERMISSION_PROMPT_REQUIRED: 
 				case states.PERMISSION_DENIED: {
 					switchtrack.classList.remove("set");
 					break;
@@ -250,7 +252,7 @@ function updateSwitch() {
         });
 }
 
-function initOneSignal() {
+function initPusher() {
     window.addEventListener("click", function(e) {
         var notificationBlock = document.getElementById("notification-block");
         var subscribe = document.getElementById("subscribe");
