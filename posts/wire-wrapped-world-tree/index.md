@@ -9,6 +9,6 @@ pics:
 ---
 My first attempt at wire-wrapped jewelry!
 
-This was another secret-Santa project. It's made of copper wire and then tarnished with liver of sulphur and then buffed with steel wool, and I think the World Tree motif was perfect.
+This was another secret-Santa project. It's made of copper wire and then tarnished with liver of sulfur and then buffed with steel wool, and I think the World Tree motif was perfect.
 
 It turns out wire wrapped jewelry is a great craft to do while binging Lord of the Rings.
