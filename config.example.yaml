@@ -2,10 +2,19 @@
 post_dir: posts
 out_dir: docs
 
+site_url: "https://example.com"
 site_name: "My awesome site"
 site_description: "Where all my awesome stuff goes"
 # This is the ogImage to use for pages that aren't posts.
 site_thumbnail: "assets/images/ACoolPhoto.jpg"
+
+# Optional OneSignal settings for push notifications
+onesignal:
+    app_id: "APP_ID"
+    app_key_token: "APP_KEY_TOKEN"
+    user_key_token: "USER_KEY_TOKEN"
+    timezone: "America/Whitehorse"
+    crontime: "* * 9 * * Mon-Fri"
 
 # Image credits. Optional, but it's the only way to get links in credits.
 credits:

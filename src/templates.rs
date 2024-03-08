@@ -6,7 +6,7 @@ use anyhow::Result;
 use chrono::*;
 use handlebars::*;
 
-use crate::{ThumbnailData, ThumbnailMap, SIZES};
+use crate::imagegen::*;
 
 fn format_date(
     h: &Helper,
