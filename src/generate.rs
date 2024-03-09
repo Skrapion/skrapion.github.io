@@ -1,11 +1,14 @@
+use std::str::FromStr;
 use std::{env, fs};
 use std::collections::{BTreeMap, BTreeSet};
 use std::fs::File;
-use std::io::Write;
+use std::io::{BufReader, Write};
+use std::path::PathBuf;
 
 use anyhow::Result;
 use chrono::NaiveDate;
 use handlebars::Handlebars;
+use serde::Deserialize;
 
 use crate::config::*;
 use crate::imagegen::*;
@@ -217,37 +220,111 @@ async fn generate_posts(
     Ok(())
 }
 
-async fn generate_root_pages(
+#[derive(Deserialize)]
+struct PageData {
+    content: String,
+    #[serde(default="default_default")]
+    template: String,
+    title: Option<String>,
+    description: Option<String>,
+}
+
+fn default_default() -> String { "default".to_string() }
+
+fn generate_pages(
     config: &Config,
     cposts: &CollectedPosts, 
     handlebars: &mut Handlebars<'_>,
     cachebust: &str,
+    dir: &PathBuf,
+) -> Result<()> {
+    let out_dir = env::current_dir()?.join(&config.out_dir).join(dir);
+    let page_dir = env::current_dir()?.join(&config.page_dir).join(dir);
+
+    fs::create_dir_all(&out_dir)?;
+
+    for entry in fs::read_dir(&page_dir)? {
+        let entry = entry?;
+        let path = entry.path();
+
+        if path.is_dir() {
+            generate_pages(
+                config, cposts, handlebars, cachebust, 
+                &dir.clone().join(entry.file_name()))?
+        } else if let Some(ext) = &path.extension() {
+            if ext.to_str().unwrap() == "yaml" {
+                let mut full_url = dir.clone();
+                if entry.file_name() != "index.yaml" {
+                    full_url.push(&entry.file_name());
+                    full_url.set_extension("html");
+                }
+
+                let mut content_url = dir.clone().join(&entry.file_name());
+                content_url.set_extension("content.html");
+
+                let mut full_path = 
+                    PathBuf::from_str(&config.out_dir)?.join(&full_url);
+                if entry.file_name() == "index.yaml" {
+                    full_path.push(&entry.file_name());
+                    full_path.set_extension("html");
+                }
+                let content_path = 
+                    PathBuf::from_str(&config.out_dir)?.join(&content_url);
+
+                println!("Generating {}", full_path.display());
+
+                let file = File::open(path)?;
+                let reader = BufReader::new(file);
+                let page_data: PageData = 
+                    serde_yaml::from_reader(reader).unwrap();
+
+                let header_data = HeaderData {
+                    title: 
+                        page_data.title.as_ref().unwrap_or(&config.site_name),
+                    description: 
+                        page_data.description.as_ref().unwrap_or(&config.site_description),
+                    url: 
+                        full_url.to_str().expect("Could not convert path to string"),
+                    thumbnail: 
+                        page_data.description.as_ref().unwrap_or(&config.site_thumbnail),
+                    cachebust: &cachebust,
+                };
+                let post_with_children = PostWithChildren {
+                    children: Some(&cposts.posts_by_parent[""]),
+                    post: None,
+                    header: &header_data,
+                };
+
+                let content = page_dir.clone().join(&page_data.content).to_str()
+                    .expect(&format!("Could not convert {}/{} to a file",
+                                    dir.display(), page_data.content))
+                    .to_string();
+
+                handlebars.register_template_file(&content, &content)?;
+
+                let rendered = handlebars.render(&content, &post_with_children)
+                    .map_err(|e| { format!("{:?}", e )}).unwrap();
+
+                let mut output = File::create(content_path)?;
+                write!(output, "{}", rendered)?;
+
+                handlebars.register_template_string("content", rendered)?;
+                let output = File::create(full_path)?;
+                handlebars.render_to_write(&page_data.template, &header_data, output)
+                    .map_err(|e| { format!("{:?}", e) }).unwrap();
+            }
+        }
+    }
+
+    Ok(())
+}
+
+async fn generate_rss(
+    config: &Config,
+    cposts: &CollectedPosts, 
+    handlebars: &mut Handlebars<'_>,
 ) -> Result<()> {
     let out_dir = env::current_dir()?.join(&config.out_dir);
-
-    println!("Generating front page");
-    let header_data = HeaderData {
-        title: &config.site_name,
-        description: &config.site_description,
-        url: "",
-        thumbnail: "assets/images/RickHoldingTheWorld.jpg",
-        cachebust: &cachebust,
-    };
-    let post_with_children = PostWithChildren {
-        children: Some(&cposts.posts_by_parent[""]),
-        post: None,
-        header: &header_data,
-    };
-    let rendered = handlebars.render("frontpage", &post_with_children)
-        .map_err(|e| { format!("{:?}", e )}).unwrap();
-    let mut output = File::create(out_dir.clone().join("content.html"))?;
-    write!(output, "{}", rendered)?;
-
-    handlebars.register_template_string("content", rendered)?;
-    let output = File::create(out_dir.clone().join("index.html"))?;
-    handlebars.render_to_write("default", &header_data, output)
-        .map_err(|e| { format!("{:?}", e) }).unwrap();
-
 
     println!("Generating RSS");
     let mut postmap = BTreeMap::new();
@@ -260,23 +337,6 @@ async fn generate_root_pages(
     let output = File::create(out_dir.clone().join("rss.xml"))?;
     handlebars.render_to_write("rss", &postmap, output)
         .map_err(|e| { format!("{:?}", e )}).unwrap();
-
-    println!("Generating 404 page");
-    let postmap = BTreeMap::<String, String>::new();
-    let rendered = handlebars.render("404", &postmap)
-        .map_err(|e| { format!("{:?}", e )}).unwrap();
-
-    let header_data = HeaderData {
-        title: &("Error 404 - ".to_string() + &config.site_name),
-        description: &config.site_description,
-        url: "/404.html",
-        thumbnail: "assets/images/RickHoldingTheWorld.jpg",
-        cachebust: &cachebust,
-    };
-    handlebars.register_template_string("content", rendered)?;
-    let output = File::create(out_dir.clone().join("404.html"))?;
-    handlebars.render_to_write("default", &header_data, output)
-        .map_err(|e| { format!("{:?}", e) }).unwrap();
 
     Ok(())
 }
@@ -292,7 +352,8 @@ pub async fn generate_site(regenerate: bool, config: &Config) -> Result<()> {
         .num_days().to_string();
 
     generate_posts(&config, &cposts, &mut handlebars, &cachebust).await?;
-    generate_root_pages(&config, &cposts, &mut handlebars, &cachebust).await?;
+    generate_pages(&config, &cposts, &mut handlebars, &cachebust, &"".into())?;
+    generate_rss(&config, &cposts, &mut handlebars).await?;
 
     Ok(())
 }
