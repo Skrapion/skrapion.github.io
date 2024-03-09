@@ -22,7 +22,8 @@
   transform: translate3d(-100px, 0, 0) !important;
 }
 
-#singlecontent {
+#singlecontent,
+#aboutcontent {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -33,7 +34,8 @@
     transition: opacity 0.2s, transform 0.3s;
 }
 
-#singlecontent article {
+#singlecontent article,
+#aboutcontent article {
     position: relative;
     display: grid;
     grid-template-columns: 300px;
@@ -44,6 +46,10 @@
     padding: 20px;
 }
 
+#aboutcontent article {
+    grid-template-columns: 400px;
+}
+
 #articlecontainer {
     z-index: 1;
     border-bottom: 17px solid transparent;
@@ -51,7 +57,8 @@
     padding: 20px 125px 20px 100px;
 }
 
-#story {
+#story,
+#about {
     grid-area: story;
     padding-right: 40px;
     font-family: 'Fraunces', serif;

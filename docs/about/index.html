@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>About Rick Yorgason</title>
+        <title>About Rick Yorgason - Firefang</title>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width,initial-scale=1"/>
-        <meta name="description" content="Rick Yorgason&#x27;s portfolio blog. Everything from traditional woodworking to video game development."/>
+        <meta name="description" content="Rick Yorgason&#x27;s project blog. Everything from traditional woodworking to video game development."/>
         <meta property="og:title" content="Firefang"/>
-        <meta property="og:description" content="Rick Yorgason&#x27;s portfolio blog. Everything from traditional woodworking to video game development."/>
+        <meta property="og:description" content="Rick Yorgason&#x27;s project blog. Everything from traditional woodworking to video game development."/>
         <meta property="og:image" content="https://firefang.com/assets/images/RickHoldingTheWorld.jpg"/>
         <meta property="og:url" content="https://firefang.com/about"/>
         <meta property="og:type" content="website"/>
@@ -45,19 +45,60 @@
                         </svg>
                     </div>
                     <div id='headericons'>
-                        <a href='mailto:rick@firefang.com'><img src='/assets/images/icons/mail.svg' height='24px' alt='email'/></a>
-                        <a href='https://facebook.com/skrapion'><img src='/assets/images/icons/facebook.svg' height='24px' alt='Facebook'/></a>
-                        <a href='https://www.youtube.com/channel/UCLCEtL5d5botNpR4TCU_f9w'><img src='/assets/images/icons/youtube.svg' height='24px' alt='Youtube'/></a>
-                        <div id='notification-block'><a href='#'><img src='/assets/images/icons/bell.svg' height='24px' alt='notifications'/></a><div id='subscribe'><div id='subscribe-content'><p class='unsupported-message'>Sorry, web push notifications aren't supported on your platform.</p><p>Want to be notified when I post a new project?</p><div id="switchtrack" class="switchtrack" onclick="clickSubscribe(this)"><div class='switchthumb'></div></div></div></div></div>
+                        <a hx-get="/about/index.content.html" href='/about' hx-replace-url="/about" hx-target="#content" dx-swap="innerHTML swap:0.3s settle:0.3s" onclick="return setTransitionName('fade-transition')" hx-on:click="document.title='About Rick Yorgason - Firefang'"><img src='/assets/images/icons/info.svg' height='24px' alt='about' title='about'/></a>
+                        <a href='mailto:rick@firefang.com'><img src='/assets/images/icons/mail.svg' height='24px' alt='email' title='email'/></a>
+                        <a href='https://facebook.com/skrapion'><img src='/assets/images/icons/facebook.svg' height='24px' alt='Facebook' title='Facebook'/></a>
+                        <a href='https://www.youtube.com/channel/UCLCEtL5d5botNpR4TCU_f9w'><img src='/assets/images/icons/youtube.svg' height='24px' alt='Youtube' title='Youtube'/></a>
+                        <div id='notification-block'><a href='#'><img src='/assets/images/icons/bell.svg' height='24px' alt='notifications' title='notifications'/></a><div id='subscribe'><div id='subscribe-content'><p class='unsupported-message'>Sorry, web push notifications aren't supported on your platform.</p><p>Want to be notified when I post a new project?</p><div id="switchtrack" class="switchtrack" onclick="clickSubscribe(this)"><div class='switchthumb'></div></div></div></div></div>
                     </div>
                 </div>
             </header>
             <div id="contentcontainer">
                 <div id="content" hx-target="this" hx-swap="innerHTML swap:0.3s settle:0.3s">
-                    <div>
-                        <h1>Where the heck am I?</h1>
-                        <h2>not found</h2>
-                        <p>Well this is embarassing.</p>
+                    <div id='aboutcontent'>
+                        <div id='articlecontainer'>
+                            <article>
+                                <div id='about'>
+                                    <div id='storycontainer'>
+                                        <div id='boringwords'>
+                                            <h1>Where the heck am I?</h1>
+                                            <p>
+                                                You've found Firefang, the project blog of Rick 
+                                                Yorgason. Welcome!
+                                            </p>
+                                            <p>
+                                                I'm a maker, programmer, woodworker, baker, 
+                                                photographer, 3D modeller, cosplayer, and general 
+                                                jack of all trades.
+                                            </p>
+                                            <p>
+                                                I currently run 
+                                                <a href="https://yukonstruct.com">Yukonstruct's 
+                                                Makespace</a>, the first makerspace north of 60°, 
+                                                and before that I was a programmer, designer, and
+                                                the VP of a little indie game dev studio called
+                                                <a href="https://longbowgames.com">Longbow Games</a>.
+                                            </p>
+                                            <p>
+                                                I mostly created this site to make it easier to have
+                                                conversations about my various projects, but you're
+                                                welcome to poke around as much as you like!
+                                            </p>
+                                            <p>Enjoy!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id='prettypictures'>
+                                    <div>
+                                        <div class="responsive prettyimg">
+                                            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/wAARCAAUABQDAREAAhEBAxEB/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwCJfEt3atmC7eIMAwXcBz9DVqxLelzWtfiJcQKFu41lK/xrxn61oopk89jetPiHp726meJ/M77VBH86fsn0F7RHkl7Z27zG8V5GIyA5bBYHnpjFcXtWtjoVJW1NTSvDE2pRJOL+COFiQN3Xjrx6120+WUea55latOFRwUdup11r4P0aOACfzpnPJdX2j8AKvXoQq99ziZoUhhjiX7oUjnk8V5Vz2zHudUvFv4bSOYxxYcYQAdQQf0qlJrRGE6cW7sNekuLbUFiW7uGUQpjdIfSplJ3FyxWiR//Z" width="200" height="200" aria-hidden="true" class="placeholder cover"/>
+                                            <img alt="" onload="loaded(this)" src="/whitehorse-road-trip-day-13/cover-980.jpg" srcset="/whitehorse-road-trip-day-13/cover-200.jpg 200w, /whitehorse-road-trip-day-13/cover-400.jpg 400w, /whitehorse-road-trip-day-13/cover-800.jpg 800w, /whitehorse-road-trip-day-13/cover-980.jpg 980w" width="200" height="200" class="actual contain" loading="lazy"/>
+                                            <div style="width: 100%; padding-bottom: 100.0%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
                     </div>
                 </div>
             </div>

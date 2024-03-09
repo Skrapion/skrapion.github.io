@@ -298,6 +298,10 @@ a {
 
 #error h1 {
     font-size: 12rem;
+}
+
+h1 {
+    font-size: 2rem;
     font-family: 'Rouge Script', cursive;
     font-weight: 100;
     font-style: italic;
