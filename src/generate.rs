@@ -207,7 +207,7 @@ async fn generate_posts(
             handlebars.register_template_string("body", post_data.body.clone())?;
             let rendered = handlebars.render("post", &post_with_children)
                 .map_err(|e| { format!("{:?}", e )}).unwrap();
-            let mut output = File::create(post_dir.clone().join("content.html"))?;
+            let mut output = File::create(post_dir.clone().join("index.content.html"))?;
             write!(output, "{}", rendered)?;
 
             handlebars.register_template_string("content", rendered)?;

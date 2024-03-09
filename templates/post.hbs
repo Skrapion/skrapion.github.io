@@ -48,12 +48,12 @@
             <div id='signposts'>
                 <div id='newer' class='post'>
                     {{#if post.newer}}
-                        <a hx-get="/{{post.newer}}/content.html?{{header.cachebust}}" href="/{{post.newer}}?{{header.cachebust}}" hx-replace-url="/{{post.newer}}" id="newerlink" onclick="return setTransitionName('right-transition')" hx-on:click="document.title='{{titlelookup post.newer}} - Firefang'" preload="preload:init">
+                        <a hx-get="/{{post.newer}}/index.content.html?{{header.cachebust}}" href="/{{post.newer}}?{{header.cachebust}}" hx-replace-url="/{{post.newer}}" id="newerlink" onclick="return setTransitionName('right-transition')" hx-on:click="document.title='{{titlelookup post.newer}} - Firefang'" preload="preload:init">
                             {{>responsiveimg class="signpostimg" slug=post.newer filename="cover.jpg" title=(titlelookup post.newer) fit="cover" w="200" h="200" maxwidth="400"}}
                         </a>
                     {{else}}
                         {{#if post.parent}}
-                            <a hx-get="/{{post.parent}}/content.html?{{header.cachebust}}" href="/{{post.parent}}?{{header.cachebust}}" hx-replace-url="/{{post.parent}}" id="newerlink" onclick="return setTransitionName('right-transition')" hx-on:click="document.title='{{titlelookup post.parent}} - Firefang'" preload="preload:init">
+                            <a hx-get="/{{post.parent}}/index.content.html?{{header.cachebust}}" href="/{{post.parent}}?{{header.cachebust}}" hx-replace-url="/{{post.parent}}" id="newerlink" onclick="return setTransitionName('right-transition')" hx-on:click="document.title='{{titlelookup post.parent}} - Firefang'" preload="preload:init">
                                 {{>responsiveimg class="signpostimg" slug=post.parent filename="cover.jpg" title=(titlelookup post.parent) fit="cover" w="200" h="200" maxwidth="400"}}
                             </a>
                         {{/if}}
@@ -61,12 +61,12 @@
                 </div>
                 <div id='older' class='post'>
                     {{#if post.older}}
-                        <a hx-get="/{{post.older}}/content.html?{{header.cachebust}}" href="/{{post.older}}?{{cachebust}}" hx-replace-url="/{{post.older}}" id="olderlink" onclick="return setTransitionName('left-transition')" hx-on:click="document.title='{{titlelookup post.older}} - Firefang'" preload="preload:init">
+                        <a hx-get="/{{post.older}}/index.content.html?{{header.cachebust}}" href="/{{post.older}}?{{cachebust}}" hx-replace-url="/{{post.older}}" id="olderlink" onclick="return setTransitionName('left-transition')" hx-on:click="document.title='{{titlelookup post.older}} - Firefang'" preload="preload:init">
                             {{>responsiveimg class="signpostimg" slug=post.older filename="cover.jpg" title=(titlelookup post.older) fit="cover" w="200" h="200" maxwidth="400"}}
                         </a>
                     {{else}}
                         {{#if post.parent}}
-                            <a hx-get="/{{post.parent}}/content.html?{{header.cachebust}}" href="/{{post.parent}}?{{cachebust}}" hx-replace-url="/{{post.parent}}" id="olderlink" onclick="return setTransitionName('left-transition')" hx-on:click="document.title='{{titlelookup post.parent}} - Firefang'" preload="preload:init">
+                            <a hx-get="/{{post.parent}}/index.content.html?{{header.cachebust}}" href="/{{post.parent}}?{{cachebust}}" hx-replace-url="/{{post.parent}}" id="olderlink" onclick="return setTransitionName('left-transition')" hx-on:click="document.title='{{titlelookup post.parent}} - Firefang'" preload="preload:init">
                                 {{>responsiveimg class="signpostimg" slug=post.parent filename="cover.jpg" title=(titlelookup post.parent) fit="cover" w="200" h="200" maxwidth="400"}}
                             </a>
                         {{/if}}
@@ -82,7 +82,7 @@
                 <div class="indexcontent">
                     {{#each post.similars}}
                         <div class="post">
-                            <a class="photosquare" hx-get="/{{this}}/content.html?{{../header.cachebust}}" href="/{{this}}?{{cachebust}}" hx-replace-url="/{{this}}" onclick="return setTransitionName('fade-transition')" hx-on:click="document.title='{{titlelookup this}} - Firefang'" preload>
+                            <a class="photosquare" hx-get="/{{this}}/index.content.html?{{../header.cachebust}}" href="/{{this}}?{{cachebust}}" hx-replace-url="/{{this}}" onclick="return setTransitionName('fade-transition')" hx-on:click="document.title='{{titlelookup this}} - Firefang'" preload>
                                 {{>responsiveimg title=(titlelookup this) class="photosquare" slug=this filename="cover.jpg" fit="cover" w="200" h="200" maxwidth="400"}}
                             </a>
                         </div>
