@@ -178,42 +178,44 @@ async fn generate_posts(
 
     println!("Generating posts");
     for (parent, posts) in &cposts.posts_by_parent {
-        println!("Parent post: {}", parent);
-        for post_data in posts {
-            println!("Generating {}", post_data.slug);
-            let header_data = HeaderData {
-                title: &(post_data.title.clone() + " - " + &config.site_name),
-                description: &post_data.description,
-                url: &post_data.slug,
-                thumbnail: &(post_data.slug.clone() + "/ogImage.jpg"),
-                cachebust: &cachebust,
-            };
+        if parent != "hidden" {
+            println!("Parent post: {}", parent);
+            for post_data in posts {
+                println!("Generating {}", post_data.slug);
+                let header_data = HeaderData {
+                    title: &(post_data.title.clone() + " - " + &config.site_name),
+                    description: &post_data.description,
+                    url: &post_data.slug,
+                    thumbnail: &(post_data.slug.clone() + "/ogImage.jpg"),
+                    cachebust: &cachebust,
+                };
 
-            let post_with_children = PostWithChildren {
-                children: {
-                    match cposts.posts_by_parent.get(&post_data.slug) {
-                        None => None,
-                        Some(k) => {
-                            Some(&k)
+                let post_with_children = PostWithChildren {
+                    children: {
+                        match cposts.posts_by_parent.get(&post_data.slug) {
+                            None => None,
+                            Some(k) => {
+                                Some(&k)
+                            }
                         }
-                    }
-                },
-                post: Some(&post_data),
-                header: &header_data,
-            };
+                    },
+                    post: Some(&post_data),
+                    header: &header_data,
+                };
 
-            let post_dir = out_dir.clone().join(&post_data.slug);
+                let post_dir = out_dir.clone().join(&post_data.slug);
 
-            handlebars.register_template_string("body", post_data.body.clone())?;
-            let rendered = handlebars.render("post", &post_with_children)
-                .map_err(|e| { format!("{:?}", e )}).unwrap();
-            let mut output = File::create(post_dir.clone().join("index.content.html"))?;
-            write!(output, "{}", rendered)?;
+                handlebars.register_template_string("body", post_data.body.clone())?;
+                let rendered = handlebars.render("post", &post_with_children)
+                    .map_err(|e| { format!("{:?}", e )}).unwrap();
+                let mut output = File::create(post_dir.clone().join("index.content.html"))?;
+                write!(output, "{}", rendered)?;
 
-            handlebars.register_template_string("content", rendered)?;
-            let output = File::create(post_dir.clone().join("index.html"))?;
-            handlebars.render_to_write("default", &header_data, output)
-                .map_err(|e| { format!("{:?}", e) }).unwrap();
+                handlebars.register_template_string("content", rendered)?;
+                let output = File::create(post_dir.clone().join("index.html"))?;
+                handlebars.render_to_write("default", &header_data, output)
+                    .map_err(|e| { format!("{:?}", e) }).unwrap();
+            }
         }
     }
 

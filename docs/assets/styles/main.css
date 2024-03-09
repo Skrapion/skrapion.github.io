@@ -317,3 +317,8 @@ h1 {
     margin-top: 0;
     text-align: center;
 }
+
+#aboutcontent .circle {
+    border-radius: 50%;
+    border: 1px solid #aaa;
+}
