@@ -1,6 +1,14 @@
 * Mail box
 * Electronics bins
 * Jump rope
+* Moon poem
+* Ant Farm
+* Circus photography
+* Sandman costume
+* Pixel wall
+* Toe molds?
+* Triangle lamp?
+* Glass feathers
 * Ulu gift
 * Yukon River
 * 2018 hikes

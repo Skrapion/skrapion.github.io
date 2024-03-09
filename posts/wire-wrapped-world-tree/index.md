@@ -6,6 +6,7 @@ tags: [crafty]
 pics:
   - cover.jpg
   - forscale.jpg
+featured: true
 ---
 My first attempt at wire-wrapped jewelry!
 
