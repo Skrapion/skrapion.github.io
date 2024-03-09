@@ -200,6 +200,10 @@
         padding-left: 125px;
     }
 
+    #about {
+        padding-right: 0;
+    }
+
     #story {
         display: block;
         position: relative;
