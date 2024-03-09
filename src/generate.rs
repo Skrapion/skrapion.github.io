@@ -221,15 +221,31 @@ async fn generate_posts(
 }
 
 #[derive(Deserialize)]
+enum PostsBy {
+    #[serde(rename="by_date")]
+    ByDate,
+    #[serde(rename="by_postdate")]
+    ByPostdate,
+}
+
+#[derive(Deserialize)]
 struct PageData {
     content: String,
     #[serde(default="default_default")]
     template: String,
+    #[serde(default="html")]
+    extension: String,
     title: Option<String>,
     description: Option<String>,
+    #[serde(default="by_date")]
+    posts_by: PostsBy,
+    #[serde(default)]
+    skip_content: bool,
 }
 
 fn default_default() -> String { "default".to_string() }
+fn html() -> String { "html".to_string() }
+fn by_date() -> PostsBy { PostsBy::ByDate }
 
 fn generate_pages(
     config: &Config,
@@ -253,10 +269,15 @@ fn generate_pages(
                 &dir.clone().join(entry.file_name()))?
         } else if let Some(ext) = &path.extension() {
             if ext.to_str().unwrap() == "yaml" {
+                let file = File::open(path)?;
+                let reader = BufReader::new(file);
+                let page_data: PageData = 
+                    serde_yaml::from_reader(reader).unwrap();
+
                 let mut full_url = dir.clone();
                 if entry.file_name() != "index.yaml" {
                     full_url.push(&entry.file_name());
-                    full_url.set_extension("html");
+                    full_url.set_extension(&page_data.extension);
                 }
 
                 let mut content_url = dir.clone().join(&entry.file_name());
@@ -273,11 +294,6 @@ fn generate_pages(
 
                 println!("Generating {}", full_path.display());
 
-                let file = File::open(path)?;
-                let reader = BufReader::new(file);
-                let page_data: PageData = 
-                    serde_yaml::from_reader(reader).unwrap();
-
                 let header_data = HeaderData {
                     title: 
                         page_data.title.as_ref().unwrap_or(&config.site_name),
@@ -289,8 +305,23 @@ fn generate_pages(
                         page_data.description.as_ref().unwrap_or(&config.site_thumbnail),
                     cachebust: &cachebust,
                 };
+                let mut postdate_vec = Posts::new();
                 let post_with_children = PostWithChildren {
-                    children: Some(&cposts.posts_by_parent[""]),
+                    children: Some({
+                        match page_data.posts_by {
+                            PostsBy::ByDate => &cposts.posts_by_parent[""],
+                            PostsBy::ByPostdate => {
+                                let mut postdate_map = BTreeMap::<String, &PostData>::new();
+                                for post in &cposts.posts_by_parent[""] {
+                                    postdate_map.insert(post.postdate.clone() + &post.slug, &post);
+                                }
+                                for post in postdate_map.values().rev() {
+                                    postdate_vec.push((*post).clone());
+                                }
+                                &postdate_vec
+                            }
+                        }
+                    }),
                     post: None,
                     header: &header_data,
                 };
@@ -305,8 +336,10 @@ fn generate_pages(
                 let rendered = handlebars.render(&content, &post_with_children)
                     .map_err(|e| { format!("{:?}", e )}).unwrap();
 
-                let mut output = File::create(content_path)?;
-                write!(output, "{}", rendered)?;
+                if page_data.skip_content == false {
+                    let mut output = File::create(content_path)?;
+                    write!(output, "{}", rendered)?;
+                }
 
                 handlebars.register_template_string("content", rendered)?;
                 let output = File::create(full_path)?;
@@ -315,28 +348,6 @@ fn generate_pages(
             }
         }
     }
-
-    Ok(())
-}
-
-async fn generate_rss(
-    config: &Config,
-    cposts: &CollectedPosts, 
-    handlebars: &mut Handlebars<'_>,
-) -> Result<()> {
-    let out_dir = env::current_dir()?.join(&config.out_dir);
-
-    println!("Generating RSS");
-    let mut postmap = BTreeMap::new();
-    let mut postdate_map = BTreeMap::<String, &PostData>::new();
-    for post in &cposts.posts_by_parent[""] {
-        postdate_map.insert(post.postdate.clone() + &post.slug, &post);
-    }
-    let postdate_vec: Vec<&&PostData> = postdate_map.values().rev().collect();
-    postmap.insert(config.post_dir.clone(), &postdate_vec);
-    let output = File::create(out_dir.clone().join("rss.xml"))?;
-    handlebars.render_to_write("rss", &postmap, output)
-        .map_err(|e| { format!("{:?}", e )}).unwrap();
 
     Ok(())
 }
@@ -353,7 +364,6 @@ pub async fn generate_site(regenerate: bool, config: &Config) -> Result<()> {
 
     generate_posts(&config, &cposts, &mut handlebars, &cachebust).await?;
     generate_pages(&config, &cposts, &mut handlebars, &cachebust, &"".into())?;
-    generate_rss(&config, &cposts, &mut handlebars).await?;
 
     Ok(())
 }

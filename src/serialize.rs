@@ -9,6 +9,7 @@ use serde::{Serialize, Deserialize};
 use crate::config::*;
 
 #[derive(Deserialize)]
+#[derive(Clone)]
 #[serde(untagged)]
 enum PicMetadataIn {
     Basic(String),
@@ -17,6 +18,7 @@ enum PicMetadataIn {
 
 #[derive(Deserialize)]
 #[derive(Serialize, Default)]
+#[derive(Clone)]
 pub struct PicMetadata {
     pub filename: String,
     #[serde(rename="type", default="default_pic")]
@@ -31,6 +33,7 @@ pub struct PicMetadata {
 
 #[derive(Deserialize)]
 #[derive(Serialize)]
+#[derive(Clone)]
 pub struct PostData {
     #[serde(skip_deserializing)]
     pub slug: String,
