@@ -26,17 +26,14 @@ pub async fn start_server(config: Config) -> anyhow::Result<()> {
         let io = TokioIo::new(stream);
 
         let server = Server {
-            dir: config.out_dir.clone()
+            dir: config.out_dir.clone(),
         };
 
         tokio::task::spawn(async move {
             let server = server.clone();
-            if let Err(err) = 
-                auto::Builder::new(TokioExecutor::new())
-                    .serve_connection(
-                        io, 
-                        server
-                    ).await
+            if let Err(err) = auto::Builder::new(TokioExecutor::new())
+                .serve_connection(io, server)
+                .await
             {
                 println!("Failed to serve connection: {:?}", err);
             }
@@ -56,45 +53,46 @@ impl Service<Request<IncomingBody>> for Server {
 
     fn call(&self, req: Request<IncomingBody>) -> Self::Future {
         fn mk_response(
-            status: StatusCode, 
-            data: Vec<u8>, 
-            mime: &str 
+            status: StatusCode,
+            data: Vec<u8>,
+            mime: &str,
         ) -> Result<Response<Full<Bytes>>, hyper::Error> {
             Ok(Response::builder()
-               .status(status)
-               .header("Content-Type", mime)
-               .body(Full::new(Bytes::from(data))).unwrap())
+                .status(status)
+                .header("Content-Type", mime)
+                .body(Full::new(Bytes::from(data)))
+                .unwrap())
         }
 
         let dir = self.dir.clone();
         fn get404(dir: &String, filename: &str) -> Vec<u8> {
             eprintln!("No such file: {}", filename);
-            let path404 = env::current_dir().unwrap().join(&dir).join("404.html");
-            std::fs::read(&path404).unwrap()
+            let path404 = env::current_dir().unwrap().join(dir).join("404.html");
+            std::fs::read(path404).unwrap()
         }
 
         let mut filename = match (req.method(), req.uri().path()) {
             (&Method::GET, path) => path.to_string(),
-            _ => return Box::pin(async move { 
-                mk_response(StatusCode::NOT_FOUND, get404(&dir, ""), "text/html") 
-            })
+            _ => {
+                return Box::pin(async move {
+                    mk_response(StatusCode::NOT_FOUND, get404(&dir, ""), "text/html")
+                })
+            }
         };
 
-        if filename.starts_with("/") {
+        if filename.starts_with('/') {
             filename = filename[1..].to_string();
         }
-        let mut path = env::current_dir().unwrap()
-            .join(&self.dir).join(&filename);
+        let mut path = env::current_dir().unwrap().join(&self.dir).join(&filename);
 
-        let is_dir: bool;
-        match fs::metadata(&path) {
+        let is_dir: bool = match fs::metadata(&path) {
             Err(_) => {
-                return Box::pin(async move { 
-                    mk_response(StatusCode::NOT_FOUND, get404(&dir, &filename), "text/html") 
+                return Box::pin(async move {
+                    mk_response(StatusCode::NOT_FOUND, get404(&dir, &filename), "text/html")
                 });
-            },
-            Ok(o) => is_dir = o.is_dir()
-        }
+            }
+            Ok(o) => o.is_dir(),
+        };
 
         if is_dir {
             path.push("index.html");
@@ -103,8 +101,8 @@ impl Service<Request<IncomingBody>> for Server {
         let output = match std::fs::read(&path) {
             Ok(o) => o,
             Err(_) => {
-                return Box::pin(async move { 
-                    mk_response(StatusCode::NOT_FOUND, get404(&dir, &filename), "text/html") 
+                return Box::pin(async move {
+                    mk_response(StatusCode::NOT_FOUND, get404(&dir, &filename), "text/html")
                 });
             }
         };
@@ -120,11 +118,10 @@ impl Service<Request<IncomingBody>> for Server {
             }
             mimestring = output;
         } else {
-            mimestring="application/octet-stream".to_string();
+            mimestring = "application/octet-stream".to_string();
         }
 
         println!("Serving File: {}", filename);
         Box::pin(async move { mk_response(StatusCode::OK, output, &mimestring) })
     }
 }
-

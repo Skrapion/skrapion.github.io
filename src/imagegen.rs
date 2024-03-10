@@ -1,4 +1,4 @@
-use std::collections::{HashMap, hash_map};
+use std::collections::{hash_map, HashMap};
 use std::env;
 use std::fs;
 use std::path::PathBuf;
@@ -11,7 +11,7 @@ use tokio::task::JoinHandle;
 use crate::config::*;
 use crate::utils::*;
 
-pub const SIZES: [u32;6] = [20, 200, 400, 800, 1200, 1920];
+pub const SIZES: [u32; 6] = [20, 200, 400, 800, 1200, 1920];
 
 pub struct ThumbnailData {
     pub placeholder: String,
@@ -27,30 +27,20 @@ pub struct ThumbnailFuturesMap {
 pub type ThumbnailMap = HashMap<String, ThumbnailData>;
 
 impl ThumbnailFuturesMap {
-    pub fn queue_image(
-        self: &mut Self, 
-        slug: String, 
-        file: String,
-        config: &Config,
-        regenerate: bool,
-    ) {
+    pub fn queue_image(&mut self, slug: String, file: String, config: &Config, regenerate: bool) {
         let path = slug.clone() + "/" + &file;
         if let hash_map::Entry::Vacant(entry) = self.hashmap.entry(path) {
-            entry.insert(
-                Box::new(
-                    tokio::task::spawn(
-                        load_images(
-                            slug, file, 
-                            config.post_dir.clone(), config.out_dir.clone(), 
-                            regenerate
-                        )
-                    )
-                )
-            );
+            entry.insert(Box::new(tokio::task::spawn(load_images(
+                slug,
+                file,
+                config.post_dir.clone(),
+                config.out_dir.clone(),
+                regenerate,
+            ))));
         }
     }
 
-    pub async fn join_all(self: &mut Self) -> Result<ThumbnailMap> {
+    pub async fn join_all(&mut self) -> Result<ThumbnailMap> {
         println!("Awaiting image generation");
 
         let mut thumbnail_map = HashMap::with_capacity(self.hashmap.len());
@@ -64,26 +54,28 @@ impl ThumbnailFuturesMap {
 }
 
 fn scale_image(
-    img: &mut Option<image::DynamicImage>, 
-    in_file: &PathBuf, out_file: &PathBuf, 
-    w: u32, h: u32,
+    img: &mut Option<image::DynamicImage>,
+    in_file: &PathBuf,
+    out_file: &PathBuf,
+    w: u32,
+    h: u32,
     fill: bool,
 ) {
-    if let None = img {
-        *img = Some(image::open(&in_file).unwrap());
+    if img.is_none() {
+        *img = Some(image::open(in_file).unwrap());
     }
 
     if let Some(ref image) = img {
         let scaled = match fill {
             true => image.resize_to_fill(w, h, FilterType::CatmullRom),
-            false => image.resize(w, h, FilterType::CatmullRom)
+            false => image.resize(w, h, FilterType::CatmullRom),
         };
         scaled.save(out_file).unwrap();
     }
 }
 
 async fn load_images(
-    slug: String, 
+    slug: String,
     file: String,
     post_dir: String,
     out_dir: String,
@@ -94,15 +86,12 @@ async fn load_images(
     let out_dir = current_dir.clone().join(out_dir);
     let dir = PathBuf::from(slug);
     let in_file = post_dir.join(dir.clone()).join(&file);
-    let basename = in_file.file_stem().unwrap()
-        .to_str().unwrap().to_string();
+    let basename = in_file.file_stem().unwrap().to_str().unwrap().to_string();
 
     let out_file = |w: u32| -> PathBuf {
-        out_dir.join(dir.clone()).join( 
-            basename.clone() + 
-            "-" + 
-            &w.to_string() + 
-            ".jpg")
+        out_dir
+            .join(dir.clone())
+            .join(basename.clone() + "-" + &w.to_string() + ".jpg")
     };
 
     let in_file_modified = fs::metadata(&in_file)?.modified()?;
@@ -121,7 +110,7 @@ async fn load_images(
         }
     }
 
-    if width <= SIZES[SIZES.len()-1] {
+    if width <= SIZES[SIZES.len() - 1] {
         let out_file = out_file(width);
 
         if regenerate || should_update_from_time(&in_file_modified, &out_file) {
@@ -142,11 +131,9 @@ async fn load_images(
     let scaled20 = fs::read(out_file(20))?;
 
     Ok(ThumbnailData {
-        placeholder: "data:image/jpeg;base64,".to_string() +
-            &Base64Display::new(scaled20.as_slice(), &STANDARD)
-            .to_string(),
-        width: width,
-        height: height,
+        placeholder: "data:image/jpeg;base64,".to_string()
+            + &Base64Display::new(scaled20.as_slice(), &STANDARD).to_string(),
+        width,
+        height,
     })
 }
-

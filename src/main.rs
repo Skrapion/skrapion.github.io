@@ -17,7 +17,6 @@ use generate::*;
 use onesignal::*;
 use webserver::*;
 
-
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
 struct Args {

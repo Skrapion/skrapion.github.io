@@ -1,27 +1,24 @@
 use std::collections::BTreeSet;
 use std::fs::File;
-use std::io::{BufReader, BufRead};
+use std::io::{BufRead, BufReader};
 use std::path::PathBuf;
 
 use anyhow::{anyhow, Result};
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 use crate::config::*;
 
-#[derive(Deserialize)]
-#[derive(Clone)]
+#[derive(Deserialize, Clone)]
 #[serde(untagged)]
 enum PicMetadataIn {
     Basic(String),
     Extended(PicMetadata),
 }
 
-#[derive(Deserialize)]
-#[derive(Serialize, Default)]
-#[derive(Clone)]
+#[derive(Deserialize, Serialize, Default, Clone)]
 pub struct PicMetadata {
     pub filename: String,
-    #[serde(rename="type", default="default_pic")]
+    #[serde(rename = "type", default = "default_pic")]
     pub filetype: String,
     #[serde(default)]
     pub credit: String,
@@ -31,9 +28,7 @@ pub struct PicMetadata {
     pub site: String,
 }
 
-#[derive(Deserialize)]
-#[derive(Serialize)]
-#[derive(Clone)]
+#[derive(Deserialize, Serialize, Clone)]
 pub struct PostData {
     #[serde(skip_deserializing)]
     pub slug: String,
@@ -48,7 +43,7 @@ pub struct PostData {
     pub parent: String,
     #[serde(default)]
     pub tags: Vec<String>,
-    #[serde(skip_serializing, rename="pics", default="default_cover")]
+    #[serde(skip_serializing, rename = "pics", default = "default_cover")]
     pics_in: Vec<PicMetadataIn>,
     #[serde(skip_deserializing)]
     pub pics: Vec<PicMetadata>,
@@ -90,11 +85,11 @@ pub struct PostWithChildren<'a> {
     pub header: &'a HeaderData<'a>,
 }
 
-pub fn deserialize_md(dir: &PathBuf, config: &Config) -> Result<PostData> {
+pub fn deserialize_md(dir: PathBuf, config: &Config) -> Result<PostData> {
     let slug = dir.file_name().unwrap().to_str().unwrap().to_string();
     println!("Parsing {}", &slug);
 
-    let mut path = dir.clone();
+    let mut path = dir;
     path.push("index.md");
 
     let file = File::open(path)?;
@@ -102,7 +97,11 @@ pub fn deserialize_md(dir: &PathBuf, config: &Config) -> Result<PostData> {
     let mut front_matter = String::new();
     let mut content = String::new();
     #[derive(PartialEq)]
-    enum Mode { Pre, FrontMatter, Content }
+    enum Mode {
+        Pre,
+        FrontMatter,
+        Content,
+    }
     let mut mode = Mode::Pre;
 
     for line in reader.lines() {
@@ -113,7 +112,7 @@ pub fn deserialize_md(dir: &PathBuf, config: &Config) -> Result<PostData> {
                     return Err(anyhow!("File did not start with ---"));
                 }
                 mode = Mode::FrontMatter;
-            },
+            }
             Mode::FrontMatter => {
                 if line == "---" {
                     mode = Mode::Content;
@@ -121,7 +120,7 @@ pub fn deserialize_md(dir: &PathBuf, config: &Config) -> Result<PostData> {
                     front_matter += "\n";
                     front_matter += &line;
                 }
-            },
+            }
             Mode::Content => {
                 content += &line;
                 content += "\n";
@@ -135,7 +134,7 @@ pub fn deserialize_md(dir: &PathBuf, config: &Config) -> Result<PostData> {
 
     let mut post_data: PostData = serde_yaml::from_str(&front_matter).unwrap();
     post_data.slug = slug;
-    if post_data.postdate == "" {
+    if post_data.postdate.is_empty() {
         post_data.postdate = post_data.date.clone();
     }
 
@@ -145,7 +144,7 @@ pub fn deserialize_md(dir: &PathBuf, config: &Config) -> Result<PostData> {
             PicMetadataIn::Basic(filename) => {
                 pic_out.filename = filename.to_string();
                 pic_out.filetype = "pic".to_string();
-            },
+            }
             PicMetadataIn::Extended(metadata) => {
                 pic_out.filename = metadata.filename.to_string();
                 pic_out.filetype = metadata.filetype.to_string();

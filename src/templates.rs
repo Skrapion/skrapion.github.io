@@ -13,7 +13,7 @@ fn format_date(
     _: &Handlebars,
     _: &Context,
     _: &mut RenderContext,
-    out: &mut dyn Output
+    out: &mut dyn Output,
 ) -> HelperResult {
     let unformatted = h.param(0).unwrap().value().render();
     let format = h.param(1).unwrap().value().render();
@@ -29,7 +29,7 @@ fn ratio(
     _: &Handlebars,
     _: &Context,
     _: &mut RenderContext,
-    out: &mut dyn Output
+    out: &mut dyn Output,
 ) -> HelperResult {
     let width_str = h.param(0).unwrap().value().render();
     let height_str = h.param(1).unwrap().value().render();
@@ -50,18 +50,22 @@ struct TitleLookupHelper<'a> {
 
 impl HelperDef for TitleLookupHelper<'_> {
     fn call<'reg: 'rc, 'rc>(
-        &self, h: &Helper, 
-        _: &Handlebars, 
-        _: &Context, 
-        _: &mut RenderContext, 
-        out: &mut dyn Output
+        &self,
+        h: &Helper,
+        _: &Handlebars,
+        _: &Context,
+        _: &mut RenderContext,
+        out: &mut dyn Output,
     ) -> HelperResult {
         let slug = h.param(0).unwrap().value().render();
-        
+
         if let Some(title) = self.titles.get(&slug) {
             out.write(title)?;
         } else {
-            Err(RenderErrorReason::Other(format!("Couldn't find title for slug: {}", slug)))?;
+            Err(RenderErrorReason::Other(format!(
+                "Couldn't find title for slug: {}",
+                slug
+            )))?;
         }
 
         Ok(())
@@ -74,11 +78,12 @@ struct PicHelper<'a> {
 
 impl HelperDef for PicHelper<'_> {
     fn call<'reg: 'rc, 'rc>(
-        &self, h: &Helper, 
-        _: &Handlebars, 
-        _: &Context, _: 
-        &mut RenderContext, 
-        out: &mut dyn Output
+        &self,
+        h: &Helper,
+        _: &Handlebars,
+        _: &Context,
+        _: &mut RenderContext,
+        out: &mut dyn Output,
     ) -> HelperResult {
         let slug = h.param(0).unwrap().value().render();
         let file = h.param(1).unwrap().value().render();
@@ -86,27 +91,21 @@ impl HelperDef for PicHelper<'_> {
         let path = slug.clone() + "/" + &file;
 
         match cmd.as_str() {
-            "placeholder" =>
-                out.write(&self.thumbnail_map[&path].placeholder)?,
-            "width" =>
-                out.write(&self.thumbnail_map[&path].width.to_string())?,
-            "height" =>
-                out.write(&self.thumbnail_map[&path].height.to_string())?,
-            "src" =>
-                out.write(&self.src(&self.thumbnail_map[&path], &slug, &file)?)?,
+            "placeholder" => out.write(&self.thumbnail_map[&path].placeholder)?,
+            "width" => out.write(&self.thumbnail_map[&path].width.to_string())?,
+            "height" => out.write(&self.thumbnail_map[&path].height.to_string())?,
+            "src" => out.write(&self.src(&self.thumbnail_map[&path], &slug, &file)?)?,
             "srcset" => {
                 let max_width = match h.param(3) {
                     Some(json) => json.value().render().parse().unwrap_or(u32::MAX),
-                    None => u32::MAX
+                    None => u32::MAX,
                 };
-                out.write(&self.srcset(
-                        &self.thumbnail_map[&path],
-                        &slug, &file, max_width
-                    )?)?
-            },
-            _ =>
-                Err(RenderErrorReason::Other(
-                        format!("Bad cmd '{}' in img", cmd)))?
+                out.write(&self.srcset(&self.thumbnail_map[&path], &slug, &file, max_width)?)?
+            }
+            _ => Err(RenderErrorReason::Other(format!(
+                "Bad cmd '{}' in img",
+                cmd
+            )))?,
         }
 
         Ok(())
@@ -115,39 +114,58 @@ impl HelperDef for PicHelper<'_> {
 
 impl PicHelper<'_> {
     fn src(
-        &self, thumbnail: &ThumbnailData, slug: &String, file: &String
+        &self,
+        thumbnail: &ThumbnailData,
+        slug: &String,
+        file: &String,
     ) -> Result<String, RenderError> {
-        let out = PathBuf::from(file).file_stem().unwrap()
-            .to_str().unwrap().to_string();
+        let out = PathBuf::from(file)
+            .file_stem()
+            .unwrap()
+            .to_str()
+            .unwrap()
+            .to_string();
         let mut out = "/".to_string() + &slug + "/" + &out + "-";
 
         let width = thumbnail.width;
 
         out += &{
-            if width < SIZES[SIZES.len()-1] { width }
-            else { SIZES[SIZES.len()-1] }
-        }.to_string();
+            if width < SIZES[SIZES.len() - 1] {
+                width
+            } else {
+                SIZES[SIZES.len() - 1]
+            }
+        }
+        .to_string();
         out += ".jpg";
 
         Ok(out)
     }
 
-    fn srcset(&self, 
-              thumbnail: &ThumbnailData, 
-              slug: &String, 
-              file: &String,
-              max_width: u32,
+    fn srcset(
+        &self,
+        thumbnail: &ThumbnailData,
+        slug: &String,
+        file: &String,
+        max_width: u32,
     ) -> Result<String, RenderError> {
-        let basename = PathBuf::from(file).file_stem().unwrap()
-            .to_str().unwrap().to_string();
+        let basename = PathBuf::from(file)
+            .file_stem()
+            .unwrap()
+            .to_str()
+            .unwrap()
+            .to_string();
         let basename = "/".to_string() + &slug + "/" + &basename + "-";
         let mut out = String::new();
         let mut comma = false;
 
         let mut output = |w: u32| -> HelperResult {
             if w > 20 && w <= max_width {
-                if comma { out += ", "; }
-                else { comma = true; }
+                if comma {
+                    out += ", ";
+                } else {
+                    comma = true;
+                }
 
                 out += &basename;
                 out += &w.to_string();
@@ -166,15 +184,13 @@ impl PicHelper<'_> {
             }
         }
 
-        if width < SIZES[SIZES.len()-1] {
+        if width < SIZES[SIZES.len() - 1] {
             output(width)?;
         }
 
         Ok(out)
     }
 }
-
-
 
 #[derive(Clone, Copy)]
 struct HeightHelper<'a> {
@@ -183,12 +199,12 @@ struct HeightHelper<'a> {
 
 impl<'a> HelperDef for HeightHelper<'a> {
     fn call<'reg: 'rc, 'rc>(
-        &self, h: 
-        &Helper, 
-        _: &Handlebars, 
-        _: &Context, 
-        _: &mut RenderContext, 
-        out: &mut dyn Output
+        &self,
+        h: &Helper,
+        _: &Handlebars,
+        _: &Context,
+        _: &mut RenderContext,
+        out: &mut dyn Output,
     ) -> HelperResult {
         let slug = h.param(0).unwrap().value().render();
         let file = h.param(1).unwrap().value().render();
@@ -201,29 +217,30 @@ impl<'a> HelperDef for HeightHelper<'a> {
 }
 
 pub fn setup_handlebars<'a, 'b>(
-    post_titles: &'a BTreeMap<String, String>, 
-    thumbnail_map: &'a ThumbnailMap
+    post_titles: &'a BTreeMap<String, String>,
+    thumbnail_map: &'a ThumbnailMap,
 ) -> Result<Handlebars<'b>>
-where 'a: 'b
+where
+    'a: 'b,
 {
     let mut handlebars = Handlebars::new();
 
     handlebars.register_helper("format-date", Box::new(format_date));
     handlebars.register_helper("ratio", Box::new(ratio));
-    handlebars.register_helper("titlelookup", Box::new(
-            TitleLookupHelper { titles: &post_titles }
-            ));
-    handlebars.register_helper("pic", Box::new(
-            PicHelper { thumbnail_map: &thumbnail_map }
-            ));
+    handlebars.register_helper(
+        "titlelookup",
+        Box::new(TitleLookupHelper {
+            titles: post_titles,
+        }),
+    );
+    handlebars.register_helper("pic", Box::new(PicHelper { thumbnail_map }));
 
     for entry in fs::read_dir("templates")? {
         let entry = entry?;
         let path = entry.path();
         let basename = &path.file_stem().unwrap().to_str().unwrap();
 
-        handlebars.register_template_string(basename,
-            fs::read_to_string(&path)?)?;
+        handlebars.register_template_string(basename, fs::read_to_string(&path)?)?;
     }
 
     Ok(handlebars)

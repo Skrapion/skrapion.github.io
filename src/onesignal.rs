@@ -6,9 +6,9 @@ use anyhow::{bail, Result};
 use chrono_tz::Tz;
 use cron::Schedule;
 
-use onesignal_rust_api::*;
 use onesignal_rust_api::apis::configuration::Configuration;
 use onesignal_rust_api::models::{Notification, StringMap};
+use onesignal_rust_api::*;
 
 use crate::config::*;
 use crate::serialize::*;
@@ -35,22 +35,19 @@ fn get_latest_post(config: &Config) -> Result<LatestPostData> {
 
     let mut latest_post_data = LatestPostData::default();
 
-    for entry in fs::read_dir(&post_dir)? {
+    for entry in fs::read_dir(post_dir)? {
         let entry = entry?;
         let path = entry.path();
 
-        let post_data = deserialize_md(&path, &config)?;
-        if &latest_date < &post_data.postdate {
+        let post_data = deserialize_md(path.clone(), config)?;
+        if latest_date < post_data.postdate {
             latest_date = post_data.postdate.clone();
 
-            latest_post_data.slug = 
-                entry.file_name().to_str().unwrap().to_string();
+            latest_post_data.slug = entry.file_name().to_str().unwrap().to_string();
             latest_post_data.title = post_data.title.clone();
             latest_post_data.description = post_data.description.clone();
-            latest_post_data.post_url = 
-                config.site_url.clone() + "/" + &latest_post_data.slug;
-            latest_post_data.thumbnail_url =
-                latest_post_data.post_url.clone() + "/ogImage.jpg";
+            latest_post_data.post_url = config.site_url.clone() + "/" + &latest_post_data.slug;
+            latest_post_data.thumbnail_url = latest_post_data.post_url.clone() + "/ogImage.jpg";
         }
     }
 
@@ -58,8 +55,8 @@ fn get_latest_post(config: &Config) -> Result<LatestPostData> {
 }
 
 fn create_notification(
-    onesignal: &OneSignal, 
-    latest_post_data: LatestPostData
+    onesignal: &OneSignal,
+    latest_post_data: LatestPostData,
 ) -> Box<Notification> {
     let mut notification = Notification::new(onesignal.app_id.clone());
 
@@ -87,13 +84,12 @@ fn create_notification(
 }
 
 async fn send_notification(
-    configuration: Box<Configuration>, 
-    notification: Box<Notification>
+    configuration: Box<Configuration>,
+    notification: Box<Notification>,
 ) -> Result<()> {
     // Send notification to the server
-    let create_notification_response = 
-        apis::default_api::create_notification(&configuration, *notification)
-        .await?;
+    let create_notification_response =
+        apis::default_api::create_notification(&configuration, *notification).await?;
 
     // Check the result
     if let Some(id) = create_notification_response.id {
