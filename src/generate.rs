@@ -97,13 +97,17 @@ async fn collect_posts(config: &Config, regenerate: bool) -> Result<CollectedPos
         let path = entry.path();
 
         let post_data = deserialize_md(path.clone(), config)?;
-        if latest_date < post_data.postdate {
-            latest_date = post_data.postdate.clone();
+        if let Some(ref postdate) = post_data.postdate {
+            if &latest_date < postdate {
+                latest_date = postdate.clone();
+            }
         }
 
         fs::create_dir_all(&out_dir.clone().join(&post_data.slug))?;
 
-        post_titles.insert(post_data.slug.clone(), post_data.title.clone());
+        if let Some(ref title) = post_data.title {
+            post_titles.insert(post_data.slug.clone(), title.clone());
+        }
 
         if post_data.parent.is_empty() {
             for tag in &post_data.tags {
@@ -153,10 +157,13 @@ async fn collect_posts(config: &Config, regenerate: bool) -> Result<CollectedPos
             regenerate,
         );
 
-        posts_by_parent_sorted
-            .entry(post_data.parent.clone())
-            .or_default()
-            .insert(post_data.date.clone() + &post_data.slug, post_data);
+        if let Some(ref date) = post_data.date {
+            let key = date.clone() + &post_data.slug;
+            posts_by_parent_sorted
+                .entry(post_data.parent.clone())
+                .or_default()
+                .insert(key, post_data);
+        }
     }
 
     let posts_by_parent = collate_posts(&reverse_tags, posts_by_parent_sorted).await?;
@@ -180,46 +187,54 @@ async fn generate_posts(
 
     println!("Generating posts");
     for (parent, posts) in &cposts.posts_by_parent {
-        if parent != "hidden" {
-            println!("Parent post: {}", parent);
-            for post_data in posts {
-                println!("Generating {}", post_data.slug);
-                let header_data = HeaderData {
-                    title: &(post_data.title.clone() + " - " + &config.site_name),
-                    description: &post_data.description,
-                    url: &post_data.slug,
-                    thumbnail: &(post_data.slug.clone() + "/ogImage.jpg"),
-                    cachebust,
-                };
+        println!("Parent post: {}", parent);
+        for post_data in posts {
+            println!("Generating {}", post_data.slug);
+            let title = match post_data.title {
+                Some(ref title) => title.clone() + " - " + &config.site_name,
+                None => config.site_name.clone(),
+            };
+            let header_data = HeaderData {
+                title: &title,
+                description: {
+                    if let Some(ref desc) = post_data.description {
+                        desc
+                    } else {
+                        &config.site_description
+                    }
+                },
+                url: &post_data.slug,
+                thumbnail: &(post_data.slug.clone() + "/ogImage.jpg"),
+                cachebust,
+            };
 
-                let post_with_children = PostWithChildren {
-                    children: {
-                        match cposts.posts_by_parent.get(&post_data.slug) {
-                            None => None,
-                            Some(k) => Some(k),
-                        }
-                    },
-                    post: Some(post_data),
-                    header: &header_data,
-                };
+            let post_with_children = PostWithChildren {
+                children: {
+                    match cposts.posts_by_parent.get(&post_data.slug) {
+                        None => None,
+                        Some(k) => Some(k),
+                    }
+                },
+                post: Some(post_data),
+                header: &header_data,
+            };
 
-                let post_dir = out_dir.clone().join(&post_data.slug);
+            let post_dir = out_dir.clone().join(&post_data.slug);
 
-                handlebars.register_template_string("body", post_data.body.clone())?;
-                let rendered = handlebars
-                    .render("post", &post_with_children)
-                    .map_err(|e| format!("{:?}", e))
-                    .unwrap();
-                let mut output = File::create(post_dir.clone().join("index.content.html"))?;
-                write!(output, "{}", rendered)?;
+            handlebars.register_template_string("body", post_data.body.clone())?;
+            let rendered = handlebars
+                .render(&post_data.template_body, &post_with_children)
+                .map_err(|e| format!("{:?}", e))
+                .unwrap();
+            let mut output = File::create(post_dir.clone().join("index.content.html"))?;
+            write!(output, "{}", rendered)?;
 
-                handlebars.register_template_string("content", rendered)?;
-                let output = File::create(post_dir.clone().join("index.html"))?;
-                handlebars
-                    .render_to_write("default", &header_data, output)
-                    .map_err(|e| format!("{:?}", e))
-                    .unwrap();
-            }
+            handlebars.register_template_string("content", rendered)?;
+            let output = File::create(post_dir.clone().join("index.html"))?;
+            handlebars
+                .render_to_write(&post_data.template_content, &header_data, output)
+                .map_err(|e| format!("{:?}", e))
+                .unwrap();
         }
     }
 
@@ -328,7 +343,9 @@ fn generate_pages(
                             PostsBy::ByPostdate => {
                                 let mut postdate_map = BTreeMap::<String, &PostData>::new();
                                 for post in &cposts.posts_by_parent[""] {
-                                    postdate_map.insert(post.postdate.clone() + &post.slug, post);
+                                    if let Some(ref postdate) = post.postdate {
+                                        postdate_map.insert(postdate.clone() + &post.slug, post);
+                                    }
                                 }
                                 for post in postdate_map.values().rev() {
                                     postdate_vec.push((*post).clone());

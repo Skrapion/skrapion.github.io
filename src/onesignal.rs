@@ -40,14 +40,22 @@ fn get_latest_post(config: &Config) -> Result<LatestPostData> {
         let path = entry.path();
 
         let post_data = deserialize_md(path.clone(), config)?;
-        if latest_date < post_data.postdate {
-            latest_date = post_data.postdate.clone();
+        if let Some(ref postdate) = post_data.postdate {
+            if &latest_date < postdate {
+                latest_date = postdate.clone();
 
-            latest_post_data.slug = entry.file_name().to_str().unwrap().to_string();
-            latest_post_data.title = post_data.title.clone();
-            latest_post_data.description = post_data.description.clone();
-            latest_post_data.post_url = config.site_url.clone() + "/" + &latest_post_data.slug;
-            latest_post_data.thumbnail_url = latest_post_data.post_url.clone() + "/ogImage.jpg";
+                latest_post_data.slug = entry.file_name().to_str().unwrap().to_string();
+                latest_post_data.title = match post_data.title {
+                    Some(ref title) => title.clone(),
+                    None => config.site_name.clone(),
+                };
+                latest_post_data.description = match post_data.description {
+                    Some(ref desc) => desc.clone(),
+                    None => config.site_description.clone(),
+                };
+                latest_post_data.post_url = config.site_url.clone() + "/" + &latest_post_data.slug;
+                latest_post_data.thumbnail_url = latest_post_data.post_url.clone() + "/ogImage.jpg";
+            }
         }
     }
 

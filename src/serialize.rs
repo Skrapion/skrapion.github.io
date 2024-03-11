@@ -32,11 +32,14 @@ pub struct PicMetadata {
 pub struct PostData {
     #[serde(skip_deserializing)]
     pub slug: String,
-    pub title: String,
-    pub description: String,
-    pub date: String,
-    #[serde(default)]
-    pub postdate: String,
+    #[serde(rename = "templatebody", default = "default_post")]
+    pub template_body: String,
+    #[serde(rename = "templatecontent", default = "default_default")]
+    pub template_content: String,
+    pub title: Option<String>,
+    pub description: Option<String>,
+    pub date: Option<String>,
+    pub postdate: Option<String>,
     #[serde(default)]
     pub featured: bool,
     #[serde(default)]
@@ -57,6 +60,14 @@ pub struct PostData {
     pub similars_category: String,
     #[serde(skip_deserializing)]
     pub similars: BTreeSet<String>,
+}
+
+fn default_post() -> String {
+    "post".to_string()
+}
+
+fn default_default() -> String {
+    "default".to_string()
 }
 
 fn default_pic() -> String {
@@ -134,7 +145,7 @@ pub fn deserialize_md(dir: PathBuf, config: &Config) -> Result<PostData> {
 
     let mut post_data: PostData = serde_yaml::from_str(&front_matter).unwrap();
     post_data.slug = slug;
-    if post_data.postdate.is_empty() {
+    if post_data.postdate.is_none() {
         post_data.postdate = post_data.date.clone();
     }
 

@@ -1,3 +1,9 @@
+---
+title: About Rick Yorgason
+template_body: rawbody
+template_content: rawcontent
+parent: "hidden"
+---
 <div id='aboutcontent'>
     <div id='articlecontainer'>
         <article>
@@ -33,7 +39,7 @@
             </div>
             <div id='prettypictures'>
                 <div>
-                    {{>responsiveimg class="prettyimg circle" slug="rick-holding-the-world" filename="cover.jpg" fit="contain" w="200" h="200"}}
+                    {{>responsiveimg class="prettyimg circle" slug="about" filename="cover.jpg" fit="contain" w="200" h="200"}}
                 </div>
             </div>
         </article>
