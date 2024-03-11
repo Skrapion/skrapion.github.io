@@ -39,7 +39,7 @@ fn get_latest_post(config: &Config) -> Result<LatestPostData> {
         let entry = entry?;
         let path = entry.path();
 
-        let post_data = deserialize_md(path.clone(), config)?;
+        let post_data = deserialize_md(&path, config)?;
         if let Some(ref postdate) = post_data.postdate {
             if &latest_date < postdate {
                 latest_date = postdate.clone();

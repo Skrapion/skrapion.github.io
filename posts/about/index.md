@@ -1,8 +1,8 @@
 ---
 title: About Rick Yorgason
 template_body: rawbody
-template_content: rawcontent
 parent: "hidden"
+default_thumbnail: true
 ---
 <div id='aboutcontent'>
     <div id='articlecontainer'>

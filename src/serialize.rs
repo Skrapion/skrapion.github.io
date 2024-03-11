@@ -1,7 +1,7 @@
 use std::collections::BTreeSet;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
-use std::path::PathBuf;
+use std::path::Path;
 
 use anyhow::{anyhow, Result};
 use serde::{Deserialize, Serialize};
@@ -32,10 +32,14 @@ pub struct PicMetadata {
 pub struct PostData {
     #[serde(skip_deserializing)]
     pub slug: String,
-    #[serde(rename = "templatebody", default = "default_post")]
+    #[serde(default = "default_post")]
     pub template_body: String,
-    #[serde(rename = "templatecontent", default = "default_default")]
+    #[serde(default = "default_default")]
     pub template_content: String,
+    #[serde(default)]
+    pub default_thumbnail: bool,
+    #[serde(default)]
+    pub skip_content: bool,
     pub title: Option<String>,
     pub description: Option<String>,
     pub date: Option<String>,
@@ -96,14 +100,17 @@ pub struct PostWithChildren<'a> {
     pub header: &'a HeaderData<'a>,
 }
 
-pub fn deserialize_md(dir: PathBuf, config: &Config) -> Result<PostData> {
-    let slug = dir.file_name().unwrap().to_str().unwrap().to_string();
-    println!("Parsing {}", &slug);
-
-    let mut path = dir;
+pub fn deserialize_md(dir: &Path, config: &Config) -> Result<PostData> {
+    let mut slug = dir.to_path_buf();
+    let mut path = dir.to_path_buf();
     if path.is_dir() {
         path.push("index.md");
+    } else if dir.extension().is_some() {
+        slug.set_extension("html");
     }
+
+    let slug = slug.file_name().unwrap().to_str().unwrap().to_string();
+    println!("Parsing {}", &slug);
 
     let file = File::open(&path)
         .unwrap_or_else(|_| panic!("Could not open md file at {}", path.display()));

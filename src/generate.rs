@@ -96,7 +96,7 @@ async fn collect_posts(config: &Config, regenerate: bool) -> Result<CollectedPos
         let entry = entry?;
         let path = entry.path();
 
-        let post_data = deserialize_md(path.clone(), config)?;
+        let post_data = deserialize_md(&path, config)?;
         if let Some(ref postdate) = post_data.postdate {
             if &latest_date < postdate {
                 latest_date = postdate.clone();
@@ -161,13 +161,13 @@ async fn collect_posts(config: &Config, regenerate: bool) -> Result<CollectedPos
             );
         }
 
-        if let Some(ref date) = post_data.date {
-            let key = date.clone() + &post_data.slug;
-            posts_by_parent_sorted
-                .entry(post_data.parent.clone())
-                .or_default()
-                .insert(key, post_data);
-        }
+        let zero_date = "0000-00-00".to_string();
+        let date = post_data.date.as_ref().unwrap_or(&zero_date);
+        let key = date.clone() + &post_data.slug;
+        posts_by_parent_sorted
+            .entry(post_data.parent.clone())
+            .or_default()
+            .insert(key, post_data);
     }
 
     let posts_by_parent = collate_posts(&reverse_tags, posts_by_parent_sorted).await?;
@@ -193,11 +193,27 @@ async fn generate_posts(
     for (parent, posts) in &cposts.posts_by_parent {
         println!("Parent post: {}", parent);
         for post_data in posts {
-            println!("Generating {}", post_data.slug);
+            let mut slug = String::new();
+            if post_data.slug != "index.html" {
+                slug = post_data.slug.clone();
+            }
+            println!("Generating {}", slug);
+
             let title = match post_data.title {
                 Some(ref title) => title.clone() + " - " + &config.site_name,
                 None => config.site_name.clone(),
             };
+
+            let mut out_file = out_dir.clone().join(&post_data.slug);
+            if out_file.is_dir() {
+                out_file.push("index.html");
+            }
+
+            let thumbnail = match post_data.default_thumbnail {
+                true => config.site_thumbnail.clone(),
+                false => slug.clone() + "/ogImage.jpg",
+            };
+
             let header_data = HeaderData {
                 title: &title,
                 description: {
@@ -207,14 +223,14 @@ async fn generate_posts(
                         &config.site_description
                     }
                 },
-                url: &post_data.slug,
-                thumbnail: &(post_data.slug.clone() + "/ogImage.jpg"),
+                url: &slug,
+                thumbnail: &thumbnail,
                 cachebust,
             };
 
             let post_with_children = PostWithChildren {
                 children: {
-                    match cposts.posts_by_parent.get(&post_data.slug) {
+                    match cposts.posts_by_parent.get(&slug) {
                         None => None,
                         Some(k) => Some(k),
                     }
@@ -223,18 +239,22 @@ async fn generate_posts(
                 header: &header_data,
             };
 
-            let post_dir = out_dir.clone().join(&post_data.slug);
-
             handlebars.register_template_string("body", post_data.body.clone())?;
             let rendered = handlebars
                 .render(&post_data.template_body, &post_with_children)
                 .map_err(|e| format!("{:?}", e))
                 .unwrap();
-            let mut output = File::create(post_dir.clone().join("index.content.html"))?;
-            write!(output, "{}", rendered)?;
+
+            if !post_data.skip_content {
+                let mut content_file = out_file.clone();
+                content_file.set_extension("content.html");
+
+                let mut output = File::create(content_file)?;
+                write!(output, "{}", rendered)?;
+            }
 
             handlebars.register_template_string("content", rendered)?;
-            let output = File::create(post_dir.clone().join("index.html"))?;
+            let output = File::create(out_file)?;
             handlebars
                 .render_to_write(&post_data.template_content, &header_data, output)
                 .map_err(|e| format!("{:?}", e))
