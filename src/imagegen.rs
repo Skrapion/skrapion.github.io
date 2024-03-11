@@ -62,7 +62,12 @@ fn scale_image(
     fill: bool,
 ) {
     if img.is_none() {
-        *img = Some(image::open(in_file).unwrap());
+        *img = Some(image::open(in_file).unwrap_or_else(|_| {
+            panic!(
+                "Could not open image file for scaling: {}",
+                in_file.display()
+            )
+        }));
     }
 
     if let Some(ref image) = img {
@@ -94,7 +99,9 @@ async fn load_images(
             .join(basename.clone() + "-" + &w.to_string() + ".jpg")
     };
 
-    let in_file_modified = fs::metadata(&in_file)?.modified()?;
+    let in_file_modified = fs::metadata(&in_file)
+        .unwrap_or_else(|_| panic!("Could not open metadata for file {}", in_file.display()))
+        .modified()?;
 
     let (width, height) = image::image_dimensions(&in_file)?;
     let mut img = Option::<image::DynamicImage>::None;

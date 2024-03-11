@@ -101,9 +101,13 @@ pub fn deserialize_md(dir: PathBuf, config: &Config) -> Result<PostData> {
     println!("Parsing {}", &slug);
 
     let mut path = dir;
-    path.push("index.md");
+    if path.is_dir() {
+        path.push("index.md");
+    }
 
-    let file = File::open(path)?;
+    let file = File::open(&path)
+        .unwrap_or_else(|_| panic!("Could not open md file at {}", path.display()));
+
     let reader = BufReader::new(file);
     let mut front_matter = String::new();
     let mut content = String::new();

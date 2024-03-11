@@ -103,7 +103,9 @@ async fn collect_posts(config: &Config, regenerate: bool) -> Result<CollectedPos
             }
         }
 
-        fs::create_dir_all(&out_dir.clone().join(&post_data.slug))?;
+        if path.is_dir() {
+            fs::create_dir_all(&out_dir.clone().join(&post_data.slug))?;
+        }
 
         if let Some(ref title) = post_data.title {
             post_titles.insert(post_data.slug.clone(), title.clone());
@@ -124,38 +126,40 @@ async fn collect_posts(config: &Config, regenerate: bool) -> Result<CollectedPos
             }
         }
 
-        for pic in &post_data.pics {
-            match pic.filetype.as_str() {
-                "pic" => {
-                    thumbnail_futures_map.queue_image(
-                        post_data.slug.clone(),
-                        pic.filename.clone(),
-                        config,
-                        regenerate,
-                    );
-                }
-                "copy" => {
-                    let in_file = post_dir
-                        .join(post_data.slug.clone())
-                        .join(pic.filename.clone());
-                    let out_file = out_dir
-                        .join(post_data.slug.clone())
-                        .join(pic.filename.clone());
-                    if regenerate || should_update(&in_file, &out_file)? {
-                        println!("Copying {}", out_file.display());
-                        fs::copy(in_file, out_file)?;
+        if path.is_dir() {
+            for pic in &post_data.pics {
+                match pic.filetype.as_str() {
+                    "pic" => {
+                        thumbnail_futures_map.queue_image(
+                            post_data.slug.clone(),
+                            pic.filename.clone(),
+                            config,
+                            regenerate,
+                        );
                     }
+                    "copy" => {
+                        let in_file = post_dir
+                            .join(post_data.slug.clone())
+                            .join(pic.filename.clone());
+                        let out_file = out_dir
+                            .join(post_data.slug.clone())
+                            .join(pic.filename.clone());
+                        if regenerate || should_update(&in_file, &out_file)? {
+                            println!("Copying {}", out_file.display());
+                            fs::copy(in_file, out_file)?;
+                        }
+                    }
+                    _ => {}
                 }
-                _ => {}
             }
-        }
 
-        thumbnail_futures_map.queue_image(
-            post_data.slug.clone(),
-            "cover.jpg".to_string(),
-            config,
-            regenerate,
-        );
+            thumbnail_futures_map.queue_image(
+                post_data.slug.clone(),
+                "cover.jpg".to_string(),
+                config,
+                regenerate,
+            );
+        }
 
         if let Some(ref date) = post_data.date {
             let key = date.clone() + &post_data.slug;
