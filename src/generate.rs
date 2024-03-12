@@ -54,31 +54,25 @@ async fn collate_posts<'a>(
         let mut last_post_opt: Option<&mut PostData> = None;
 
         for post_data in posts.values_mut() {
-            let mut similars_len = 0;
-            let mut similars_all = BTreeSet::new();
-            for tag in &post_data.tags {
-                let taglen = reverse_tags[tag].len();
-                if taglen > similars_len {
-                    post_data.similars = BTreeSet::new();
-                }
-
-                for slug in &reverse_tags[tag] {
-                    if slug != &post_data.slug {
-                        similars_all.insert(slug.clone());
-                        if taglen > similars_len {
+            if !post_data.tags.is_empty() {
+                let main_tag = &post_data.tags[0];
+                if reverse_tags[main_tag].len() >= 4 {
+                    post_data.similars_category = main_tag.clone();
+                    for slug in &reverse_tags[main_tag] {
+                        if slug != &post_data.slug {
                             post_data.similars.insert(slug.clone());
                         }
                     }
+                } else {
+                    post_data.similars_category = "similar".to_string();
+                    for tag in &post_data.tags {
+                        for slug in &reverse_tags[tag] {
+                            if slug != &post_data.slug {
+                                post_data.similars.insert(slug.clone());
+                            }
+                        }
+                    }
                 }
-                if taglen > similars_len {
-                    post_data.similars_category = tag.clone();
-                    similars_len = taglen;
-                }
-            }
-
-            if similars_len < 5 {
-                post_data.similars_category = "similar".to_string();
-                post_data.similars = similars_all;
             }
 
             match last_post_opt {
