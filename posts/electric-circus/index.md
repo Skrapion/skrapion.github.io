@@ -4,6 +4,7 @@ description: The Yukon Circus Society at Electrify Yukon
 date: 2023-11-05
 postdate: 2024-03-11
 tags: [photography]
+og_image: emma-plane.jpg
 pics:
  - emma-plane.jpg
  - cover.jpg

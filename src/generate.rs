@@ -150,6 +150,7 @@ async fn collect_posts(config: &Config, regenerate: bool) -> Result<CollectedPos
                             pic.filename.clone(),
                             config,
                             regenerate,
+                            post_data.og_image == pic.filename,
                         );
                     }
                     "copy" => {
@@ -173,6 +174,7 @@ async fn collect_posts(config: &Config, regenerate: bool) -> Result<CollectedPos
                 "cover.jpg".to_string(),
                 config,
                 regenerate,
+                post_data.og_image == "cover.jpg",
             );
         }
 

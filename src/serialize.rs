@@ -74,8 +74,10 @@ pub struct PostData {
     pub parent: String,
     #[serde(default)]
     pub tags: Vec<String>,
-    #[serde(skip_serializing, rename = "pics", default = "default_cover")]
+    #[serde(skip_serializing, rename = "pics", default = "default_cover_vec")]
     pics_in: Vec<PicMetadataIn>,
+    #[serde(default = "default_cover")]
+    pub og_image: String,
 
     // Uncommon params mostly for pages
     #[serde(default = "default_post")]
@@ -124,7 +126,11 @@ fn default_html() -> String {
     "html".to_string()
 }
 
-fn default_cover() -> Vec<PicMetadataIn> {
+fn default_cover() -> String {
+    "cover".to_string()
+}
+
+fn default_cover_vec() -> Vec<PicMetadataIn> {
     vec![PicMetadataIn::Basic("cover.jpg".to_string())]
 }
 

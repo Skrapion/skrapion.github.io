@@ -51,7 +51,14 @@ pub struct ThumbnailFuturesMap {
 pub type ThumbnailMap = HashMap<String, ThumbnailData>;
 
 impl ThumbnailFuturesMap {
-    pub fn queue_image(&mut self, slug: String, file: String, config: &Config, regenerate: bool) {
+    pub fn queue_image(
+        &mut self,
+        slug: String,
+        file: String,
+        config: &Config,
+        regenerate: bool,
+        is_og_image: bool,
+    ) {
         let path = slug.clone() + "/" + &file;
         if let hash_map::Entry::Vacant(entry) = self.hashmap.entry(path) {
             entry.insert(Box::new(tokio::task::spawn(load_images(
@@ -60,6 +67,7 @@ impl ThumbnailFuturesMap {
                 config.post_dir.clone(),
                 config.out_dir.clone(),
                 regenerate,
+                is_og_image,
             ))));
         }
     }
@@ -109,6 +117,7 @@ async fn load_images(
     post_dir: String,
     out_dir: String,
     regenerate: bool,
+    is_og_image: bool,
 ) -> Result<ThumbnailData> {
     let current_dir = env::current_dir()?;
     let post_dir = current_dir.clone().join(post_dir);
@@ -150,7 +159,7 @@ async fn load_images(
         }
     }
 
-    if file == "cover.jpg" {
+    if is_og_image {
         let og_image_file = out_dir.join(dir.clone()).join("ogImage.jpg");
         if regenerate || should_update_from_time(&in_file_modified, &og_image_file) {
             println!("Generating {}", og_image_file.display());
