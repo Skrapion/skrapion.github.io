@@ -1,14 +1,11 @@
 use std::collections::{BTreeMap, BTreeSet};
 use std::fs::File;
-use std::io::{BufReader, Write};
-use std::path::PathBuf;
-use std::str::FromStr;
+use std::io::Write;
 use std::{env, fs};
 
 use anyhow::Result;
 use chrono::NaiveDate;
 use handlebars::Handlebars;
-use serde::Deserialize;
 
 use crate::config::*;
 use crate::imagegen::*;
@@ -194,6 +191,9 @@ async fn generate_posts(
         println!("Parent post: {}", parent);
         for post_data in posts {
             let mut slug = String::new();
+
+            // TODO: Reorganize code to be recursive so we don't rely on this
+            // hard-coded check anymore.
             if post_data.slug != "index.html" {
                 slug = post_data.slug.clone();
             }
@@ -206,7 +206,8 @@ async fn generate_posts(
 
             let mut out_file = out_dir.clone().join(&post_data.slug);
             if out_file.is_dir() {
-                out_file.push("index.html");
+                out_file.push("index");
+                out_file.set_extension(&post_data.extension);
             }
 
             let thumbnail = match post_data.default_thumbnail {
@@ -228,11 +229,21 @@ async fn generate_posts(
                 cachebust,
             };
 
+            let mut postdate_vec: Posts = vec![];
             let post_with_children = PostWithChildren {
-                children: {
-                    match cposts.posts_by_parent.get(&slug) {
-                        None => None,
-                        Some(k) => Some(k),
+                children: match post_data.posts_by {
+                    PostsBy::ByDate => cposts.posts_by_parent.get(&slug),
+                    PostsBy::ByPostdate => {
+                        let mut postdate_map = BTreeMap::<String, &PostData>::new();
+                        for post in &cposts.posts_by_parent[""] {
+                            if let Some(ref postdate) = post.postdate {
+                                postdate_map.insert(postdate.clone() + &post.slug, post);
+                            }
+                        }
+                        for post in postdate_map.values().rev() {
+                            postdate_vec.push((*post).clone());
+                        }
+                        Some(&postdate_vec)
                     }
                 },
                 post: Some(post_data),
@@ -241,13 +252,13 @@ async fn generate_posts(
 
             handlebars.register_template_string("body", post_data.body.clone())?;
             let rendered = handlebars
-                .render(&post_data.template_body, &post_with_children)
+                .render(&post_data.template_content, &post_with_children)
                 .map_err(|e| format!("{:?}", e))
                 .unwrap();
 
             if !post_data.skip_content {
                 let mut content_file = out_file.clone();
-                content_file.set_extension("content.html");
+                content_file.set_extension("content.".to_string() + &post_data.extension);
 
                 let mut output = File::create(content_file)?;
                 write!(output, "{}", rendered)?;
@@ -256,164 +267,9 @@ async fn generate_posts(
             handlebars.register_template_string("content", rendered)?;
             let output = File::create(out_file)?;
             handlebars
-                .render_to_write(&post_data.template_content, &header_data, output)
+                .render_to_write(&post_data.template_root, &header_data, output)
                 .map_err(|e| format!("{:?}", e))
                 .unwrap();
-        }
-    }
-
-    Ok(())
-}
-
-#[derive(Deserialize)]
-enum PostsBy {
-    #[serde(rename = "by_date")]
-    ByDate,
-    #[serde(rename = "by_postdate")]
-    ByPostdate,
-}
-
-#[derive(Deserialize)]
-struct PageData {
-    content: String,
-    #[serde(default = "default_default")]
-    template: String,
-    #[serde(default = "html")]
-    extension: String,
-    title: Option<String>,
-    description: Option<String>,
-    #[serde(default = "by_date")]
-    posts_by: PostsBy,
-    #[serde(default)]
-    skip_content: bool,
-}
-
-fn default_default() -> String {
-    "default".to_string()
-}
-fn html() -> String {
-    "html".to_string()
-}
-fn by_date() -> PostsBy {
-    PostsBy::ByDate
-}
-
-fn generate_pages(
-    config: &Config,
-    cposts: &CollectedPosts,
-    handlebars: &mut Handlebars<'_>,
-    cachebust: &str,
-    dir: &PathBuf,
-) -> Result<()> {
-    let out_dir = env::current_dir()?.join(&config.out_dir).join(dir);
-    let page_dir = env::current_dir()?.join(&config.page_dir).join(dir);
-
-    fs::create_dir_all(out_dir)?;
-
-    for entry in fs::read_dir(&page_dir)? {
-        let entry = entry?;
-        let path = entry.path();
-
-        if path.is_dir() {
-            generate_pages(
-                config,
-                cposts,
-                handlebars,
-                cachebust,
-                &dir.clone().join(entry.file_name()),
-            )?
-        } else if let Some(ext) = &path.extension() {
-            if ext.to_str().unwrap() == "yaml" {
-                let file = File::open(path)?;
-                let reader = BufReader::new(file);
-                let page_data: PageData = serde_yaml::from_reader(reader).unwrap();
-
-                let mut full_url = dir.clone();
-                if entry.file_name() != "index.yaml" {
-                    full_url.push(&entry.file_name());
-                    full_url.set_extension(&page_data.extension);
-                }
-
-                let mut content_url = dir.clone().join(&entry.file_name());
-                content_url.set_extension("content.html");
-
-                let mut full_path = PathBuf::from_str(&config.out_dir)?.join(&full_url);
-                if entry.file_name() == "index.yaml" {
-                    full_path.push(&entry.file_name());
-                    full_path.set_extension("html");
-                }
-                let content_path = PathBuf::from_str(&config.out_dir)?.join(&content_url);
-
-                println!("Generating {}", full_path.display());
-
-                let header_data = HeaderData {
-                    title: page_data.title.as_ref().unwrap_or(&config.site_name),
-                    description: page_data
-                        .description
-                        .as_ref()
-                        .unwrap_or(&config.site_description),
-                    url: full_url.to_str().expect("Could not convert path to string"),
-                    thumbnail: page_data
-                        .description
-                        .as_ref()
-                        .unwrap_or(&config.site_thumbnail),
-                    cachebust,
-                };
-                let mut postdate_vec = Posts::new();
-                let post_with_children = PostWithChildren {
-                    children: Some({
-                        match page_data.posts_by {
-                            PostsBy::ByDate => &cposts.posts_by_parent[""],
-                            PostsBy::ByPostdate => {
-                                let mut postdate_map = BTreeMap::<String, &PostData>::new();
-                                for post in &cposts.posts_by_parent[""] {
-                                    if let Some(ref postdate) = post.postdate {
-                                        postdate_map.insert(postdate.clone() + &post.slug, post);
-                                    }
-                                }
-                                for post in postdate_map.values().rev() {
-                                    postdate_vec.push((*post).clone());
-                                }
-                                &postdate_vec
-                            }
-                        }
-                    }),
-                    post: None,
-                    header: &header_data,
-                };
-
-                let content = page_dir
-                    .clone()
-                    .join(&page_data.content)
-                    .to_str()
-                    .unwrap_or_else(|| {
-                        panic!(
-                            "Could not convert {}/{} to a file",
-                            dir.display(),
-                            page_data.content
-                        )
-                    })
-                    .to_string();
-
-                handlebars.register_template_file(&content, &content)?;
-
-                let rendered = handlebars
-                    .render(&content, &post_with_children)
-                    .map_err(|e| format!("{:?}", e))
-                    .unwrap();
-
-                if !page_data.skip_content {
-                    let mut output = File::create(content_path)?;
-                    write!(output, "{}", rendered)?;
-                }
-
-                handlebars.register_template_string("content", rendered)?;
-                let output = File::create(full_path)?;
-                handlebars
-                    .render_to_write(&page_data.template, &header_data, output)
-                    .map_err(|e| format!("{:?}", e))
-                    .unwrap();
-            }
         }
     }
 
@@ -431,7 +287,6 @@ pub async fn generate_site(regenerate: bool, config: &Config) -> Result<()> {
         .to_string();
 
     generate_posts(config, &cposts, &mut handlebars, &cachebust).await?;
-    generate_pages(config, &cposts, &mut handlebars, &cachebust, &"".into())?;
 
     Ok(())
 }

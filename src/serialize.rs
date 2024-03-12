@@ -28,18 +28,18 @@ pub struct PicMetadata {
     pub site: String,
 }
 
+#[derive(Default, Serialize, Deserialize, Clone)]
+pub enum PostsBy {
+    #[default]
+    #[serde(rename = "by_date")]
+    ByDate,
+    #[serde(rename = "by_postdate")]
+    ByPostdate,
+}
+
 #[derive(Deserialize, Serialize, Clone)]
 pub struct PostData {
-    #[serde(skip_deserializing)]
-    pub slug: String,
-    #[serde(default = "default_post")]
-    pub template_body: String,
-    #[serde(default = "default_default")]
-    pub template_content: String,
-    #[serde(default)]
-    pub default_thumbnail: bool,
-    #[serde(default)]
-    pub skip_content: bool,
+    // Common params for typical posts
     pub title: Option<String>,
     pub description: Option<String>,
     pub date: Option<String>,
@@ -52,6 +52,24 @@ pub struct PostData {
     pub tags: Vec<String>,
     #[serde(skip_serializing, rename = "pics", default = "default_cover")]
     pics_in: Vec<PicMetadataIn>,
+
+    // Uncommon params mostly for pages
+    #[serde(default = "default_post")]
+    pub template_content: String,
+    #[serde(default = "default_default")]
+    pub template_root: String,
+    #[serde(default)]
+    pub default_thumbnail: bool,
+    #[serde(default)]
+    pub skip_content: bool,
+    #[serde(default)]
+    pub posts_by: PostsBy,
+    #[serde(default = "default_html")]
+    pub extension: String,
+
+    // Generated after load
+    #[serde(skip_deserializing)]
+    pub slug: String,
     #[serde(skip_deserializing)]
     pub pics: Vec<PicMetadata>,
     #[serde(skip_deserializing)]
@@ -78,6 +96,10 @@ fn default_pic() -> String {
     "pic".to_string()
 }
 
+fn default_html() -> String {
+    "html".to_string()
+}
+
 fn default_cover() -> Vec<PicMetadataIn> {
     vec![PicMetadataIn::Basic("cover.jpg".to_string())]
 }
@@ -101,16 +123,12 @@ pub struct PostWithChildren<'a> {
 }
 
 pub fn deserialize_md(dir: &Path, config: &Config) -> Result<PostData> {
-    let mut slug = dir.to_path_buf();
     let mut path = dir.to_path_buf();
     if path.is_dir() {
         path.push("index.md");
-    } else if dir.extension().is_some() {
-        slug.set_extension("html");
     }
 
-    let slug = slug.file_name().unwrap().to_str().unwrap().to_string();
-    println!("Parsing {}", &slug);
+    println!("Parsing {}", &path.display());
 
     let file = File::open(&path)
         .unwrap_or_else(|_| panic!("Could not open md file at {}", path.display()));
@@ -155,6 +173,12 @@ pub fn deserialize_md(dir: &Path, config: &Config) -> Result<PostData> {
     }
 
     let mut post_data: PostData = serde_yaml::from_str(&front_matter).unwrap();
+
+    let mut slug = dir.to_path_buf();
+    if dir.extension().is_some() {
+        slug.set_extension(&post_data.extension);
+    }
+    let slug = slug.file_name().unwrap().to_str().unwrap().to_string();
     post_data.slug = slug;
     if post_data.postdate.is_none() {
         post_data.postdate = post_data.date.clone();

@@ -1,5 +1,5 @@
 ---
-template_body: rawbody
+template_content: rawbody
 parent: "hidden"
 default_thumbnail: true
 ---

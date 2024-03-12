@@ -1,3 +1,12 @@
+---
+template_content: rawbody
+template_root: rawcontent
+parent: "hidden"
+extension: xml
+posts_by: by_postdate
+skip_content: true
+default_thumbnail: true
+---
 <rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
     <channel>
         <title>Firefang</title>

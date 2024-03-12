@@ -1,5 +1,0 @@
-content: rss.hbs
-template: empty
-extension: xml
-posts_by: by_postdate
-skip_content: true
