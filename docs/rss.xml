@@ -3,13 +3,26 @@
         <title>Firefang</title>
         <link>https://firefang.com</link>
         <description>Rick Yorgason's portfolio blog. Everything from traditional woodworking to video game development.</description>
-        <lastBuildDate>Wed, 24 Jan 2024 00:00:00 -0700</lastBuildDate>
+        <lastBuildDate>Mon, 11 Mar 2024 00:00:00 -0700</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <image>
             <title>Firefang</title>
             <url>https://firefang.com/favicon.ico</url>
             <link>https://firefang.com</link>
         </image>
+            <item>
+                <title>Electric Circus</title>
+                <link>https://firefang.com/electric-circus/</link>
+                <guid>https://firefang.com/electric-circus/</guid>
+                <pubDate>Mon, 11 Mar 2024 00:00:00 -0700</pubDate>
+                <description>The Yukon Circus Society at Electrify Yukon</description>
+                <content:encoded>&lt;p&gt;The &lt;a href&#x3D;&quot;https://www.facebook.com/YukonCircusSociety/&quot;&gt;Yukon Circus Society&lt;/a&gt; was hired for a &quot;dangle&quot; at the Electrify Yukon event at the Museum of Transportation, and I was invited to photograph them!&lt;/p&gt;
+&lt;p&gt;Electrify Yukon was an event to help Yukoners learn about novel electric alternatives to using fossil fuels, things like electric thermal storage and electric snow machines. They wanted some background entertainment, so they asked the Circus Society to set up some silks and a hoop and just improvise.&lt;/p&gt;
+&lt;p&gt;The Museum of Transportation is a really cool venue, but it&#x27;s also kind of a nightmare to photograph in, which made it a really interesting photography challenge. All of the walls are well lit, but the centre of the bay is mostly unlit, making all the subjects backlit.&lt;/p&gt;
+&lt;p&gt;If I ever find myself shooting in the Transportation Museum again, I&#x27;ll use that as an excuse to gear up with some lights, but in the meantime it was a really good exercise and I got some great photos out of it!&lt;/p&gt;
+</content:encoded>
+                <enclosure url="https://firefang.com/electric-circus/ogImage.jpg" length="0" type="image/jpg"/>
+            </item>
             <item>
                 <title>Wire Wrapped World Tree</title>
                 <link>https://firefang.com/wire-wrapped-world-tree/</link>

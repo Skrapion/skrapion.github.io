@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Electric Circus - Firefang</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width,initial-scale=1"/>
+        <meta name="description" content="The Yukon Circus Society at Electrify Yukon"/>
+        <meta property="og:title" content="Firefang"/>
+        <meta property="og:description" content="The Yukon Circus Society at Electrify Yukon"/>
+        <meta property="og:image" content="https://firefang.com/electric-circus/ogImage.jpg"/>
+        <meta property="og:url" content="https://firefang.com/electric-circus"/>
+        <meta property="og:type" content="website"/>
+        <link rel="icon" type="image/x-icon" href="/assets/images/icons/favicon.ico"/>
+        <link rel="alternate" type="application/rss+xml" title="RSS Feed for Firefang" href="/rss.xml"/>
+        <link rel="stylesheet" href="/assets/styles/main.css"/>
+        <link rel="stylesheet" href="/assets/styles/post.css"/>
+        <link rel="stylesheet" href="/assets/styles/responsiveimg.css"/>
+
+        <link rel="preconnect" href="https://fonts.gstatic.com"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rouge+Script&amp;display=swap"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;1,100;1,300&amp;display=swap"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&amp;display=swap"/>
+
+        <script src="/assets/js/htmx.min.js"></script>
+        <script src="/assets/js/htmxpreload.min.js"></script>
+        <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+        <script src="/assets/js/custom.js"></script>
+    </head>
+    <body hx-ext="preload">
+        <div id="bodycontainer">
+            <header id='headercontainer'>
+                <div id='header'>
+                    <div id='logo'>
+                        <svg width="284.75693" height="413.3757" viewBox="0 0 284.75693 413.3757">
+                            <a hx-get="/index.content.html?1531" href="/?1531" hx-replace-url="/" hx-target="#content" hx-swap="innerHTML swap:0.3s settle:0.3s" onclick="return setTransitionName('fade-transition')" hx-on:click="document.title='Firefang'">
+                                <g
+                                id="g832"
+                                transform="matrix(0.629735,0,0,0.629735,22.094624,-17.644399)">
+                                <path
+                                style="fill:#ff0000;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                                d="M 301.157,414.82 C 346.445,453.998 359.329,492.582 364.588,505.011 C 367.602,514.375 369.524,519.135 364.213,524.102 C 356.306,531.494 325.136,540.486 312.09,566.263 C 299.041,592.04 288.224,610.81 273.905,624.334 C 259.586,637.857 226.176,648.198 218.483,661.05 C 210.79,673.902 202.909,676.836 197.548,676.836 C 186.984,676.836 187.915,676.836 182.544,676.836 C 177.173,676.836 169.292,673.902 161.599,661.05 C 153.906,648.198 120.496,637.857 106.177,624.334 C 91.8584,610.81 81.0426,592.04 67.9938,566.263 C 54.945,540.486 23.7731,531.494 15.8682,524.102 C 10.5557,519.135 12.4785,514.375 15.4918,505.011 C 20.7522,492.582 35.622,454.214 78.9247,414.82 C 82.3997,410.607 90.4997,397.47 79.7829,343.136 C 73.1584,301.81 133.886,247.476 128.343,192.907 C 134.832,214.07 143.438,214.854 130.645,236.898 C 94.3091,293.806 110.364,332.23 120.298,333.564 C 135.088,333.029 115.087,265.152 148.096,235.096 C 160.877,221.451 237.355,198.838 247.488,113.523 C 261.299,209.108 186.194,278.16 207.337,285.256 C 235.551,294.175 224.521,247.088 248.54,203.812 C 277.424,154.183 318.845,161.261 389.083,31.8258 C 324,164.854 345.36,210.96 323.519,241.984 C 300.689,275.102 246.655,292.833 262.83,311.269 C 271.087,322.544 309.41,271.46 326.259,253.105 C 353.245,222.597 393.146,221.658 412.639,188.256 C 379.591,240.516 339.922,246.665 332.613,283.16 C 310.709,395.845 272.34,388.488 301.157,414.82 z M 286.292,47.6168 C 284.994,67.3111 288.627,65.1171 287.395,70.227 C 285.052,78.8911 253.02,81.6238 247.689,102.763 C 247.128,86.7741 243.582,85.8322 244.381,81.8071 C 245.806,75.6105 284.087,66.55 286.292,47.6168 z M 151.183,200.924 C 161.016,170.4 146.693,156.646 146.85,148.439 C 148.448,138.036 150.504,146.303 163.26,113.146 C 152.058,149.66 167.157,163.431 164.608,170.554 C 162.641,177.151 161.511,173.019 151.183,200.924 z M 109.652,574.358 C 138.856,590.761 145.964,592.39 163.567,595.69 C 167.352,607.638 170.428,610.002 174.213,616.983 C 175.633,607.282 175.633,605.741 177.762,598.175 C 186.28,598.528 193.801,598.528 202.318,598.175 C 204.448,605.741 204.447,607.282 205.867,616.983 C 209.653,610.002 212.728,607.638 216.513,595.69 C 234.116,592.39 241.225,590.761 270.428,574.358 C 234.7,606.607 220.06,624.324 206.332,654.976 C 205.779,650.355 204.517,647.861 202.545,643.237 C 201.525,652.341 200.812,656.863 198.996,661.865 C 190.355,665.193 189.725,665.193 181.084,661.865 C 179.268,656.863 178.556,652.341 177.535,643.237 C 175.563,647.861 174.301,650.355 173.749,654.976 C 160.02,624.324 146.967,606.607 109.652,574.358 z M 266.828,507.031 C 268.48,506.242 275.939,503.474 277.367,503.601 C 278.753,503.69 288.105,511.734 287.907,513.309 C 287.288,519.769 282.83,526.89 268.835,534.892 C 273.185,526.358 271.92,513.341 266.828,507.031 z M 113.252,507.031 C 111.6,506.242 104.142,503.474 102.713,503.601 C 101.327,503.69 91.9748,511.734 92.1737,513.309 C 92.7919,519.769 97.2498,526.89 111.245,534.892 C 106.896,526.358 108.16,513.341 113.252,507.031 z M 121.283,537.403 C 138.796,538.472 149.406,539.334 150.635,536.397 C 151.923,533.849 135.499,521.916 122.287,511.54 C 125.298,523.084 124.908,525.623 121.283,537.403 z M 258.797,537.403 C 241.284,538.472 230.674,539.334 229.445,536.397 C 228.157,533.849 244.582,521.916 257.793,511.54 C 254.782,523.084 255.172,525.623 258.797,537.403 z"
+                                id="path833" />
+                                </g>
+                            </a>
+                        </svg>
+                    </div>
+                    <div id='headericons'>
+                        <a hx-get="/about/index.content.html" href='/about' hx-replace-url="/about" hx-target="#content" dx-swap="innerHTML swap:0.3s settle:0.3s" onclick="return setTransitionName('fade-transition')" hx-on:click="document.title='About Rick Yorgason - Firefang'"><img src='/assets/images/icons/info.svg' height='24px' alt='about' title='about'/></a>
+                        <a href='mailto:rick@firefang.com'><img src='/assets/images/icons/mail.svg' height='24px' alt='email' title='email'/></a>
+                        <a href='https://facebook.com/skrapion'><img src='/assets/images/icons/facebook.svg' height='24px' alt='Facebook' title='Facebook'/></a>
+                        <a href='https://www.youtube.com/channel/UCLCEtL5d5botNpR4TCU_f9w'><img src='/assets/images/icons/youtube.svg' height='24px' alt='Youtube' title='Youtube'/></a>
+                        <div id='notification-block'><a href='#'><img src='/assets/images/icons/bell.svg' height='24px' alt='notifications' title='notifications'/></a><div id='subscribe'><div id='subscribe-content'><p class='unsupported-message'>Sorry, web push notifications aren't supported on your platform.</p><p>Want to be notified when I post a new project?</p><div id="switchtrack" class="switchtrack" onclick="clickSubscribe(this)"><div class='switchthumb'></div></div></div></div></div>
+                    </div>
+                </div>
+            </header>
+            <div id="contentcontainer">
+                <div id="content" hx-target="this" hx-swap="innerHTML swap:0.3s settle:0.3s">
+                    <div id='singlecontent'>
+                        <div id='articlecontainer'>
+                            <article>
+                                <div id='story' class='swapjs'>
+                                    <div id='storycontainer'>
+                                        <div id='boringwords'><p>The <a href="https://www.facebook.com/YukonCircusSociety/">Yukon Circus Society</a> was hired for a "dangle" at the Electrify Yukon event at the Museum of Transportation, and I was invited to photograph them!</p>
+                    <p>Electrify Yukon was an event to help Yukoners learn about novel electric alternatives to using fossil fuels, things like electric thermal storage and electric snow machines. They wanted some background entertainment, so they asked the Circus Society to set up some silks and a hoop and just improvise.</p>
+                    <p>The Museum of Transportation is a really cool venue, but it's also kind of a nightmare to photograph in, which made it a really interesting photography challenge. All of the walls are well lit, but the centre of the bay is mostly unlit, making all the subjects backlit.</p>
+                    <p>If I ever find myself shooting in the Transportation Museum again, I'll use that as an excuse to gear up with some lights, but in the meantime it was a really good exercise and I got some great photos out of it!</p>
+                    </div>
+                                        <div id='date'>November 5, 2023</div>
+                                        <div id='readmorecontainer'>
+                                            <div id='readmore'>
+                                                <a href='#' class='button' onclick="readmore()">Read More</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id='prettypictures'>
+                                    <div>
+                                            <div class='picbox'>
+                                                        <div class='pic' onclick="lightboxOpen(this)">
+                                                            <div class="responsive prettyimg">
+                                                                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/wAARCAANABQDAREAAhEBAxEB/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDzA6ZDPYkGN0bfncueOP8AP5VrWhFVBx1iQ2VtDZ3Mfn3RRWZQpILHrz9D71yVItoexT+w30ju0Jm2Fjj94Ez+B5qLwStIq0uh6BDp0Nwr2jbghUElTgnOR1/D9a7KqcnKb6WX33EtIIteJvBdlb2umrHK5aRAodwCRz1964fbNXYKN3Y6TTvDWm2dmsbCeRj8xYuo/wDZa8mpVc5XZ2R0Vj//2Q==" width="5962" height="3869" aria-hidden="true" class="placeholder cover"/>
+                                                                <img alt="" onload="loaded(this)" src="/electric-circus/emma-plane-1920.jpg" srcset="/electric-circus/emma-plane-200.jpg 200w, /electric-circus/emma-plane-400.jpg 400w, /electric-circus/emma-plane-800.jpg 800w, /electric-circus/emma-plane-1200.jpg 1200w, /electric-circus/emma-plane-1920.jpg 1920w" width="5962" height="3869" class="actual contain" loading="lazy"/>
+                                                                <div style="width: 100%; padding-bottom: 64.9%"></div>
+                                                            </div>
+                                                        </div>
+                    
+                                            </div>
+                                            <div class='picbox'>
+                                                        <div class='pic' onclick="lightboxOpen(this)">
+                                                            <div class="responsive prettyimg">
+                                                                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/wAARCAAUABQDAREAAhEBAxEB/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDwrZtTjq38qzua2JUiMtzm2B4+YdsU37qvIp2cvdOnWWWJE+2abtlZd2WcruB74IrjlK8m0zo5n1RzrWtxcKZET5RhRjPbtXWrLUx5JNXsWIoTbW6Ttny27YI+cdV+o/rWcpczshpWVy3feINR1GdZbu5Z3VFjXI6KOg+grNUooHNs9Ht/C2mxyxxRrKkboQyq/X+tZtX1O5e7ojgvGOnxaVrZt7dpPKK79rtuwT6VtT1RyVlaWhzZY5rWxhc//9k=" width="5320" height="5320" aria-hidden="true" class="placeholder cover"/>
+                                                                <img alt="" onload="loaded(this)" src="/electric-circus/cover-1920.jpg" srcset="/electric-circus/cover-200.jpg 200w, /electric-circus/cover-400.jpg 400w, /electric-circus/cover-800.jpg 800w, /electric-circus/cover-1200.jpg 1200w, /electric-circus/cover-1920.jpg 1920w" width="5320" height="5320" class="actual contain" loading="lazy"/>
+                                                                <div style="width: 100%; padding-bottom: 100.0%"></div>
+                                                            </div>
+                                                        </div>
+                    
+                                            </div>
+                                            <div class='picbox'>
+                                                        <div class='pic' onclick="lightboxOpen(this)">
+                                                            <div class="responsive prettyimg">
+                                                                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/wAARCAAwABQDAREAAhEBAxEB/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDw5pewyF9Cc1lY0ua+vGD+xPDxiQLIbN/NI/iPnSc/lWFGfNOa7O34JmlRWjF9zn810mJMIiVJ9KlyKsaOr8aVogPBFrIDn/rs9c+HX72r6r/0lGtR+5D0/VmTJFLCwWWN0YgHDDHBrqTT2MWmtyeGOW6nSCCN5JZDtVVHJNRJqKvJ6FJOTsjrobrTo9HtZdQuLiTUVZoA0sa4gAOeG53Dr9Ca5k3ztQWm/qdNrRUp77FltSs9xxLA/wDtb81j7Ob7mnPEy0lt9A0mCRQWub1C3m46JnG0dce/1qrSr1nd+7Hp59xqUaFJNLWXXyMvVLyzubS1EJfeu4uTyQOMKPYY/WuuEWm9Dmqyi4qzKEc21MKzAfQVbRkmbmjq2taVNpMsbMYAZYJh/wAsvUH2NcdeLo1Pbw67ruddFqrT9jLps+xLp3gqSdC2oTSWxLfII0WTePUHdx+VXLFxteGpEcJJ6S0Omtfh3pnkAmK+mJ/jMoTP4AVySx879DoWBjbUxfCGlXn2i7c2zhCoRWIwCd3OPyrqxFSPKtTHDwkpO6O7h0m/toluFs2mUMNyoVYqO5xnJryJtc3us9KLVtT0CxieO1XFlBMrchmkA4rJNdUTJ3e9j//Z" width="1769" height="4252" aria-hidden="true" class="placeholder cover"/>
+                                                                <img alt="" onload="loaded(this)" src="/electric-circus/kate-dynamic-1769.jpg" srcset="/electric-circus/kate-dynamic-200.jpg 200w, /electric-circus/kate-dynamic-400.jpg 400w, /electric-circus/kate-dynamic-800.jpg 800w, /electric-circus/kate-dynamic-1200.jpg 1200w, /electric-circus/kate-dynamic-1769.jpg 1769w" width="1769" height="4252" class="actual contain" loading="lazy"/>
+                                                                <div style="width: 100%; padding-bottom: 240.4%"></div>
+                                                            </div>
+                                                        </div>
+                    
+                                            </div>
+                                            <div class='picbox'>
+                                                        <div class='pic' onclick="lightboxOpen(this)">
+                                                            <div class="responsive prettyimg">
+                                                                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/wAARCAAPABQDAREAAhEBAxEB/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDO0fVv7O0iy2iFYmiPmqsY4DEtyMdgcfhXxuJw8sTVl3T0Na2JSnaL06FGW7stL8V6VqtpZItuoO+OUkJFwMYP0wcHOPyrrwkqqpSjN3fTzPWhjI16UKVRbaf5FfxBoem3utT391pgia7xOixO6qVYDkevOeeK2ji60YpRf5FrL1NvRu3kzLgtdQit1iDpLGp2lZPl+U+hGf5V1RqU1JyS1Z5M8FGTuW7yLVDqL3E0qmS3t1mA3nAXfz06cZ9/SuVulyKCWjdvw/zFCFWnVbv5lu78L+KJbhpItQ2xvyitO7bV7AEmpjXw0VaUNfRHpe0xP2aj+9n/2Q==" width="7254" height="5320" aria-hidden="true" class="placeholder cover"/>
+                                                                <img alt="" onload="loaded(this)" src="/electric-circus/spinning-silk-1920.jpg" srcset="/electric-circus/spinning-silk-200.jpg 200w, /electric-circus/spinning-silk-400.jpg 400w, /electric-circus/spinning-silk-800.jpg 800w, /electric-circus/spinning-silk-1200.jpg 1200w, /electric-circus/spinning-silk-1920.jpg 1920w" width="7254" height="5320" class="actual contain" loading="lazy"/>
+                                                                <div style="width: 100%; padding-bottom: 73.3%"></div>
+                                                            </div>
+                                                        </div>
+                    
+                                            </div>
+                                            <div class='picbox'>
+                                                        <div class='pic' onclick="lightboxOpen(this)">
+                                                            <div class="responsive prettyimg">
+                                                                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/wAARCAAOABQDAREAAhEBAxEB/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDz2LTbTUGiieEIzNgYGV5747fhXpYhKEHJ6pGUNXZGdqeixzSXHkSEPnzI41G4Begye3AH5V5nsuRqK3tqb3TuzmpbWaF9ro2fbmnYk9JsotkFwAxBeIqG7ryOh7cZHFdmPd5U4vZy1+5/qKivdk/L9SpFp7W9y88c74dFBDncQR6H09qylHlbFe5m30uy5IeKF2x94pzXHKUrvUZ//9k=" width="5515" height="3728" aria-hidden="true" class="placeholder cover"/>
+                                                                <img alt="" onload="loaded(this)" src="/electric-circus/caitlyn-flying-1920.jpg" srcset="/electric-circus/caitlyn-flying-200.jpg 200w, /electric-circus/caitlyn-flying-400.jpg 400w, /electric-circus/caitlyn-flying-800.jpg 800w, /electric-circus/caitlyn-flying-1200.jpg 1200w, /electric-circus/caitlyn-flying-1920.jpg 1920w" width="5515" height="3728" class="actual contain" loading="lazy"/>
+                                                                <div style="width: 100%; padding-bottom: 67.6%"></div>
+                                                            </div>
+                                                        </div>
+                    
+                                            </div>
+                                            <div class='picbox'>
+                                                        <div class='pic' onclick="lightboxOpen(this)">
+                                                            <div class="responsive prettyimg">
+                                                                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/wAARCAAdABQDAREAAhEBAxEB/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDwMZ9akonubma5CJJK7xxjbGGOdo9BSsk20NtsWG7eGPZsDAdM1MoKTuNSaVjR/sdbayeS5J804CgHAUn+ddVSl7Okpy3lsb+x5Yc0jR1Kw0eztrdlFw0kRRLpGdV+cgn5eDxgfnXB78ZuL3FKMY6CDVPDCxop0SdmA+Zjd4yc/wC7U8lXuLmh2NW6NuplhurfzIQ+0YPKsOQQfpz7iu2nioul7Gp02Z16SVmjOlgsdQvb1ZLohblw8eASwcZGMdO579K5sTN+054akSpxk3d7leLw/psKlNQ1ZYZ852queO1YvESfwRujH2MV8TIdYkk/tVtr7cMsJ4zuHYn6ZrWKTWopSaldHVad4UtJrW6muJZJJreMuDgBT7Y/+vXm1sVOLSjoejSoqSvIzNY8MWNtqtxGNxAbjBIx+tPD4+pUpqTM62DhGbR//9k=" width="4868" height="7001" aria-hidden="true" class="placeholder cover"/>
+                                                                <img alt="" onload="loaded(this)" src="/electric-circus/emma-hoop-1920.jpg" srcset="/electric-circus/emma-hoop-200.jpg 200w, /electric-circus/emma-hoop-400.jpg 400w, /electric-circus/emma-hoop-800.jpg 800w, /electric-circus/emma-hoop-1200.jpg 1200w, /electric-circus/emma-hoop-1920.jpg 1920w" width="4868" height="7001" class="actual contain" loading="lazy"/>
+                                                                <div style="width: 100%; padding-bottom: 143.8%"></div>
+                                                            </div>
+                                                        </div>
+                    
+                                            </div>
+                                            <div class='picbox'>
+                                                        <div class='pic' onclick="lightboxOpen(this)">
+                                                            <div class="responsive prettyimg">
+                                                                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/wAARCAAfABQDAREAAhEBAxEB/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDwOImOZcjoeQamWqLhozX1xmTUZV2Yyq9RjsK48Kr00dmK0qMzUsbiRdwj4PTPFdLqwWlzl9lJ62PVbvQ9D1KFWtmhO1NvlXKbHznruHU444rxI4icXuek6Kl0Od/sGSWa5vpVMj+YdpY5BUDgjHtj8q2WItFQjsOdF87lLchaLp5i7DjuQM+9CfYza7l/WNG0+2CpdahPcXGDlWcDHpgdP0rOhXqPWEUl6Gk6cftspabftp3l21skjCSRUDyMMYGdw4/3v0receduUiYXSUYo7C38Z2dpbx21zo+lXbRAqsk0YZsZJxkdeSfzrGDqxVo7ehM4xk7s8tdjOGuFLBNwB3HJBOe/fpXp2UdDlvfUvO0kGlQGJsSpIzBvrWEbOq77WOptxoxa3uyklpLcAyZUdvyro5kjjZ//2Q==" width="5104" height="7968" aria-hidden="true" class="placeholder cover"/>
+                                                                <img alt="" onload="loaded(this)" src="/electric-circus/caitlyn-plane-1920.jpg" srcset="/electric-circus/caitlyn-plane-200.jpg 200w, /electric-circus/caitlyn-plane-400.jpg 400w, /electric-circus/caitlyn-plane-800.jpg 800w, /electric-circus/caitlyn-plane-1200.jpg 1200w, /electric-circus/caitlyn-plane-1920.jpg 1920w" width="5104" height="7968" class="actual contain" loading="lazy"/>
+                                                                <div style="width: 100%; padding-bottom: 156.1%"></div>
+                                                            </div>
+                                                        </div>
+                    
+                                            </div>
+                                            <div class='picbox'>
+                                                        <div class='pic' onclick="lightboxOpen(this)">
+                                                            <div class="responsive prettyimg">
+                                                                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/wAARCAAgABQDAREAAhEBAxEB/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDyjR/DB1B7fdKXNxII4oIVLSMx9q5/aNuyNeWyuzsdB8O2Okz2moXtrPJbNJKIIbuPAuNnUZB+U/pUVYyS1KpyTdkcfrUaXWqzz21lcRQyHcqeUcDPOB7UQvFWbKau7pGne+NYtR0ZFWGS21VHVhLAdqcHOQQcg8nj3pQouEr30KnUjONmtSppXiHyL5W1bzb602tvhdy27Pbk9M89q1neSMqaUXqal18SCZQLbS4liVQAsjZI+mBwKz9jfc39vy6JGdr+qQPZiwSws/NkYSNcrFiQewI4wfpXPhFKzcma4vki0omJpwg+2xQ3R2wyNtdwAdoPfmuud+VtHJDezNCfwuFmdU1S2KgkA4Nc0cYmtYs3lh3fSSMq4lWSZjnPoT1FdEI2RjUnzSuVicODn3rQz6mgzCd2ljO0OdxAYjB71gvdXKzo+LVH/9k=" width="5022" height="7968" aria-hidden="true" class="placeholder cover"/>
+                                                                <img alt="" onload="loaded(this)" src="/electric-circus/graham-1920.jpg" srcset="/electric-circus/graham-200.jpg 200w, /electric-circus/graham-400.jpg 400w, /electric-circus/graham-800.jpg 800w, /electric-circus/graham-1200.jpg 1200w, /electric-circus/graham-1920.jpg 1920w" width="5022" height="7968" class="actual contain" loading="lazy"/>
+                                                                <div style="width: 100%; padding-bottom: 158.7%"></div>
+                                                            </div>
+                                                        </div>
+                    
+                                            </div>
+                                            <div class='picbox'>
+                                                        <div class='pic' onclick="lightboxOpen(this)">
+                                                            <div class="responsive prettyimg">
+                                                                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/wAARCAAUABQDAREAAhEBAxEB/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwCp8KYdG+2Sf2kYhlcDdzXg1oxnUSqP3T07Pk93cy/G8dhpviN5dPijkVgZFL/MMZ646dqKNrcqeg5ablSz+Jeq2FuIIroqo7KMD0/pW3sJdCeddTl9M1ERQtiVopQw2gLwV75PXNa1aaYoS0LWozXGtSRnEmY4ghZVznGefxrGmo0U/UtrnZz95azWl08EqkMv6jqDXbTqRnFSic84OEuVktuAGPtUTGjbtb+a3You0ow5UiuKdKMldmsJtFudFuCkkgyxQVnTfKmkdVSKk032P//Z" width="4353" height="4314" aria-hidden="true" class="placeholder cover"/>
+                                                                <img alt="" onload="loaded(this)" src="/electric-circus/caitlyn-flare-1920.jpg" srcset="/electric-circus/caitlyn-flare-200.jpg 200w, /electric-circus/caitlyn-flare-400.jpg 400w, /electric-circus/caitlyn-flare-800.jpg 800w, /electric-circus/caitlyn-flare-1200.jpg 1200w, /electric-circus/caitlyn-flare-1920.jpg 1920w" width="4353" height="4314" class="actual contain" loading="lazy"/>
+                                                                <div style="width: 100%; padding-bottom: 99.1%"></div>
+                                                            </div>
+                                                        </div>
+                    
+                                            </div>
+                                            <div class='picbox'>
+                                                        <div class='pic' onclick="lightboxOpen(this)">
+                                                            <div class="responsive prettyimg">
+                                                                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/wAARCAANABQDAREAAhEBAxEB/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDy/T/A2p6jZSyWCrcgEAbXKfoRg/nXKq6cknodPsHbQpaj4Z1TRYZYdUszbuHRtrSDO3kZ4zjqKftIuasxezkoO6MGaMRylQyNjuhyK3TujBqzNKy1i/t3BgvLmJgeDHMyY/75xWcoI0jJm8+r6tq9hOt7qEksTqXZG5y2OGJJ5Ix3rlmoxkrLqdNO8k79jj5TiVuT1ruWxxPc/9k=" width="7968" height="5320" aria-hidden="true" class="placeholder cover"/>
+                                                                <img alt="" onload="loaded(this)" src="/electric-circus/kate-reclining-1920.jpg" srcset="/electric-circus/kate-reclining-200.jpg 200w, /electric-circus/kate-reclining-400.jpg 400w, /electric-circus/kate-reclining-800.jpg 800w, /electric-circus/kate-reclining-1200.jpg 1200w, /electric-circus/kate-reclining-1920.jpg 1920w" width="7968" height="5320" class="actual contain" loading="lazy"/>
+                                                                <div style="width: 100%; padding-bottom: 66.8%"></div>
+                                                            </div>
+                                                        </div>
+                    
+                                            </div>
+                                            <div class='picbox'>
+                                                        <div class='pic' onclick="lightboxOpen(this)">
+                                                            <div class="responsive prettyimg">
+                                                                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/wAARCAAMABQDAREAAhEBAxEB/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDkNTsPCt1p5v7KKWOU4Xykfrwc4YDHp1ArwadaspckvxPXdOFuZEEXhiKR0vrW2kfzWG1ZTzuJ5IH1pzxErcjf3D9lG/MjNu1itrqWBrV/MjYq4m+VgwPIwSK0ip21Zk3HodW+m2mh6TbtaQqWkhd2MnzEncozXmupOtO831/zO2MVCm0jHTU7gZYbQeemR/I10+zWxg5M5y/vZtQvZbi5bzJS2Cx5J+tehCChFJHJJ3Z//9k=" width="7501" height="4654" aria-hidden="true" class="placeholder cover"/>
+                                                                <img alt="" onload="loaded(this)" src="/electric-circus/caitlyn-superman-1920.jpg" srcset="/electric-circus/caitlyn-superman-200.jpg 200w, /electric-circus/caitlyn-superman-400.jpg 400w, /electric-circus/caitlyn-superman-800.jpg 800w, /electric-circus/caitlyn-superman-1200.jpg 1200w, /electric-circus/caitlyn-superman-1920.jpg 1920w" width="7501" height="4654" class="actual contain" loading="lazy"/>
+                                                                <div style="width: 100%; padding-bottom: 62.0%"></div>
+                                                            </div>
+                                                        </div>
+                    
+                                            </div>
+                                            <div class='picbox'>
+                                                        <div class='pic' onclick="lightboxOpen(this)">
+                                                            <div class="responsive prettyimg">
+                                                                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/wAARCAAbABQDAREAAhEBAxEB/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwCOPxP4fubLzWzETuUHIKFh/DnsT23AZrxnhalKfKz11WpyV4vQi0zxrpy6Rc3sNqxuYE3snVIxgYYnjjJ246k/p6FPDNzUCZ1YxV2eSarctqerXd8+S08rSc+5zX0UaUKUVDseHUqc83I7LRptG07w9rMd9ZSu5hLRv5hA3bSBxnB5Pp6V5GMoTlVjUWyNcJiIQp8r3Ze+EU+j6jZav4e1GMNLebXKscCWMDkA9iOtZVKipvnWh20bTTgzlLnT1tb25gQFFSVlCnnGDivZhyzgpN7o8+S5ZNJFW8ne8kSAgRwSspkLdsdvrXk4mtf3ou6tsb0aSTs1qdBoGpxaVJqJsClvvuNquijdsCjgN1AznpXBK7goz1O6Fk3y6alC9vBLdyNG4AJP3sZJ9a3VfTU55U3fQwI2LZyc55OfWpbH1uOjdkeTaxHzZo6IpMjZ2LcmiyC5/9k=" width="4559" height="6126" aria-hidden="true" class="placeholder cover"/>
+                                                                <img alt="" onload="loaded(this)" src="/electric-circus/spinning-fans-1920.jpg" srcset="/electric-circus/spinning-fans-200.jpg 200w, /electric-circus/spinning-fans-400.jpg 400w, /electric-circus/spinning-fans-800.jpg 800w, /electric-circus/spinning-fans-1200.jpg 1200w, /electric-circus/spinning-fans-1920.jpg 1920w" width="4559" height="6126" class="actual contain" loading="lazy"/>
+                                                                <div style="width: 100%; padding-bottom: 134.4%"></div>
+                                                            </div>
+                                                        </div>
+                    
+                                            </div>
+                                            <div class='picbox'>
+                                                        <div class='pic' onclick="lightboxOpen(this)">
+                                                            <div class="responsive prettyimg">
+                                                                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/wAARCAAVABQDAREAAhEBAxEB/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwBvwt1+00exu5JIfNVFAc44GeleJUnyVbtXuemoc8LJ2OK+IF1Ff60LiD5Vkj34Y4CnJ4FaYZ6MiscNJI6PggqfQjFd6SaOZ3R6Fbb9K8ATyuCktyY5EYD7vzjH6L+teK5qri+VapXR6rpuGFUurdzDuZ5devbWGNoI5lh+aRQcnv0/vfSu3lhQg29jmSdWajHc0L/wWLqdZVmZCUAYdcnJ/wDrVw0cz5I2aO6vl6nK6ZveKIVfwVdt08u4i2AdhyMVxYGbWLiu6Zpj1+5OW8KWqNrtuxP8JyPwr08wm1QkceAX79HfSI0MhTeSPpXz8WpK9j2Zbn//2Q==" width="4937" height="5112" aria-hidden="true" class="placeholder cover"/>
+                                                                <img alt="" onload="loaded(this)" src="/electric-circus/caitlyn-star-1920.jpg" srcset="/electric-circus/caitlyn-star-200.jpg 200w, /electric-circus/caitlyn-star-400.jpg 400w, /electric-circus/caitlyn-star-800.jpg 800w, /electric-circus/caitlyn-star-1200.jpg 1200w, /electric-circus/caitlyn-star-1920.jpg 1920w" width="4937" height="5112" class="actual contain" loading="lazy"/>
+                                                                <div style="width: 100%; padding-bottom: 103.5%"></div>
+                                                            </div>
+                                                        </div>
+                    
+                                            </div>
+                                    </div>
+                                </div>
+                                <div id='signposts'>
+                                    <div id='newer' class='post'>
+                                            <a hx-get="/wire-wrapped-world-tree/index.content.html?1531" href="/wire-wrapped-world-tree?1531" hx-replace-url="/wire-wrapped-world-tree" id="newerlink" onclick="return setTransitionName('right-transition')" hx-on:click="document.title='Wire Wrapped World Tree - Firefang'" preload="preload:init">
+                                                <div class="responsive signpostimg">
+                                                    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/wAARCAAPABQDAREAAhEBAxEB/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDyIxQNMFkkkuGxuyWwPypJXXMwb1sixJHataPtt0I2/IRxt4znH9aL2YJXRiyy28ErRtaK7KcElyMe1VuItwFwPOI3Fsoyk9VPbPrV1FbQmOupLPNCGRUkfZs27AMNwMdeg/WsNTXQxJWM0zyHgsxNWloQ2f/Z" width="200" height="200" aria-hidden="true" class="placeholder cover"/>
+                                                    <img alt="Wire Wrapped World Tree" onload="loaded(this)" src="/wire-wrapped-world-tree/cover-1920.jpg" srcset="/wire-wrapped-world-tree/cover-200.jpg 200w, /wire-wrapped-world-tree/cover-400.jpg 400w" width="200" height="200" class="actual cover" loading="lazy"/>
+                                                    <div style="width: 100%; padding-bottom: 100.0%"></div>
+                                                </div>
+                                            </a>
+                                    </div>
+                                    <div id='older' class='post'>
+                                            <a hx-get="/duck-and-bergamot-cake/index.content.html?1531" href="/duck-and-bergamot-cake?" hx-replace-url="/duck-and-bergamot-cake" id="olderlink" onclick="return setTransitionName('left-transition')" hx-on:click="document.title='Duck and Bergamot Cake - Firefang'" preload="preload:init">
+                                                <div class="responsive signpostimg">
+                                                    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/wAARCAAPABQDAREAAhEBAxEB/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwCPVvEziB4oJXeZVOWVvue31Nc9ubV7Gqi9bD9IHjqXw5JPLq9nHZTKTC01z5rsDx2zgdsHH0rolJJHMqacnpqZlppUwjcSBZ23nLx4YfqR/KuOTk3dTsdseVKzjc89tP7Rub1YLBnkkkP3WfG49/wrRe8rC5nTOn0a+vLEXHh4uhl3iU9SsZ/iGeOuR06Y70pSajqKMG3dnVWE17aW3lq0S5OTtBP9a5fayWiNvZRerP/Z" width="200" height="200" aria-hidden="true" class="placeholder cover"/>
+                                                    <img alt="Duck and Bergamot Cake" onload="loaded(this)" src="/duck-and-bergamot-cake/cover-1920.jpg" srcset="/duck-and-bergamot-cake/cover-200.jpg 200w, /duck-and-bergamot-cake/cover-400.jpg 400w" width="200" height="200" class="actual cover" loading="lazy"/>
+                                                    <div style="width: 100%; padding-bottom: 100.0%"></div>
+                                                </div>
+                                            </a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                        <div id='similars'>
+                                <div class="indexcontentpadding">
+                                    <h2>More photography projects...</h2>
+                                    <div class="indexcontent">
+                                            <div class="post">
+                                                <a class="photosquare" hx-get="/banff-landscapes/index.content.html?1531" href="/banff-landscapes?" hx-replace-url="/banff-landscapes" onclick="return setTransitionName('fade-transition')" hx-on:click="document.title='Banff Landscapes - Firefang'" preload>
+                                                    <div class="responsive photosquare">
+                                                        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/wAARCAANABQDAREAAhEBAxEB/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDgdP1h5UWG2B2FwM4G4rxxx06GonUaWhPKVLryIdRLspMv3wMDGf5ZBrJN/Fe6KsZUzzyys829mPcHNaqY/Zs7HwDPLPebZWVrcMqeQI1CtuyPm4yfpWNalBa2NYVZNcvQ6/W/DOkSahd+fDLN5RwoMgUD6BQKcdiWcNfatBpN29na6bbrEnTPJNaqNyLn/9k=" width="200" height="200" aria-hidden="true" class="placeholder cover"/>
+                                                        <img alt="Banff Landscapes" onload="loaded(this)" src="/banff-landscapes/cover-1920.jpg" srcset="/banff-landscapes/cover-200.jpg 200w, /banff-landscapes/cover-400.jpg 400w" width="200" height="200" class="actual cover" loading="lazy"/>
+                                                        <div style="width: 100%; padding-bottom: 100.0%"></div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="post">
+                                                <a class="photosquare" hx-get="/toronto-street-photography/index.content.html?1531" href="/toronto-street-photography?" hx-replace-url="/toronto-street-photography" onclick="return setTransitionName('fade-transition')" hx-on:click="document.title='Toronto Street Photography - Firefang'" preload>
+                                                    <div class="responsive photosquare">
+                                                        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/wAARCAALABQDAREAAhEBAxEB/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwCS58CxyeMtfUv5txfwRy27SFWw2Nx57Zx6dKl3aZLVzjPF/hW70qxspJlRFuOThiWyBnJ4wODSgpL4kFrHCT2fzgAbdoxx3960sM9CbXNVLl/7Rut5xlhKQTVEFC4vbq7dhc3MswVOBI5bHI9amWxSMeO3ik3l1yQ5HU00DP/Z" width="200" height="200" aria-hidden="true" class="placeholder cover"/>
+                                                        <img alt="Toronto Street Photography" onload="loaded(this)" src="/toronto-street-photography/cover-1920.jpg" srcset="/toronto-street-photography/cover-200.jpg 200w, /toronto-street-photography/cover-400.jpg 400w" width="200" height="200" class="actual cover" loading="lazy"/>
+                                                        <div style="width: 100%; padding-bottom: 100.0%"></div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="post">
+                                                <a class="photosquare" hx-get="/whitehorse-road-trip/index.content.html?1531" href="/whitehorse-road-trip?" hx-replace-url="/whitehorse-road-trip" onclick="return setTransitionName('fade-transition')" hx-on:click="document.title='Whitehorse Road Trip - Firefang'" preload>
+                                                    <div class="responsive photosquare">
+                                                        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/wAARCAANABQDAREAAhEBAxEB/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD0Sxj1AeH1vDKpuGXeE27kxkfxDvzmsSuWyudULfy7OOSV97KoLAd/XGK1Ue5D7lUavokg3C9jXtgnH9KtRa6GblB9TndFs/P8JRWnnyoIowMqRhud2cYo9mk7j5242HasJ7HSZrme6lmVVRdsR8okMQPvc4PPUU29bWBR0uc1D4PsdTjM9vPc2qCR4/LLiXlXK5yRnnHSmqjQeyTP/9k=" width="200" height="200" aria-hidden="true" class="placeholder cover"/>
+                                                        <img alt="Whitehorse Road Trip" onload="loaded(this)" src="/whitehorse-road-trip/cover-1440.jpg" srcset="/whitehorse-road-trip/cover-200.jpg 200w, /whitehorse-road-trip/cover-400.jpg 400w" width="200" height="200" class="actual cover" loading="lazy"/>
+                                                        <div style="width: 100%; padding-bottom: 100.0%"></div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="post">
+                                                <a class="photosquare" hx-get="/yukon-wildlife-preserve/index.content.html?1531" href="/yukon-wildlife-preserve?" hx-replace-url="/yukon-wildlife-preserve" onclick="return setTransitionName('fade-transition')" hx-on:click="document.title='Yukon Wildlife Preserve - Firefang'" preload>
+                                                    <div class="responsive photosquare">
+                                                        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/wAARCAAUABQDAREAAhEBAxEB/9sAQwAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQy/9sAQwEJCQkMCwwYDQ0YMiEcITIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDzSw0q0nW0Qg3UsgeR/wB7sEQHYHue9ZXk20irRSTYvibQX0G7axmRiRbLPG7cEhj3x/niqV+onboYkVw0SbUCYz/EOaZJ3nw30G4vdStpJYZpbGMuqXETDCHGSpHfNNJbg29in4oj1u11i8fVYPtKBmtUMibtqRkYx+DA+nNKSvqOLtoc2ILIFi8i5Y5GRzipuyrI19B8Z6tpNtDFZtFGvmZOE68/Wq20IK2qeJtWupz9oujKfMd8uAfvLgjHTGCR+NF9B21Oadm3H5jQB//Z" width="200" height="200" aria-hidden="true" class="placeholder cover"/>
+                                                        <img alt="Yukon Wildlife Preserve" onload="loaded(this)" src="/yukon-wildlife-preserve/cover-1368.jpg" srcset="/yukon-wildlife-preserve/cover-200.jpg 200w, /yukon-wildlife-preserve/cover-400.jpg 400w" width="200" height="200" class="actual cover" loading="lazy"/>
+                                                        <div style="width: 100%; padding-bottom: 100.0%"></div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
