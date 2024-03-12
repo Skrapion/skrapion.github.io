@@ -3,7 +3,6 @@
 * Jump rope
 * Moon poem
 * Ant Farm
-* Circus photography
 * Sandman costume
 * Pixel wall
 * Toe molds?
