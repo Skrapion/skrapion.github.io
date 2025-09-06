@@ -127,7 +127,7 @@ fn default_html() -> String {
 }
 
 fn default_cover() -> String {
-    "cover".to_string()
+    "cover.jpg".to_string()
 }
 
 fn default_cover_vec() -> Vec<PicMetadataIn> {
