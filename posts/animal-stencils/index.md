@@ -3,6 +3,7 @@ title: Yukon Animal Wood Stencils
 description: Wooden frames with Yukon animal stencils
 date: 2025-09-05
 tags: [woodworking, graphic art]
+og_image: standing.jpg
 pics:
   - cover.jpg
   - standing.jpg
