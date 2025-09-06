@@ -3,13 +3,24 @@
         <title>Firefang</title>
         <link>https://firefang.com</link>
         <description>Rick Yorgason's portfolio blog. Everything from traditional woodworking to video game development.</description>
-        <lastBuildDate>Mon, 11 Mar 2024 00:00:00 -0700</lastBuildDate>
+        <lastBuildDate>Fri, 05 Sep 2025 00:00:00 -0700</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <image>
             <title>Firefang</title>
             <url>https://firefang.com/favicon.ico</url>
             <link>https://firefang.com</link>
         </image>
+            <item>
+                <title>Yukon Animal Wood Stencils</title>
+                <link>https://firefang.com/animal-stencils/</link>
+                <guid>https://firefang.com/animal-stencils/</guid>
+                <pubDate>Fri, 05 Sep 2025 00:00:00 -0700</pubDate>
+                <description>Wooden frames with Yukon animal stencils</description>
+                <content:encoded>&lt;p&gt;I made these to brighten up my hallway. The frames are made of Baltic birch and sapele with my new favourite finish: raw tung oil and orange extract. The artwork was spray painted with laser-cut stencils, and the playful splashes were added with drops of acrylic paint.&lt;/p&gt;
+&lt;p&gt;I could see myself doing more of these for the other Yukon animals, but it&#x27;s hard to imagine a frolicking muskox.&lt;/p&gt;
+</content:encoded>
+                <enclosure url="https://firefang.com/animal-stencils/ogImage.jpg" length="0" type="image/jpg"/>
+            </item>
             <item>
                 <title>Electric Circus</title>
                 <link>https://firefang.com/electric-circus/</link>
