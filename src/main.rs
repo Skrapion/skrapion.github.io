@@ -54,7 +54,10 @@ struct Args {
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    let config = load_config(&PathBuf::from("config.yaml"))?;
+    let config = match load_config(&PathBuf::from("config.yaml")) {
+        Ok(config) => config,
+        Err(_e) => panic!("Could not load config.yaml")
+    };
     let args = Args::parse();
 
     if args.regenerate || !args.push {
