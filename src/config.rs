@@ -40,9 +40,6 @@ pub struct Credits {
 fn posts() -> String {
     "posts".into()
 }
-fn pages() -> String {
-    "pages".into()
-}
 fn docs() -> String {
     "docs".into()
 }
@@ -60,8 +57,6 @@ pub struct OneSignal {
 pub struct Config {
     #[serde(default = "posts")]
     pub post_dir: String,
-    #[serde(default = "pages")]
-    pub page_dir: String,
     #[serde(default = "docs")]
     pub out_dir: String,
     pub site_url: String,

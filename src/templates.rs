@@ -216,30 +216,6 @@ impl PicHelper<'_> {
     }
 }
 
-#[derive(Clone, Copy)]
-struct HeightHelper<'a> {
-    thumbnail_map: &'a ThumbnailMap,
-}
-
-impl<'a> HelperDef for HeightHelper<'a> {
-    fn call<'reg: 'rc, 'rc>(
-        &self,
-        h: &Helper,
-        _: &Handlebars,
-        _: &Context,
-        _: &mut RenderContext,
-        out: &mut dyn Output,
-    ) -> HelperResult {
-        let slug = h.param(0).unwrap().value().render();
-        let file = h.param(1).unwrap().value().render();
-        let path = slug.clone() + "/" + &file;
-
-        out.write(&self.thumbnail_map[&path].height.to_string())?;
-
-        Ok(())
-    }
-}
-
 pub fn setup_handlebars<'a, 'b>(
     post_titles: &'a BTreeMap<String, String>,
     thumbnail_map: &'a ThumbnailMap,
